@@ -1,7 +1,7 @@
 ---
 title: 'European Cloud Cover'
 desc: 'A dataset containing reanalysis data from ERA5 and satellite retrievals from METeosat Second Generation.'
-thumbnail: images/thumbnails/european-cloud-cover.jpg
+thumbnail: thumbnails/european-cloud-cover.jpg
 publication: https://www.mdpi.com/2504-2289/5/4/62/pdf
 tags:
   - climate change
