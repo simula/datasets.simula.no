@@ -1,7 +1,7 @@
 ---
 title: 'European Cloud Cover'
 desc: 'A dataset containing reanalysis data from ERA5 and satellite retrievals from METeosat Second Generation.'
-thumbnail: thumbnails/european-cloud-cover.jpg
+thumbnail: images/thumbnails/european-cloud-cover.jpg
 publication: https://www.mdpi.com/2504-2289/5/4/62/pdf
 tags:
   - climate change
@@ -23,7 +23,7 @@ For evaluation purposes, we suggest standard computer vision metrics such as dic
 ## Download
 | File | Description | Size | Download |
 | --- | --- | --- | :---: |
-| ecc.zip | The ecc.zip archive containing the dataset. | 17GB | [<img src="/icons/fa-download-solid.svg" style="margin:0;display: inline;" height="18" width="18"/>](https://osf.io/kqdgx/) |
+| ecc.zip | The ecc.zip archive containing the dataset. | 17GB | [<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 m-0 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>](https://osf.io/kqdgx/) |
 
 All files can be viewed and downloaded in our OSF repository available here: [https://osf.io/kqdgx](https://osf.io/kqdgx)
 

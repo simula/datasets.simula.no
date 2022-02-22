@@ -20,7 +20,7 @@ For evaluation purposes, we suggest standard computer vision metrics such as dic
 ## Download
 | File | Description | Size | Download |
 | --- | --- | --- | :---: |
-| kvasir-capsule-seg.zip | The kvasir-capsule-seg.zip archive containing the dataset. | 2.66MB | [<img src="/icons/fa-download-solid.svg" style="margin:0;display: inline;" height="18" width="18"/>](https://datasets.simula.no/downloads/kvasir-capsule-seg.zip) |
+| kvasir-capsule-seg.zip | The kvasir-capsule-seg.zip archive containing the dataset. | 2.66MB | [<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 m-0 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>](https://datasets.simula.no/downloads/kvasir-capsule-seg.zip) |
 
 ## Cite
 If you use this dataset in your research, Please cite the following paper:

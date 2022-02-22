@@ -22,7 +22,7 @@ The dataset has been collected from Twitter during a period between 1st of Janua
 ## Download
 | File | Description | Size | Download
 | --- | --- | --- | :---: |
-| wico.zip  | The entire wico.zip dataset in one zip file. | 115MB |  [<img src="/icons/fa-download-solid.svg" style="margin:0;display: inline;" height="18" width="18"/>](https://drive.google.com/file/d/17Qe3StgOwU5M00b83fX1UwX2Ju7Z61rT/view?usp=sharing) 
+| wico.zip  | The entire wico.zip dataset in one zip file. | 115MB |  [<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 m-0 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>](https://drive.google.com/file/d/17Qe3StgOwU5M00b83fX1UwX2Ju7Z61rT/view?usp=sharing) 
 
 All files can be viewed and downloaded in our OSF repository available here: [https://osf.io/5m3by](https://osf.io/5m3by)
 

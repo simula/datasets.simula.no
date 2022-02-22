@@ -47,7 +47,7 @@ Participants 1, 3, and 5 took pictures of everything they consumed, except water
 ## Download
 | File | Description | Size | Download
 | --- | --- | --- | :---: |
-| pmdata.zip  | The entire pmdata.zip dataset in one zip file. | 1.4GB |  [<img src="/icons/fa-download-solid.svg" style="margin:0;display: inline;" height="18" width="18"/>](https://datasets.simula.no/downloads/pmdata.zip) |
+| pmdata.zip  | The entire pmdata.zip dataset in one zip file. | 1.4GB |  [<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 m-0 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>](https://datasets.simula.no/downloads/pmdata.zip) |
 
 All files can be viewed and downloaded in our OSF repository available here: [https://osf.io/vx4bk](https://osf.io/vx4bk)
 

@@ -42,7 +42,7 @@ In addition to the above metrics, system performance metrics processing speed an
 ## Download
 | File | Description | Size | Download
 | --- | --- | --- | :---: |
-| nerthus.zip  | The entire HyperKvasir dataset in one zip file. | 250.3MB |  [<img src="/icons/fa-download-solid.svg" style="margin:0;display: inline;" height="18" width="18"/>](https://datasets.simula.no/downloads/nerthus/nerthus.zip) |
+| nerthus.zip  | The entire HyperKvasir dataset in one zip file. | 250.3MB |  [<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 m-0 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>](https://datasets.simula.no/downloads/nerthus/nerthus.zip) |
 
 ## Cite
     @inproceedings{Pogorelov:2017:NBP:3083187.3083216,
