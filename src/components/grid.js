@@ -23,6 +23,7 @@ export function DatasetGrid({ datasets }) {
     return (
         <div className="grid grid-cols-1 p-4 md:grid-cols-2 md:p-0 lg:grid-cols-3 xl:grid-cols-4">
             {datasets
+                .filter(props => !props.frontmatter.hidden)
                 .filter(props => datasetSearchCriteria(props, value))
                 .map(props => {
                     return (
