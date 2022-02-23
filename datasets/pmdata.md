@@ -1,7 +1,7 @@
 ---
 title: 'PMData '
 desc: 'A lifelogging dataset of 16 persons during 5 months using Fitbit, Google Forms and PMSys.'
-thumbnail: thumbnails/pmdata.jpg
+thumbnail: /thumbnails/pmdata.jpg
 publication: https://dl.acm.org/doi/10.1145/3339825.3394926
 tags:
   - sports
@@ -54,7 +54,17 @@ All files can be viewed and downloaded in our OSF repository available here: [ht
 ## Cite
     @inproceedings{10.1145/3339825.3394926,
             title = {PMData: A Sports Logging Dataset},
-            author = {Thambawita, Vajira and Hicks, Steven Alexander and Borgli, Hanna and Stensland, H\r{a}kon Kvale and Jha, Debesh and Svensen, Martin Kristoffer and Pettersen, Svein-Arne and Johansen, Dag and Johansen, H\r{a}vard Dagenborg and Pettersen, Susann Dahl and Nordvang, Simon and Pedersen, Sigurd and Gjerdrum, Anders and Gr\o{}nli, Tor-Morten and Fredriksen, Per Morten and Eg, Ragnhild and Hansen, Kjeld and Fagernes, Siri and Claudi, Christine and Bi\o{}rn-Hansen, Andreas and Nguyen, Duc Tien Dang and Kupka, Tomas and Hammer, Hugo Lewi and Jain, Ramesh and Riegler, Michael Alexander and Halvorsen, P\r{a}l},
+            author = {
+              Thambawita, Vajira and Hicks, Steven Alexander and Borgli, Hanna and
+              Stensland, H\r{a}kon Kvale and Jha, Debesh and Svensen, Martin Kristoffer and
+              Pettersen, Svein-Arne and Johansen, Dag and Johansen, H\r{a}vard Dagenborg and
+              Pettersen, Susann Dahl and Nordvang, Simon and Pedersen, Sigurd and
+              Gjerdrum, Anders and Gr\o{}nli, Tor-Morten and Fredriksen, Per Morten and
+              Eg, Ragnhild and Hansen, Kjeld and Fagernes, Siri and
+              Claudi, Christine and Bi\o{}rn-Hansen, Andreas and Nguyen, Duc Tien Dang and
+              Kupka, Tomas and Hammer, Hugo Lewi and Jain, Ramesh and Riegler, Michael Alexander and
+              Halvorsen, P\r{a}l
+            },
             year = {2020},
             publisher = {Association for Computing Machinery},
             address = {New York, NY, USA},

@@ -1,7 +1,7 @@
 ---
 title: 'THREAT'
 desc: 'A Large Annotated Corpus for Detection of Violent Threats.'
-thumbnail: thumbnails/threat.png
+thumbnail: /thumbnails/threat.png
 tags:
   - violent threats
   - text

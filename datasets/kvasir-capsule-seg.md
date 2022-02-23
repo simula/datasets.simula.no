@@ -1,7 +1,7 @@
 ---
 title: 'KvasirCapsule SEG'
 desc: 'A Capsule Endoscopy Segmentation Dataset.'
-thumbnail: thumbnails/kvasir-capsule-seg.jpg
+thumbnail: /thumbnails/kvasir-capsule-seg.jpg
 publication: https://arxiv.org/abs/2104.11138#:~:text=NanoNet%3A%20Real%2DTime%20Polyp%20Segmentation%20in%20Video%20Capsule%20Endoscopy%20and%20Colonoscopy,-Debesh%20Jha%2C%20Nikhil&text=Deep%20learning%20in%20gastrointestinal%20endoscopy,to%20assess%20lesions%20more%20accurately.
 github: https://github.com/DebeshJha/NanoNet
 tags:
@@ -29,14 +29,9 @@ If you use this dataset in your research, Please cite the following paper:
       title     = {Nanonet: Real-time polyp segmentation in
         video capsule endoscopy and colonoscopy},
       author    = {
-          Jha, Debesh and
-          Tomar, Nikhil Kumar and
-          Ali, Sharib and
-          Riegler, Michael A and
-          Johansen, H{\aa}vard D and
-          Johansen, Dag and
-          de Lange, Thomas and
-          Halvorsen, P{\aa}l
+          Jha, Debesh and Tomar, Nikhil Kumar and Ali, Sharib and
+          Riegler, Michael A and Johansen, H{\aa}vard D and Johansen, Dag and
+          de Lange, Thomas and Halvorsen, P{\aa}l
       },
       booktitle = {Proceedings of the 2021 IEEE 34th International
         Symposium on Computer-Based Medical Systems (CBMS)},

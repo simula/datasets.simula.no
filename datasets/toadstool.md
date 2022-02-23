@@ -1,7 +1,7 @@
 ---
 title: 'Toadstool'
 desc: 'A Dataset for Training Emotional and Intelligent Machines Playing Super Mario Bros.'
-thumbnail: thumbnails/toadstool.jpg
+thumbnail: /thumbnails/toadstool.jpg
 github: https://github.com/simula/toadstool
 publication: https://dl.acm.org/doi/10.1145/3339825.3394939
 tags:
@@ -22,15 +22,9 @@ All files can be viewed and downloaded in our OSF repository available here: [ht
     @inproceedings{10.1145/3339825.3394939,
       title = {Toadstool: A Dataset for Training Emotional Intelligent Machines Playing Super Mario Bros},
       author = {
-          Svoren, Henrik and
-          Thambawita, Vajira and
-          Halvorsen, P\r{a}l and
-          Jakobsen, Petter and
-          Garcia-Ceja, Enrique and
-          Noori, Farzan Majeed and
-          Hammer, Hugo L. and
-          Lux, Mathias and
-          Riegler, Michael Alexander and
+          Svoren, Henrik and Thambawita, Vajira and Halvorsen, P\r{a}l and
+          Jakobsen, Petter and Garcia-Ceja, Enrique and Noori, Farzan Majeed and
+          Hammer, Hugo L. and Lux, Mathias and Riegler, Michael Alexander and
           Hicks, Steven Alexander
         },
       year = {2020},

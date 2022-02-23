@@ -15,7 +15,7 @@ export default function Card(props) {
                     <div className="relative h-48 w-full overflow-hidden">
                         <img
                             alt={props.title}
-                            src={`/${props.thumbnail}`}
+                            src={`${props.thumbnail}`}
                             className="min-h-full w-full object-cover"
                         />
                     </div>

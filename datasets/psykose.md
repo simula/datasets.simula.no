@@ -1,7 +1,7 @@
 ---
 title: 'Psykose'
 desc: 'A Motor Activity Database of Patients with Schizophrenia.'
-thumbnail: thumbnails/psykose.png
+thumbnail: /thumbnails/psykose.png
 publication: https://ieeexplore.ieee.org/document/9182896
 tags:
   - mental health
@@ -22,15 +22,9 @@ All files can be viewed and downloaded in our OSF repository available here: [ht
     @inproceedings{Jakobsen2020,  
         title={PSYKOSE: A Motor Activity Database of Patients with Schizophrenia},   
         author={
-            Jakobsen, Petter and
-            Garcia-Ceja, Enrique and
-            Stabell, Lena Antonsen and
-            Oedegaard, Ketil Joachim and
-            Berle, Jan Oystein and
-            Thambawita, Vajira and
-            Hicks, Steven Alexander and
-            Halvorsen, Pål and
-            Fasmer, Ole Bernt and
+            Jakobsen, Petter and Garcia-Ceja, Enrique and Stabell, Lena Antonsen and
+            Oedegaard, Ketil Joachim and Berle, Jan Oystein and Thambawita, Vajira and
+            Hicks, Steven Alexander and Halvorsen, Pål and Fasmer, Ole Bernt and
             Riegler, Michael Alexander
         },  
         booktitle={2020 IEEE 33rd International Symposium on Computer-Based Medical Systems (CBMS)},   

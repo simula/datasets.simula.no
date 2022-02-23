@@ -1,7 +1,7 @@
 ---
 title: 'WICO Graph Dataset'
 desc: 'A Labeled Dataset of Twitter Subgraphs based on Conspiracy Theory and 5G-Corona Misinformation Tweets.'
-thumbnail: thumbnails/wico.png
+thumbnail: /thumbnails/wico.png
 publication: https://dl.acm.org/doi/10.1145/3472720.3483617
 tags:
   - misinformation
@@ -32,10 +32,8 @@ If you use this dataset in your research, Please cite the following paper:
     @inbook{10.1145/3472720.3483617,
         title = {WICO Text: A Labeled Dataset of Conspiracy Theory and 5G-Corona Misinformation Tweets},
         author = {
-            Pogorelov, Konstantin and
-            Schroeder, Daniel Thilo and
-            Filkukov\'{a}, Petra and
-            Brenner, Stefan and
+            Pogorelov, Konstantin and Schroeder, Daniel Thilo and
+            Filkukov\'{a}, Petra and Brenner, Stefan and
             Langguth, Johannes
         },
         year = {2021},

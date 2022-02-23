@@ -1,7 +1,7 @@
 ---
 title: 'Heimdallr'
 desc: 'A Dataset For Sport Analysis.'
-thumbnail: thumbnails/heimdallr.png
+thumbnail: /thumbnails/heimdallr.png
 tags:
   - soccer
   - video analysis

@@ -1,7 +1,7 @@
 ---
 title: 'Kvasir SEG'
 desc: 'Segmented Polyp Dataset for Computer Aided Gastrointestinal Disease Detection.'
-thumbnail: thumbnails/kvasir-seg.png
+thumbnail: /thumbnails/kvasir-seg.png
 publication: https://dl.acm.org/doi/10.1007/978-3-030-37734-2_37
 tags:
   - gastrointestinal

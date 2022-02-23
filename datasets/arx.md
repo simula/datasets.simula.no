@@ -1,7 +1,7 @@
 ---
 title: 'Arx'
 desc: 'A Text-Classification Dataset Consisting of Norwegian Soccer Articles from VG and TV2.'
-thumbnail: thumbnails/arx.jpg
+thumbnail: /thumbnails/arx.jpg
 publication: https://ieeexplore.ieee.org/abstract/document/8877417/
 tags:
   - soccer
@@ -30,12 +30,8 @@ The dataset contains 5,526 labeled data samples and is freely available online. 
         title = {Semantic Analysis of Soccer News 
           for AutomaticGame Event Classification},
         author = {
-            Nordskog, Aanund Jupsk{\aa}s and
-            Halvorsen, P{\aa}l and
-            Hicks, Steven and
-            Stensland, H{\aa}kon K. and
-            Hammer, Hugo L. and
-            Johansen, Dag and
+            Nordskog, Aanund Jupsk{\aa}s and Halvorsen, P{\aa}l and Hicks, Steven and
+            Stensland, H{\aa}kon K. and Hammer, Hugo L. and Johansen, Dag and
             Riegler, Michael A.
         },
         series = {CBMI'19},

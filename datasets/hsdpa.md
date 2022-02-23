@@ -1,7 +1,7 @@
 ---
 title: 'HSDPA'
 desc: 'HSDPA-bandwidth logs for mobile HTTP streaming scenarios.'
-thumbnail: thumbnails/hsdpa-bandwidth-traces.jpg
+thumbnail: /thumbnails/hsdpa-bandwidth-traces.jpg
 tags:
   - networks
   - streaming 

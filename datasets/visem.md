@@ -1,7 +1,7 @@
 ---
 title: 'VISEM'
 desc: 'A Multimodal Video Dataset of Human Spermatozoa.'
-thumbnail: thumbnails/visem.png
+thumbnail: /thumbnails/visem.png
 publication: https://dl.acm.org/doi/10.1145/3304109.3325814
 tags:
   - sperm
@@ -46,14 +46,9 @@ In addition to these possible research questions, the dataset will hopefully ins
     @inproceedings{10.1145/3304109.3325814,
         title = {VISEM: A Multimodal Video Dataset of Human Spermatozoa},
         author = {
-            Haugen, Trine B. and
-            Hicks, Steven A. and
-            Andersen, Jorunn M. and
-            Witczak, Oliwia and
-            Hammer, Hugo L. and
-            Borgli, Rune and
-            Halvorsen, P\r{a}l and
-            Riegler, Michael
+            Haugen, Trine B. and Hicks, Steven A. and Andersen, Jorunn M. and
+            Witczak, Oliwia and Hammer, Hugo L. and Borgli, Rune and
+            Halvorsen, P\r{a}l and Riegler, Michael
         },
         year = {2019},
         publisher = {Association for Computing Machinery},

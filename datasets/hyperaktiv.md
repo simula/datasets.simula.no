@@ -1,7 +1,7 @@
 ---
 title: 'HYPERAKTIV'
 desc: 'A Motor Activity Database of Patients with ADHD.'
-thumbnail: thumbnails/hyperaktiv.png
+thumbnail: /thumbnails/hyperaktiv.png
 github: https://github.com/simula/hyperaktiv
 publication: https://dl.acm.org/doi/10.1145/3458305.3478454
 tags:
@@ -26,18 +26,10 @@ If you use this dataset in your research, Please cite the following paper:
             title = {{HYPERAKTIV: An Activity Dataset from
                 Adult Patients with Attention-Deficit/Hyperactivity Disorder (ADHD)}},
             author = {
-                Steven Hicks and
-                Andrea Stautland and
-                Ole Bernt Fasmer and
-                Wenche Førland and
-                Hugo Lewi Hammer and
-                Pål Halvorsen and
-                Kristin Mjeldheim and
-                Ketil Joachim Oedegaard and
-                Berge Osnes and
-                Vigdis Elin Giæver Syrstad and
-                Michael Riegler and
-                Petter Jakobsen
+                Steven Hicks and Andrea Stautland and Ole Bernt Fasmer and
+                Wenche Førland and Hugo Lewi Hammer and Pål Halvorsen and
+                Kristin Mjeldheim and Ketil Joachim Oedegaard and Berge Osnes and
+                Vigdis Elin Giæver Syrstad and Michael Riegler and Petter Jakobsen
             },
             booktitle = {Proceedings of the 12th ACM Multimedia Systems Conference},
             doi = {10.1145/3458305.3478454},

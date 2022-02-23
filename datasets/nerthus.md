@@ -1,7 +1,7 @@
 ---
 title: 'Nerthus'
 desc: 'A Bowel Preparation Quality Video Dataset.'
-thumbnail: thumbnails/nerthus.jpg
+thumbnail: /thumbnails/nerthus.jpg
 publication: https://dl.acm.org/do/10.1145/3193165/abs/
 tags:
   - gastrointestinal
@@ -47,7 +47,12 @@ In addition to the above metrics, system performance metrics processing speed an
 ## Cite
     @inproceedings{Pogorelov:2017:NBP:3083187.3083216,
       title = {Nerthus: A Bowel Preparation Quality Video Dataset},
-      author = {Pogorelov, Konstantin and Randel, Kristin Ranheim and de Lange, Thomas and Eskeland, Sigrun Losada and Griwodz, Carsten and Johansen, Dag and Spampinato, Concetto and Taschwer, Mario and Lux, Mathias and Schmidt, Peter Thelin and Riegler, Michael and Halvorsen, P{\aa}l},
+      author = {
+        Pogorelov, Konstantin and Randel, Kristin Ranheim and de Lange, Thomas and
+        Eskeland, Sigrun Losada and Griwodz, Carsten and Johansen, Dag and
+        Spampinato, Concetto and Taschwer, Mario and Lux, Mathias and
+        Schmidt, Peter Thelin and Riegler, Michael and Halvorsen, P{\aa}l
+      },
       booktitle = {Proceedings of the 8th ACM on Multimedia Systems Conference},
       series = {MMSys'17},
       year = {2017},

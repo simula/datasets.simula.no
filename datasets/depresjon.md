@@ -1,7 +1,7 @@
 ---
 title: 'Depresjon'
 desc: 'The Depresjon Dataset.'
-thumbnail: thumbnails/depresjon.png
+thumbnail: /thumbnails/depresjon.png
 publication: https://dl.acm.org/doi/10.1145/3204949.3208125
 tags:
   - mental health
@@ -43,12 +43,8 @@ Looking at the list of related work in this area, there are a lot of different m
     @inproceedings{Garcia:2018:NBP:3083187.3083216,
         title = {Depresjon: A Motor Activity Database of Depression Episodes in Unipolar and Bipolar Patients},
         author = {
-            Enrique Garcia-Ceja and
-            Michael Riegler and
-            Petter Jakobsen and
-            Jim T\o rresen and
-            Tine Nordgreen and
-            Ketil J. Oedegaard and
+            Enrique Garcia-Ceja and Michael Riegler and Petter Jakobsen and
+            Jim T\o rresen and Tine Nordgreen and Ketil J. Oedegaard and
             Ole Bernt Fasmer
         },
         booktitle = {Proceedings of the 9th ACM on Multimedia Systems Conference},

@@ -1,7 +1,7 @@
 ---
 title: 'HTAD'
 desc: 'A Home-Tasks Activities Dataset with Wrist-accelerometer and Audio Features.'
-thumbnail: thumbnails/htad.png
+thumbnail: /thumbnails/htad.png
 publication: https://link.springer.com/chapter/10.1007/978-3-030-67835-7_17
 tags:
   - activity
@@ -22,14 +22,9 @@ All files can be viewed and downloaded in our OSF repository available here: [ht
         title = {HTAD: A Home-Tasks Activities Dataset with
             Wrist-Accelerometer and Audio Features},
         author = {
-            Garcia-Ceja, Enrique and
-            Thambawita, Vajira and
-            Hicks, Steven A. and
-            Jha, Debesh and
-            Jakobsen, Petter and
-            Hammer, Hugo L. and
-            Halvorsen, P{\aa}l and
-            Riegler, Michael A.
+            Garcia-Ceja, Enrique and Thambawita, Vajira and Hicks, Steven A. and
+            Jha, Debesh and Jakobsen, Petter and Hammer, Hugo L. and
+            Halvorsen, P{\aa}l and Riegler, Michael A.
         },
         booktitle = {MultiMedia Modeling},
         year = {2021},

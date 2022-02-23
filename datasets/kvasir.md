@@ -1,7 +1,7 @@
 ---
 title: 'Kvasir'
 desc: 'A Multi-Class Image-Dataset for Computer Aided Gastrointestinal Disease Detection.'
-thumbnail: thumbnails/kvasir.jpg
+thumbnail: /thumbnails/kvasir.jpg
 publication: https://dl.acm.org/do/10.1145/3193289/abs/
 tags:
   - gastrointestinal
@@ -152,7 +152,12 @@ In addition to the above metrics, system performance metrics processing speed an
 
     @inproceedings{Pogorelov:2017:KMI:3083187.3083212,
       title = {KVASIR: A Multi-Class Image Dataset for Computer Aided Gastrointestinal Disease Detection},
-      author = {Pogorelov, Konstantin and Randel, Kristin Ranheim and Griwodz, Carsten and Eskeland, Sigrun Losada and de Lange, Thomas and Johansen, Dag and Spampinato, Concetto and Dang-Nguyen, Duc-Tien and Lux, Mathias and Schmidt, Peter Thelin and Riegler, Michael and Halvorsen, P{\aa}l},
+      author = {
+         Pogorelov, Konstantin and Randel, Kristin Ranheim and Griwodz, Carsten and
+         Eskeland, Sigrun Losada and de Lange, Thomas and Johansen, Dag and
+         Spampinato, Concetto and Dang-Nguyen, Duc-Tien and Lux, Mathias and
+         Schmidt, Peter Thelin and Riegler, Michael and Halvorsen, P{\aa}l
+      },
       booktitle = {Proceedings of the 8th ACM on Multimedia Systems Conference},
       series = {MMSys'17},
       year = {2017},

@@ -1,7 +1,7 @@
 ---
 title: 'European Cloud Cover'
 desc: 'A dataset containing reanalysis data from ERA5 and satellite retrievals from METeosat Second Generation.'
-thumbnail: thumbnails/european-cloud-cover.jpg
+thumbnail: /thumbnails/european-cloud-cover.jpg
 publication: https://www.mdpi.com/2504-2289/5/4/62/pdf
 tags:
   - climate change
@@ -32,7 +32,10 @@ If you use this dataset in your research, Please cite the following paper:
 
     @article{svennevik2021prediction,
       title={Prediction of cloud fractional cover using machine learning},
-      author={Svennevik, Hanna and Riegler, Michael A and Hicks, Steven and Storelvmo, Trude and Hammer, Hugo L},
+      author={
+        Svennevik, Hanna and Riegler, Michael A and Hicks, Steven and
+        Storelvmo, Trude and Hammer, Hugo L
+      },
       journal={Big Data and Cognitive Computing},
       volume={5},
       number={4},

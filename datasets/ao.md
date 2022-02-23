@@ -1,7 +1,7 @@
 ---
 title: 'Anarchy Online'
 desc: 'Server-side Network Traffic from Anarchy Online: Analysis, Statistics and Applications.'
-thumbnail: thumbnails/anarchy-online.png
+thumbnail: /thumbnails/anarchy-online.png
 publication: https://datasets.simula.no/ao/mmsys2012-dataset.pdf
 tags:
   - climate change
