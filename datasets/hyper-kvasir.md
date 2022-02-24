@@ -22,7 +22,7 @@ The dataset can be split into four distinct parts; Labeled image data, unlabeled
 
 ## Download
 | File | Description | Size | Download
-| --- | --- | --- | --- |
+| --- | --- | --- | :---: |
 | hyper-kvasir.zip  | The entire HyperKvasir dataset in one zip file. | 58.6GB |  [<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 m-0 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>](https://datasets.simula.no/hyper-kvasir/downloads/hyper-kvasir.zip) |
 | hyper-kvasir-labeled-images.zip  | The entire HyperKvasir dataset in one zip file. | 3.9GB |  [<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 m-0 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>](https://datasets.simula.no/hyper-kvasir/downloads/hyper-kvasir-labeled-images.zip) |
 | hyper-kvasir-labeled-videos.zip  | The entire HyperKvasir dataset in one zip file. | 25.2GB |  [<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 m-0 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>](https://datasets.simula.no/hyper-kvasir/downloads/hyper-kvasir-videos.zip) |
