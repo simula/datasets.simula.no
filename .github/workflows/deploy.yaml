@@ -27,4 +27,4 @@ jobs:
             - name: Export application
               run: npm run export
             - name: Deploy with rsync
-              run: rsync -avz --omit-dir-times --delete ./out/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.HOST_DEPLOY_PATH }} --exclude downloads --exclude keep --exclude ExE1Dlex4PyE78q9BXFv --exclude ExE1Dlex4PyE78q9BXkl
+              run: rsync -avz --no-perms --omit-dir-times --delete ./out/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.HOST_DEPLOY_PATH }} --exclude downloads --exclude keep --exclude ExE1Dlex4PyE78q9BXFv --exclude ExE1Dlex4PyE78q9BXkl
