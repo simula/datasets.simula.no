@@ -17,9 +17,13 @@ For each video we have labelled bounding boxes around people, other boats, nets,
 
 The labels were manually created using Labelbox. Labelbox is a platform for annotating datasets. It had a simple interface that allowed us to label bounding boxes and temporal annotations. For the bounding boxes it linearly interpolates between keyframes, allowing for faster annotating. The dataset is anticipated as continuously growing and expanding (in terms of annotations, but also amount of data), and currently it contains 71 fully annotated videos and 127 videos without annotations. The not annotated video can also be useful for unsupervised or self supervised learning experiments.
 
-
 ## Dataset Structure
 The dataset is organized as follows. The root directory contains a *readme.txt* file and a *videos* directory. The *readme.txt* file gives a brief description of the included data and annotations. The *videos* directory contains a subdirectory for each annotated video that contains the video in *.mp4* format and two annotation files, one file for the bounding box annotations and one file for the timeline annotations. The two annotation files are structured as *.csv* files using a semi-colon as the delimiter. The bounding box contains one line per bounding box annotation with the following 7 values; class, frame number, center x position, center y position, the bounding box's width, and the bounding box's height. The width and height have been normalized by dividing each by the video's width and height, respectively. The timeline annotation file contains one line per annotated class and includes the following two values; the class of the frame and the frame number of the corresponding video. The *videos* directory also contains a *unannotated* subdirectory containing all videos that have not been annotated yet.
+
+## Download
+| File | Description | Size | Download
+| --- | --- | --- | :---: |
+| njord.zip  | The dataset in a single zip file. | 16.3GB |  [<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 m-0 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>](/downloads/njord.zip) |
 
 ## Terms of use
 The data is released fully open for research and educational purposes. The use of the dataset for purposes such as competitions and commercial purposes needs prior written permission.
