@@ -34,13 +34,13 @@ export default function Card(props) {
                     </div>
                 </div>
             </Link>
-            <div className="overflow-hidden border-t-2 p-4">
+            <div className="w-full h-12 flex flex-column flex-wrap overflow-hidden border-t-2 px-4">
                 {props.tags &&
                     props.tags.map(tag => (
                         <span
                             key={tag + props.slug}
                             onClick={() => setValue(tag)}
-                            className="m-1 cursor-pointer rounded-lg bg-gray-200 p-2 text-xs font-semibold hover:bg-gray-300"
+                            className="m-1 my-2 cursor-pointer rounded-lg bg-gray-200 p-2 text-xs font-semibold hover:bg-gray-300"
                         >
                             {tag}
                         </span>
