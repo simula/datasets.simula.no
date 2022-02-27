@@ -9,6 +9,8 @@ tags:
   - segmentation
 ---
 
+![banner](/images/njord/banner.png)
+
 A modern fishing vessel is infused with high-tech digital technologies.  The bridge deck of a trawler operating in, for instance, the Arctic contains numerous terminals visualizing geographical position and other vessels in the vicinity, weather conditions and predictions, fish finder sonar data and the like. Video streams from the deck and production line under deck are also frequently displayed so that the officer in-charge has real-time information when making operational decisions. The video stream is used, for instance, in a safety context for the crew members alone on deck or working somewhere along the heavy machinery constituting a production line. Accidents in this industry is not an exception. The constant collection of voluminous, multimodal data on a modern commercial fishing vessels leads to interesting possibilities for the application of advanced analysis methods. For example, using Artificial Intelligence (AI) to analyse this data could lead to new insights supporting more energy-efficient location of fish to catch, a sustainable catching, and a safer working environment for the fishermen. Add to this the potential such technologies applied can have in a resource control and global management perspective. 
 
 ## Dataset Details
