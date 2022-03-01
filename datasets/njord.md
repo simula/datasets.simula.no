@@ -3,7 +3,7 @@ title: 'Njord'
 desc: 'A fishing boat dataset.'
 thumbnail: /thumbnails/njord.jpeg
 github: https://github.com/simula/njord
-hidden: true
+hidden: false
 tags:
   - fishing
   - segmentation
