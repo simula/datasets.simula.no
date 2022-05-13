@@ -11,7 +11,8 @@ tags:
 
 We present a dataset called Toadstool that aims to contribute to the field of reinforcement learning, multimodal data fusion, and the possibility of exploring emotionally aware machine learning algorithms. Furthermore, the dataset can also be useful to researchers interested in facial expressions, biometric sensors, sentiment analysis, and game studies. The dataset consists of video, sensor, and demographic data collected from ten participants playing a Super Mario Bros. The sensor data is collected through an Empatica E4 wristband, which provides high-quality measurements and is graded as a medical device. In addition to the dataset, we also present a set of baseline experiments which show that sensory input can be used to train fully autonomous agents, which, in this case, play a video game. We think that the presented dataset can be interesting for a manifold of researchers to explore different exciting questions.
 
-*** Update 13-05-2022 ***
+***Update 13-05-2022***
+
 We have now added true emotion labels and synchronization to the dataset. This expanded vesrion can be dowlodaded below (Toadstool2.0.zip).
 
 ## Download
