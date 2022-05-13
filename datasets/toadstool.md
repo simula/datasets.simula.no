@@ -19,7 +19,7 @@ We have now added true emotion labels and synchronization to the dataset. This e
 | File | Description | Size | Download
 | --- | --- | --- | :---: |
 | toadstool.zip  |  The toadstool.zip dataset in one zip file. | 7.5GB |  [<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 m-0 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>](https://datasets.simula.no/downloads/toadstool.zip) |
-| toadstool2.zip  | The toadstool2.zip dataset in one zip file. | 24.7GB |  [<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 m-0 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>](https://datasets.simula.no/downloads/Toadstool2.0.zip) |
+| toadstool2.zip  | The toadstool2.zip dataset in one zip file. | 24.7GB |  [<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 m-0 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>](https://datasets.simula.no/downloads/toadstool2.zip) |
 
 ## Cite
     @inproceedings{10.1145/3339825.3394939,
