@@ -13,7 +13,7 @@ We present a dataset called Toadstool that aims to contribute to the field of re
 
 ***Update 13-05-2022***
 
-We have now added true emotion labels and synchronization to the dataset. This expanded vesrion can be dowlodaded below (Toadstool2.0.zip).
+We have now added true emotion labels and synchronization to the dataset. This expanded vesrion can be dowlodaded below (toadstool2.zip).
 
 ## Download
 | File | Description | Size | Download
