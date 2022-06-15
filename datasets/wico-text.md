@@ -46,4 +46,4 @@ We selected more than 10,000 tweets that deal with COVID-19 and 5G and labeled t
 The use of the WICO-Text dataset is restricted to research and education purposes. The use of the dataset is forbidden for commercial use without prior written permission. For other purposes, contact us (see below). In all documents and publications that use the WICO-Text dataset or report experimental results based on the WICO-Text dataset, a reference to the dataset paper has to be included (see above). Please email konstantin@simula.no if you have any questions regarding how to cite the dataset.
 
 ## Contact
-Email konstantin (_at_) simula (_dot_) no if you have any questions about the dataset and our research activities. We always welcome collaboration and joint research! 
+Email konstantin (_at_) simula (_dot_) no if you have any questions about the dataset and our research activities. We always welcome collaboration and joint research!
