@@ -1,6 +1,6 @@
 ---
 title: 'VISEM Tracking'
-desc: 'A spm quality control dataset.'
+desc: 'A sperm tracking dataset.'
 thumbnail: /thumbnails/visem-qc.png
 hidden: true
 tags:
