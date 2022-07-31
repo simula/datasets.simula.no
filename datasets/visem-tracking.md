@@ -1,5 +1,5 @@
 ---
-title: 'VISEM Tracking'
+title: 'Medico Multimedia - VISEM Tracking'
 desc: 'A sperm tracking dataset.'
 thumbnail: /thumbnails/visem-qc.png
 hidden: true
