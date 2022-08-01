@@ -76,8 +76,6 @@ Please contact your task organizers with any questions on these points.
 
 [5] Thambawita, V., Halvorsen, P., Hammer, H., Riegler, M., & Haugen, T. B. (2019). Extracting temporal features into a spatial domain using autoencoders for sperm video analysis. arXiv preprint arXiv:1911.03100.
 
-	MediaEval'21 
-
 ## Download
 | File | Description | Train | Test |
 | --- | --- | --- | :---: |
