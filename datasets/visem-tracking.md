@@ -8,7 +8,9 @@ tags:
   - videos
 ---
 
-![banner](/images/visem-tracking/banner.gif)
+<p align="center">
+  <img src="/images/visem-tracking/banner.gif" />
+</p>
 
 *See the [MediaEval 2022 webpage](https://multimediaeval.github.io/editions/2022/) for information on how to register and participate.*
 
