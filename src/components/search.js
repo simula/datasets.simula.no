@@ -6,7 +6,7 @@ export default function SearchAndFilter() {
 
     return (
         <div className="mt-6">
-            <div className="border-1 mx-auto flex h-10 w-96 px-1 items-center rounded-xl border-gray-600 bg-slate-200 focus-within:outline focus-within:outline-2 focus-within:outline-black">
+            <div className="border-1 mx-auto flex h-10 w-96 items-center rounded-xl border-gray-600 bg-slate-200 px-1 focus-within:outline focus-within:outline-2 focus-within:outline-black">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="ml-2 inline-block h-7 w-7"

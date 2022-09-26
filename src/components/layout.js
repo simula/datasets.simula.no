@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { FaGithub } from 'react-icons/fa'
 
 export default function Layout({ children }) {
     return (
@@ -20,7 +21,11 @@ export default function Layout({ children }) {
             <main className="container mx-auto max-w-7xl flex-1">
                 {children}
             </main>
-            <footer className="mt-8 bg-primary py-4"></footer>
+            <footer className="mt-8 flex justify-center bg-primary py-4">
+                <a href="https://github.com/simula/datasets.simula.no">
+                    <FaGithub size="1.5rem" />
+                </a>
+            </footer>
         </div>
     )
 }

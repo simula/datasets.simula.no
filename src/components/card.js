@@ -34,7 +34,7 @@ export default function Card(props) {
                     </div>
                 </div>
             </Link>
-            <div className="w-full h-12 flex flex-column flex-wrap overflow-hidden border-t-2 px-4">
+            <div className="flex-column flex h-12 w-full flex-wrap overflow-hidden border-t-2 px-4">
                 {props.tags &&
                     props.tags.map(tag => (
                         <span
