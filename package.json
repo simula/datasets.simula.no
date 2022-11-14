@@ -15,7 +15,8 @@
         "markdown-it": "^12.3.2",
         "next": "12.0.10",
         "react": "17.0.2",
-        "react-dom": "17.0.2"
+        "react-dom": "17.0.2",
+        "react-icons": "^4.6.0"
     },
     "devDependencies": {
         "@tailwindcss/typography": "^0.5.1",
