@@ -1,6 +1,6 @@
 ---
-title: 'Soccer game captions and summary'
-desc: 'English soccer game captions and summary for game summarization.'
+title: 'Soccer captions and summary'
+desc: 'Soccer game captions and summary in English for game summarization.'
 thumbnail: /thumbnails/arx.jpg
 github: https://github.com/simula/soccer-summarization
 publication: https://dl.acm.org/doi/10.1145/3552463.3557019
