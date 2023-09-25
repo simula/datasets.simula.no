@@ -1,5 +1,5 @@
 ---
-title: 'Soccer Summary'
+title: 'Soccer Summarization'
 desc: 'Soccer game captions and summary in English for game summarization.'
 thumbnail: /thumbnails/arx.jpg
 github: https://github.com/simula/soccer-summarization
