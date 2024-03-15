@@ -2,7 +2,7 @@
 title: 'VISEM QC'
 desc: 'A spm quality control dataset.'
 thumbnail: /thumbnails/visem-qc.png
-hidden: true
+hidden: false
 tags:
   - sperm
   - videos
