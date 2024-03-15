@@ -1,6 +1,6 @@
 ---
 title: 'VISEM QC'
-desc: 'A spm quality control dataset.'
+desc: 'A sperm quality control dataset.'
 thumbnail: /thumbnails/visem.png
 hidden: false
 tags:
