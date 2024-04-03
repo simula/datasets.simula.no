@@ -1,7 +1,7 @@
 ---
 title: 'WICO Text'
 desc: 'A labeled dataset of conspiracy theory and 5G-corona misinformation tweets.'
-thumbnail: /thumbnails/wico-text.jpg
+thumbnail: /thumbnails/wico.png
 publication: https://dl.acm.org/doi/abs/10.1145/3472720.3483617
 tags:
   - 5G
