@@ -33,7 +33,7 @@ export async function getStaticProps({ params: { slug } }) {
 export default function DatasetPage({ frontmatter, content }) {
     const md = markdownIt({ html: true })
     return (
-        <div className="mx-auto px-8">
+        <div className="mx-auto max-w-7xl px-8">
             <Head>
                 <title>Simula Datasets - {frontmatter.title}</title>
             </Head>
