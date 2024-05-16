@@ -1,7 +1,7 @@
 ---
 title: 'Cellular'
 desc: 'A cell autophagy dataset.'
-thumbnail: /thumbnails/njord.jpeg
+thumbnail: /thumbnails/cellular.png
 github: https://github.com/simula/cellular
 hidden: true
 tags:
