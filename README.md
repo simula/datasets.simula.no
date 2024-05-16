@@ -8,6 +8,7 @@ Currently, we have published the following datasets:
 * HyperKvasir, The Largest Gastrointestinal Dataset. [ [publication](https://www.nature.com/articles/s41597-020-00622-y) ]
 * HYPERAKTIV, A Motor Activity Database of Patients with ADHD. [ [publication](https://dl.acm.org/doi/10.1145/3458305.3478454) ]
 * KvasirCapsule SEG, A Capsule Endoscopy Segmentation Dataset. [ [publication](https://arxiv.org/pdf/2104.11138) ]
+* Cellular, A cell autophagy dataset. [ [publication](https://github.com/simula/cellular) ]
 * GastroVision, A multicenter dataset. [ [publication](https://arxiv.org/abs/2307.08140) ]
 * Nerthus, A Bowel Preparation Quality Video Dataset. [ [publication](https://dl.acm.org/do/10.1145/3193165/abs/) ]
 * Kvasir Capsule, The largest gastrointestinal PillCAM dataset. [ [publication](https://www.nature.com/articles/s41597-021-00920-z) ]
