@@ -1,7 +1,7 @@
 ---
 title: 'SoccerSum'
 desc: 'The SoccerSum Dataset for Automated Detection, Segmentation, and Tracking of Objects on the Soccer Pitch'
-thumbnail: /thumbnails/arx.jpg
+thumbnail: /thumbnails/soccersum.jpeg
 github: https://github.com/simula/SoccerSum
 publication: ---
 hidden: false
@@ -50,15 +50,15 @@ For the segmentation task, the dataset includes the following two classes:
 #### Detection and Segmentation
 
 <p align="center">
-  <img src="https://kumi.no/sample_vidoes/Det_exp_1.jpg" alt="SoccerSum Detection Example" style="width: 45%;">
-  <img src="https://kumi.no/sample_vidoes/Seg_exp_1.jpg" alt="SoccerSum Segmentation Example" style="width: 45%;">
+  <img src="https://raw.githubusercontent.com/simula/datasets.simula.no/main/public/images/soccersum/Det_exp_2.jpg" alt="SoccerSum Detection Example" style="width: 45%;">
+  <img src="https://raw.githubusercontent.com/simula/datasets.simula.no/main/public/images/soccersum/Seg_exp_1.jpg" alt="SoccerSum Segmentation Example" style="width: 45%;">
 </p>
 
 #### Tracking
 
 <p align="center">
-  <img src="https://kumi.no/sample_vidoes/tracking-1.jpg" alt="SoccerSum Tracking Frame 1" style="width: 35%;">
-  <img src="https://kumi.no/sample_vidoes/tracking-2.jpg" alt="SoccerSum Tracking Frame 2" style="width: 35%;">
+  <img src="https://raw.githubusercontent.com/simula/datasets.simula.no/main/public/images/soccersum/tracking-gif-soccersum.gif" alt="SoccerSum Tracking Frame 1" style="width: 70%;">
+
 </p>
 
 ## Accessing the Dataset
@@ -116,6 +116,6 @@ The dataset is fully open for research and educational purposes. Use of the data
 
 For any questions regarding the dataset, or to discuss potential collaboration and joint research opportunities, please contact the following people:
 
-- Mehdi Houshmand: mehdihou@oslomet.no
-- Cise Midoglu: cise@simula.no
-- Pål Halvorsen: paalh@simula.no
+- Mehdi Houshmand: [mehdihou@oslomet.no](mailto:mehdihou@oslomet.no)
+- Cise Midoglu: [cise@simula.no](mailto:cise@simula.no)
+- Pål Halvorsen: [paalh@simula.no](mailto:paalh@simula.no)
