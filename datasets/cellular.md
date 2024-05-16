@@ -3,7 +3,7 @@ title: 'Cellular'
 desc: 'A cell autophagy dataset.'
 thumbnail: /thumbnails/cellular.png
 github: https://github.com/simula/cellular
-hidden: true
+hidden: false
 tags:
   - cells
   - segmentation
