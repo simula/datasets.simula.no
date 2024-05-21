@@ -27,6 +27,7 @@ Currently, we have published the following datasets:
 * Soccer Summarization, Soccer game captions and summary in English for game summarization. [ [publication](https://dl.acm.org/doi/10.1145/3552463.3557019) ]
 * SoccerMon, Subjective and objective data collected over two years from two different elite women´s soccer teams.
 * SoccerSum, The SoccerSum Dataset for Automated Detection, Segmentation, and Tracking of Objects on the Soccer Pitch [ [publication](http://localhost:3000/---) ]
+* SoccerNet-Echoes, SoccerNet-Echoes: A Soccer Game Audio Commentary Dataset [ [publication](https://arxiv.org/abs/2405.07354) ]
 * PMData , A lifelogging dataset of 16 persons during 5 months using Fitbit, Google Forms and PMSys.
 * TACDEC, TACDEC: Dataset of Tackle Events in Soccer Game Videos [ [publication](https://dl.acm.org/doi/10.1145/3625468.3652166) ]
 
