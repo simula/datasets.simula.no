@@ -13,7 +13,7 @@ tags:
 
 ## Accessing the Dataset
 
-The dataset is available on: https://github.com/SoccerNet/sn-echoes.
+The dataset is available [here](https://github.com/SoccerNet/sn-echoes).
 
 ## Terms of Use
 
@@ -39,7 +39,7 @@ The dataset is fully open for research and educational purposes. Use of the data
 ## Contact
 
 For any questions regarding the dataset, or to discuss potential collaboration and joint research opportunities, please contact the following people:
-- Sushant Gautam: [sushant@simula.no] (mailto:sushant@simula.no)
+- Sushant Gautam: [sushant@simula.no](mailto:sushant@simula.no)
 - Mehdi Houshmand: [mehdihou@oslomet.no](mailto:mehdihou@oslomet.no)
 - Cise Midoglu: [cise@simula.no](mailto:cise@simula.no)
 - Pål Halvorsen: [paalh@simula.no](mailto:paalh@simula.no)
