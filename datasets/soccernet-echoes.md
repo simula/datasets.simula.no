@@ -3,7 +3,7 @@ title: 'SoccerNet-Echoes'
 desc: 'A Soccer Game Audio Commentary Dataset'
 thumbnail: /thumbnails/soccernet-echoes.png
 github: https://github.com/SoccerNet/sn-echoes
-publication: ---
+publication: https://arxiv.org/abs/2405.07354
 hidden: false
 tags:
   - text
