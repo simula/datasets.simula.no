@@ -11,6 +11,7 @@ Currently, we have published the following datasets:
 * Cellular, A cell autophagy dataset. [ [publication](https://github.com/simula/cellular) ]
 * GastroVision, A multicenter dataset. [ [publication](https://arxiv.org/abs/2307.08140) ]
 * Nerthus, A Bowel Preparation Quality Video Dataset. [ [publication](https://dl.acm.org/do/10.1145/3193165/abs/) ]
+* Kvasir-VQA: A Text-Image Pair GI Tract Dataset
 * Kvasir Capsule, The largest gastrointestinal PillCAM dataset. [ [publication](https://www.nature.com/articles/s41597-021-00920-z) ]
 * Kvasir Instrument, A gastrointestinal instrument Dataset. [ [publication](https://link.springer.com/chapter/10.1007/978-3-030-67835-7_19) ]
 * Kvasir SEG, Segmented Polyp Dataset for Computer Aided Gastrointestinal Disease Detection. [ [publication](https://dl.acm.org/doi/10.1007/978-3-030-37734-2_37) ]
