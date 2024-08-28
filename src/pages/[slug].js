@@ -80,7 +80,7 @@ export default function DatasetPage({ frontmatter, content }) {
                 </div>
             </div>
             <div className="prose mx-auto max-w-none prose-h2:mb-2 prose-h2:mt-5 prose-p:my-3">
-                <div dangerouslySetInnerHTML={{ __html: md.render(content) }} />
+                <div className="break-words" dangerouslySetInnerHTML={{ __html: md.render(content) }} />
             </div>
         </div>
     )
