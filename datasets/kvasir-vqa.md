@@ -28,7 +28,7 @@ You can downlod the dataset from HuggingFace:
 
 You can use the Kvasir-VQA dataset directly from HuggingFace Dataset Hub.
 
-🔥 See [Jupyter Notebook Demo](https://huggingface.co/datasets/SushantGautam/SimulaMet-HOST/Kvasir-VQA/blob/main/explore_Kvasir-VQA.ipynb). You can open the notebook on Google Colab.
+🔥 See [Jupyter Notebook Demo](https://huggingface.co/datasets/SimulaMet-HOST/Kvasir-VQA/blob/main/explore_Kvasir-VQA.ipynb). You can open the notebook on Google Colab.
 
 ```
 from datasets import load_dataset
