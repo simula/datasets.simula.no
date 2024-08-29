@@ -40,14 +40,14 @@ ds = load_dataset("SimulaMet-HOST/Kvasir-VQA")
 ```
 d_path ="./" #existing folder where you want to save images and metadata.csv
 
-df = ds['train'].select_columns(['source', 'question', 'answer', 'img_id']).to_pandas()
+df = ds['raw'].select_columns(['source', 'question', 'answer', 'img_id']).to_pandas()
 df.to_csv(f"{d_path}/metadata.csv", index=False)
 
 import os
 os.makedirs(f"{d_path}/images", exist_ok=True)
 
 for i, row in df.groupby('img_id').nth(0).iterrows(): # for images
-  image = ds['train'][i]['image'].save(f"{d_path}/images/{row['img_id']}.jpg")
+  image = ds['raw'][i]['image'].save(f"{d_path}/images/{row['img_id']}.jpg")
 ```
 
 The total image size is around 1.5 GB. The CSV file will have 58,849 rows.
