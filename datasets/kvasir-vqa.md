@@ -14,17 +14,43 @@ tags:
 The Kvasir-VQA dataset is an extended dataset derived from the HyperKvasir and Kvasir-Instrument datasets, augmented with question-and-answer annotations. This dataset is designed to facilitate advanced machine learning tasks in gastrointestinal (GI) diagnostics, including image captioning, Visual Question Answering (VQA) and text-based generation of synthetic medical images
 
 
-
 ### Download
 You can downlod the dataset from HuggingFace:
-[https://huggingface.co/datasets/SushantGautam/kvasir-vqa](https://huggingface.co/datasets/SushantGautam/kvasir-vqa)
+[https://huggingface.co/datasets/SimulaMet-HOST/Kvasir-VQA](https://huggingface.co/datasets/SimulaMet-HOST/Kvasir-VQA)
 
 <iframe
-  src="https://huggingface.co/datasets/SushantGautam/kvasir-vqa/embed/viewer/main_data/raw_annotations"
+  src="https://huggingface.co/datasets/SimulaMet-HOST/Kvasir-VQA/embed/viewer/main_data/raw_annotations"
   frameborder="0"
   width="100%"
   height="560px"
 ></iframe>
+
+
+You can use the Kvasir-VQA dataset directly from HuggingFace Dataset Hub.
+
+🔥 See [Jupyter Notebook Demo](https://huggingface.co/datasets/SushantGautam/SimulaMet-HOST/Kvasir-VQA/blob/main/explore_Kvasir-VQA.ipynb). You can open the notebook on Google Colab.
+
+```
+from datasets import load_dataset
+ds = load_dataset("SimulaMet-HOST/Kvasir-VQA")
+```
+
+#### Downloading Dataset as an Image foler and CSV Metadata
+
+```
+d_path ="./" #existing folder where you want to save images and metadata.csv
+
+df = ds['train'].select_columns(['source', 'question', 'answer', 'img_id']).to_pandas()
+df.to_csv(f"{d_path}/metadata.csv", index=False)
+
+import os
+os.makedirs(f"{d_path}/images", exist_ok=True)
+
+for i, row in df.groupby('img_id').nth(0).iterrows(): # for images
+  image = ds['train'][i]['image'].save(f"{d_path}/images/{row['img_id']}.jpg")
+```
+
+The total image size is around 1.5 GB. The CSV file will have 58,849 rows.
 
 ### Key Features
 
@@ -40,14 +66,15 @@ You can downlod the dataset from HuggingFace:
 
 The dataset includes images from various GI tract conditions and medical instruments used in GI procedures:
 
-| **Image Category**          | **Number of Samples** |
-|-----------------------------|-----------------------|
-| Normal Images               | 2500                  |
-| HyperKvasir-Polyps          | 1000                  |
-| HyperKvasir-Esophagitis     | 1000                  |
-| HyperKvasir-Ulcerative Colitis | 1000               |
-| Kvasir-Instrument           | 1000                  |
-| **Total**                   | **6500**              |
+| Image Category      | Number of Samples | Source Dataset      |
+|---------------------|-------------------|---------------------|
+| Normal              | 2500              | HyperKvasir         |
+| Polyps              | 1000              | HyperKvasir         |
+| Esophagitis         | 1000              | HyperKvasir         |
+| Ulcerative Colitis  | 1000              | HyperKvasir         |
+| Instrument          | 1000              | Kvasir-Instrument   |
+| **TOTAL**           | **6500**          |                     |
+
 
 ### Annotation Process
 
@@ -84,5 +111,3 @@ The data is released fully open for research and educational purposes under the 
 
 ## Contact
 Please contact michael@simula.no, vajira@simula.no, steven@simula.no or paalh@simula.no for any questions regarding the dataset.
-
-
