@@ -63,9 +63,11 @@ Annotations were developed with input from medical professionals and include six
 Annotations cover a range of GI aspects, including findings, abnormalities, anatomical landmarks, and medical instruments.
 
 
+When using the Kvasir-VQA dataset, you should include the following information to ensure compliance with the dataset's usage terms, particularly when citing the dataset in documents or papers:
+
 ## Terms of Use
 
-The data is released fully open for research and educational purposes. The use of the dataset for purposes such as competitions and commercial purposes needs prior written permission. In all documents and papers that use or refer to the dataset or report experimental results based on the Kvasir-VQA, a reference to the related article needs to be added: 
+The data is released fully open for research and educational purposes under the [Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) license](https://creativecommons.org/licenses/by-nc/4.0/). The use of the dataset for purposes such as competitions and commercial purposes needs prior written permission. In all documents and papers that use or refer to the dataset or report experimental results based on the Kvasir-VQA, a reference to the related article needs to be added: 
 
 ```
 @inproceedings{gautam2024kvasirvqa,
