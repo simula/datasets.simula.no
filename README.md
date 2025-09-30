@@ -24,6 +24,7 @@ Currently, we have published the following datasets:
 * Alfheim, Soccer video and player position dataset. [ [publication](https://dl.acm.org/doi/10.1145/2557642.2563677) ]
 * ARX, A Text-Classification Dataset Consisting of Norwegian Soccer Articles from VG and TV2. [ [publication](https://ieeexplore.ieee.org/abstract/document/8877417/) ]
 * Heimdallr, A Dataset For Sport Analysis.
+* HockeyRink: A Dataset for Precise Ice Hockey Rink Keypoint Mapping and Analytics. [ [publication](https://dl.acm.org/doi/10.1145/3712676.3718338) ]
 * ScopeSense, A 8.5-month sport, nutrition, and lifestyle lifelogging dataset.
 * Soccer Summarization, Soccer game captions and summary in English for game summarization. [ [publication](https://dl.acm.org/doi/10.1145/3552463.3557019) ]
 * SoccerMon, Subjective and objective data collected over two years from two different elite women´s soccer teams.
