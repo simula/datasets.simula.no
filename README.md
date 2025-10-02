@@ -26,6 +26,7 @@ Currently, we have published the following datasets:
 * ExposureEngine, Oriented Logo Detection & Sponsor Visibility Analytics (Dataset).
 * Heimdallr, A Dataset For Sport Analysis.
 * HockeyAI, A Multi-Class Ice Hockey Dataset for Object Detection. [ [publication](https://dl.acm.org/doi/10.1145/3712676.3718335) ]
+* HockeyRink: A Dataset for Precise Ice Hockey Rink Keypoint Mapping and Analytics. [ [publication](https://dl.acm.org/doi/10.1145/3712676.3718338) ]
 * HockeyOrient, A Dataset for Ice Hockey Player Orientation Classification. [ [publication](https://dl.acm.org/doi/10.1145/3712676.3718342) ]
 * ScopeSense, A 8.5-month sport, nutrition, and lifestyle lifelogging dataset.
 * Soccer Summarization, Soccer game captions and summary in English for game summarization. [ [publication](https://dl.acm.org/doi/10.1145/3552463.3557019) ]
