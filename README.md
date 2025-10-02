@@ -25,6 +25,7 @@ Currently, we have published the following datasets:
 * ARX, A Text-Classification Dataset Consisting of Norwegian Soccer Articles from VG and TV2. [ [publication](https://ieeexplore.ieee.org/abstract/document/8877417/) ]
 * ExposureEngine, Oriented Logo Detection & Sponsor Visibility Analytics (Dataset).
 * Heimdallr, A Dataset For Sport Analysis.
+* HockeyRink: A Dataset for Precise Ice Hockey Rink Keypoint Mapping and Analytics. [ [publication](https://dl.acm.org/doi/10.1145/3712676.3718338) ]
 * HockeyOrient, A Dataset for Ice Hockey Player Orientation Classification. [ [publication](https://dl.acm.org/doi/10.1145/3712676.3718342) ]
 * ScopeSense, A 8.5-month sport, nutrition, and lifestyle lifelogging dataset.
 * Soccer Summarization, Soccer game captions and summary in English for game summarization. [ [publication](https://dl.acm.org/doi/10.1145/3552463.3557019) ]
