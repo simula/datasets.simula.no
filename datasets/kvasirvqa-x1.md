@@ -14,7 +14,7 @@ tags:
 
 The **Kvasir-VQA-x1** dataset is a large-scale extension of the original Kvasir-VQA benchmark. 
 It provides **159,484 high-quality Visual Question Answering (VQA) pairs** grounded in **GI endoscopy images**, designed to support research in:
-Also see https://github.com/simula/Kvasir-VQA-x1.
+Also see [https://github.com/simula/Kvasir-VQA-x1](https://github.com/simula/Kvasir-VQA-x1).
 
 - Multimodal medical AI  
 - Visual Question Answering (VQA)  
@@ -25,7 +25,6 @@ Also see https://github.com/simula/Kvasir-VQA-x1.
 
 Kvasir-VQA-x1 integrates and expands the **HyperKvasir** image collection with a carefully curated pipeline for generating clinically relevant QA pairs using multiple LLMs, expert review, and a multi-stage naturalization and deduplication pipeline.
 
----
 
 ## Download
 
@@ -33,7 +32,7 @@ Kvasir-VQA-x1 integrates and expands the **HyperKvasir** image collection with a
 Access the dataset directly from the HuggingFace Hub:
 
 **Dataset:**  
-https://huggingface.co/datasets/SimulaMet/Kvasir-VQA-x1
+[https://huggingface.co/datasets/SimulaMet/Kvasir-VQA-x1](https://huggingface.co/datasets/SimulaMet/Kvasir-VQA-x1)
 
 ```python
 from datasets import load_dataset
@@ -41,9 +40,8 @@ ds = load_dataset("SimulaMet/Kvasir-VQA-x1")
 ```
 
 ### Notebook Demo
-A full exploration notebook is available on HuggingFace and can be opened on Google Colab. See https://github.com/simula/Kvasir-VQA-x1.
+A full exploration notebook is available on HuggingFace and can be opened on Google Colab. See [https://github.com/simula/Kvasir-VQA-x1](https://github.com/simula/Kvasir-VQA-x1).
 
----
 
 ## Dataset Summary
 
@@ -58,59 +56,9 @@ A full exploration notebook is available on HuggingFace and can be opened on Goo
 
 This version (x1) introduces **structured complexity levels**, enabling fine-grained evaluation of model reasoning:
 
-- **Level 1** — Direct visual recognition  
-- **Level 2** — Contextual localization, multi-attribute composition  
-- **Level 3** — Higher-order clinical reasoning  
-
----
-
-## Key Features
-
-### 1. Large-Scale QA Set (159k+)
-Each image is paired with diverse question types such as:
-
-- Binary  
-- Counting  
-- Color  
-- Anatomy  
-- Abnormality  
-- Instrument  
-- Localization  
-- Comparative reasoning  
-
-### 2. Multi-Stage Annotation Pipeline
-
-- LLM generation  
-- Semantic deduplication (DeBERTa-MNLI + SentenceTransformer)  
-- Expert filtering  
-- Naturalization and normalization  
-- Complexity categorization  
-
----
-
-## Dataset Structure
-
-Splits:
-
-- **train** — 127,587  
-- **validation** — 15,899  
-- **test** — 15,998  
-
-Record structure:
-
-```json
-{
-  "image_id": "HK_0000123",
-  "image": "<PIL Image>",
-  "question": "How many polyps are visible?",
-  "answer": "one",
-  "complexity_level": 1,
-  "question_type": "counting",
-  "source_prompt_family": "guided-natural"
-}
-```
-
----
+- **Level 1** — single aspect question
+- **Level 2** — multi-attribute composition  
+- **Level 3** — triple-attribute composition  
 
 ## Downloading Images + Metadata Locally
 
@@ -129,7 +77,6 @@ for i, row in df.groupby("image_id").first().iterrows():
     img.save(f"images/{row['image_id']}.jpg")
 ```
 
----
 
 ## Terms of Use
 
@@ -156,12 +103,6 @@ location = {Daejeon, Korea (Republic of)}
 
 ```
 
----
-
 ## Contact
 
-sushant@simula.no
-michael@simula.no  
-vajira@simula.no  
-steven@simula.no  
-paalh@simula.no
+sushant@simula.no, michael@simula.no, vajira@simula.no, steven@simula.no or paalh@simula.no
