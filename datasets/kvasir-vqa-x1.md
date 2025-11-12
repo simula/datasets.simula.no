@@ -105,4 +105,5 @@ location = {Daejeon, Korea (Republic of)}
 
 ## Contact
 
-sushant@simula.no, michael@simula.no, vajira@simula.no, steven@simula.no or paalh@simula.no
+Please contact sushant@simula.no, michael@simula.no, vajira@simula.no, steven@simula.no or paalh@simula.no for any questions regarding the dataset.
+
