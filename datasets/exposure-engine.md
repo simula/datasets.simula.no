@@ -2,8 +2,8 @@
 title: 'ExposureEngine'
 desc: 'Oriented Logo Detection and Sponsor Visibility Analytics in Sports Broadcasts'
 thumbnail: /thumbnails/exposure-engine.jpg
-publication: ---
-github: ---
+publication: 
+github: 
 hidden: false
 tags:
   - Logo Detection

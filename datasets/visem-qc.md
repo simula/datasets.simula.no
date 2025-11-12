@@ -2,6 +2,8 @@
 title: 'VISEM QC'
 desc: 'A sperm quality control dataset.'
 thumbnail: /thumbnails/visem.png
+publication: 
+github: 
 hidden: false
 tags:
   - sperm

@@ -3,6 +3,7 @@ title: 'Kvasir'
 desc: 'A Multi-Class Image-Dataset for Computer Aided Gastrointestinal Disease Detection.'
 thumbnail: /thumbnails/kvasir.jpg
 publication: https://dl.acm.org/do/10.1145/3193289/abs/
+github: 
 tags:
   - gastrointestinal
   - images

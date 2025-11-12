@@ -3,6 +3,7 @@ title: 'HTAD'
 desc: 'A Home-Tasks Activities Dataset with Wrist-accelerometer and Audio Features.'
 thumbnail: /thumbnails/htad.png
 publication: https://link.springer.com/chapter/10.1007/978-3-030-67835-7_17
+github: 
 tags:
   - activity
   - sensor

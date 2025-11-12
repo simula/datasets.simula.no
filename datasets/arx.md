@@ -3,6 +3,7 @@ title: 'Arx'
 desc: 'A Text-Classification Dataset Consisting of Norwegian Soccer Articles from VG and TV2.'
 thumbnail: /thumbnails/arx.jpg
 publication: https://ieeexplore.ieee.org/abstract/document/8877417/
+github: 
 tags:
   - soccer
   - text

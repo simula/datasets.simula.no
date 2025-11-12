@@ -3,6 +3,7 @@ title: 'Image Sentiment'
 desc: 'A dataset for image sentiment analysis.'
 thumbnail: /thumbnails/sentiment.jpg
 publication: https://arxiv.org/pdf/2009.03051.pdf
+github: 
 tags:
   - sentiment analysis
   - images

@@ -3,6 +3,7 @@ title: 'Psykose'
 desc: 'A Motor Activity Database of Patients with Schizophrenia.'
 thumbnail: /thumbnails/psykose.png
 publication: https://ieeexplore.ieee.org/document/9182896
+github: 
 tags:
   - mental health
   - sensor

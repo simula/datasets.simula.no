@@ -3,6 +3,7 @@ title: 'WICO Graph Dataset'
 desc: 'A Labeled Dataset of Twitter Subgraphs based on Conspiracy Theory and 5G-Corona Misinformation Tweets.'
 thumbnail: /thumbnails/wico.png
 publication: https://dl.acm.org/doi/10.1145/3472720.3483617
+github: 
 tags:
   - misinformation
   - text

@@ -3,6 +3,7 @@ title: 'PMData '
 desc: 'A lifelogging dataset of 16 persons during 5 months using Fitbit, Google Forms and PMSys.'
 thumbnail: /thumbnails/pmdata.jpg
 publication: https://dl.acm.org/doi/10.1145/3339825.3394926
+github: 
 tags:
   - sports
   - sensor

@@ -2,6 +2,7 @@
 title: 'Njord'
 desc: 'A fishing boat dataset.'
 thumbnail: /thumbnails/njord.jpeg
+publication: 
 github: https://github.com/simula/njord
 hidden: false
 tags:

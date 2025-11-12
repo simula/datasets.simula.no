@@ -3,7 +3,7 @@ title: 'SoccerSum'
 desc: 'The SoccerSum Dataset for Automated Detection, Segmentation, and Tracking of Objects on the Soccer Pitch'
 thumbnail: /thumbnails/soccersum.jpeg
 github: https://github.com/simula/SoccerSum
-publication: ---
+publication: 
 hidden: false
 tags:
   - text

@@ -2,6 +2,8 @@
 title: 'Right Inflight'
 desc: 'A Dataset for Exploring the Automatic Prediction of Movies Suitable for a Watching Situation.'
 thumbnail: /thumbnails/right-inflight.png
+publication: 
+github: 
 tags:
   - climate change
   - sensor

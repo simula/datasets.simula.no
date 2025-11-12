@@ -2,6 +2,8 @@
 title: 'HSDPA'
 desc: 'HSDPA-bandwidth logs for mobile HTTP streaming scenarios.'
 thumbnail: /thumbnails/hsdpa-bandwidth-traces.jpg
+publication: http://home.ifi.uio.no/paalh/publications/files/mmsys2013-dataset.pdf
+github: 
 tags:
   - networks
   - streaming 

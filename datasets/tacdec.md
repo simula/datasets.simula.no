@@ -2,8 +2,8 @@
 title: 'TACDEC'
 desc: 'TACDEC: Dataset of Tackle Events in Soccer Game Videos'
 thumbnail: '/thumbnails/arx.jpg'
-GitHub: https://github.com/simula/tacdec
-publication: ---
+publication: https://dl.acm.org/doi/10.1145/3625468.3652166
+github: https://github.com/simula/tacdec
 hidden: false
 tags:
   - football
