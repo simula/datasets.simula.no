@@ -2,6 +2,8 @@
 title: 'ScopeSense'
 desc: 'A 8.5-month sport, nutrition, and lifestyle lifelogging dataset.'
 thumbnail: /thumbnails/right-inflight.png
+publication: ''
+github: https://osf.io/v5acr/
 hidden: false
 tags:
   - lifelogging

@@ -2,6 +2,7 @@
 title: 'Cellular'
 desc: 'A cell autophagy dataset.'
 thumbnail: /thumbnails/cellular.png
+publication: ''
 github: https://github.com/simula/cellular
 hidden: false
 tags:

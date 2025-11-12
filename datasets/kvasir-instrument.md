@@ -2,7 +2,8 @@
 title: 'Kvasir Instrument'
 desc: 'A gastrointestinal instrument Dataset.'
 thumbnail: /thumbnails/kvasir-instrument.jpg
-publication: https://link.springer.com/chapter/10.1007/978-3-030-67835-7_19
+publication: https://doi.org/10.1007/978-3-030-67835-7_19
+github: https://osf.io/kp6my/
 tags:
   - gastrointestinal
   - sgementation

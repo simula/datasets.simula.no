@@ -2,6 +2,8 @@
 title: 'Medico Multimedia - VISEM Tracking'
 desc: 'A sperm tracking dataset.'
 thumbnail: /thumbnails/visem-qc.png
+publication: https://doi.org/10.1145/3304109.3325814
+github: https://multimediaeval.github.io/editions/2022/
 hidden: true
 tags:
   - sperm

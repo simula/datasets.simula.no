@@ -4,51 +4,56 @@ A collection of open datasets published by Simula Research Laboratory and Simula
 Currently, we have published the following datasets: 
 
 **Medical and Biology Datasets**
-* Depresjon, The Depresjon Dataset. [ [publication](https://dl.acm.org/doi/10.1145/3204949.3208125) ]
-* HyperKvasir, The Largest Gastrointestinal Dataset. [ [publication](https://www.nature.com/articles/s41597-020-00622-y) ]
-* HYPERAKTIV, A Motor Activity Database of Patients with ADHD. [ [publication](https://dl.acm.org/doi/10.1145/3458305.3478454) ]
-* KvasirCapsule SEG, A Capsule Endoscopy Segmentation Dataset. [ [publication](https://arxiv.org/pdf/2104.11138) ]
-* Cellular, A cell autophagy dataset. [ [publication](https://github.com/simula/cellular) ]
-* GastroVision, A multicenter dataset. [ [publication](https://arxiv.org/abs/2307.08140) ]
-* Nerthus, A Bowel Preparation Quality Video Dataset. [ [publication](https://dl.acm.org/do/10.1145/3193165/abs/) ]
-* Kvasir-VQA: A Text-Image Pair GI Tract Dataset
-* Kvasir Capsule, The largest gastrointestinal PillCAM dataset. [ [publication](https://www.nature.com/articles/s41597-021-00920-z) ]
-* Kvasir Instrument, A gastrointestinal instrument Dataset. [ [publication](https://link.springer.com/chapter/10.1007/978-3-030-67835-7_19) ]
-* Kvasir SEG, Segmented Polyp Dataset for Computer Aided Gastrointestinal Disease Detection. [ [publication](https://dl.acm.org/doi/10.1007/978-3-030-37734-2_37) ]
-* Kvasir, A Multi-Class Image-Dataset for Computer Aided Gastrointestinal Disease Detection. [ [publication](https://dl.acm.org/do/10.1145/3193289/abs/) ]
-* Psykose, A Motor Activity Database of Patients with Schizophrenia. [ [publication](https://ieeexplore.ieee.org/document/9182896) ]
-* VISEM QC, A sperm quality control dataset.
-* VISEM, A Multimodal Video Dataset of Human Spermatozoa. [ [publication](https://dl.acm.org/doi/10.1145/3304109.3325814) ]
+* Cellular, A cell autophagy dataset. [[project](https://github.com/simula/cellular)]
+* Depresjon, The Depresjon Dataset. [[publication](https://dl.acm.org/doi/10.1145/3204949.3208125) | [project](https://datasets.simula.no/depresjon/)]
+* GastroVision, A multicenter dataset. [[publication](https://arxiv.org/abs/2307.08140) | [project](https://github.com/DebeshJha/GastroVision)]
+* HTAD, A Home-Tasks Activities Dataset with Wrist-accelerometer and Audio Features. [[publication](https://link.springer.com/chapter/10.1007/978-3-030-67835-7_17) | [project](https://osf.io/4dnh8/)]
+* HYPERAKTIV, A Motor Activity Database of Patients with ADHD. [[publication](https://dl.acm.org/doi/10.1145/3458305.3478454) | [project](https://github.com/simula/hyperaktiv)]
+* HyperKvasir, The Largest Gastrointestinal Dataset. [[publication](https://www.nature.com/articles/s41597-020-00622-y) | [project](https://github.com/simula/hyper-kvasir)]
+* Kvasir, A Multi-Class Image-Dataset for Computer Aided Gastrointestinal Disease Detection. [[publication](https://doi.org/10.1145/3083187.3083212) | [project](https://datasets.simula.no/kvasir/)]
+* Kvasir Capsule, The largest gastrointestinal PillCAM dataset. [[publication](https://www.nature.com/articles/s41597-021-00920-z) | [project](https://github.com/simula/kvasir-capsule)]
+* Kvasir Instrument, A gastrointestinal instrument Dataset. [[publication](https://doi.org/10.1007/978-3-030-67835-7_19) | [project](https://osf.io/kp6my/)]
+* Kvasir SEG, Segmented Polyp Dataset for Computer Aided Gastrointestinal Disease Detection. [[publication](https://dl.acm.org/doi/10.1007/978-3-030-37734-2_37) | [project](https://datasets.simula.no/kvasir-seg/)]
+* Kvasir-VQA, A Text-Image Pair GI Tract Dataset. [[publication](https://doi.org/10.1145/3689096.3689458) | [project](https://huggingface.co/datasets/SimulaMet-HOST/Kvasir-VQA)]
+* Kvasir-VQA-x1, A Large-Scale Multi-Task Benchmark for GI Tract Visual Question Answering. [[publication](https://doi.org/10.1007/978-3-032-08009-7_6) | [project](https://github.com/simula/Kvasir-VQA-x1)]
+* KvasirCapsule SEG, A Capsule Endoscopy Segmentation Dataset. [[publication](https://arxiv.org/abs/2104.11138) | [project](https://github.com/DebeshJha/NanoNet)]
+* MedMultiPoints, A Multimodal Dataset for Object Detection, Localization, and Counting in Medical Imaging. [[publication](https://arxiv.org/abs/2505.16647) | [project](https://github.com/Simula/PointDetectCount)]
+* Medico Multimedia - VISEM Tracking, A sperm tracking dataset. [[publication](https://doi.org/10.1145/3304109.3325814) | [project](https://multimediaeval.github.io/editions/2022/)]
+* Nerthus, A Bowel Preparation Quality Video Dataset. [[publication](https://doi.org/10.1145/3083187.3083216) | [project](https://datasets.simula.no/nerthus/)]
+* Psykose, A Motor Activity Database of Patients with Schizophrenia. [[publication](https://ieeexplore.ieee.org/document/9182896) | [project](https://osf.io/dgjzu/)]
+* VISEM, A Multimodal Video Dataset of Human Spermatozoa. [[publication](https://dl.acm.org/doi/10.1145/3304109.3325814) | [project](https://datasets.simula.no/visem/)]
+* VISEM QC, A sperm quality control dataset. [[project](https://datasets.simula.no/visem-qc/)]
 
-**Sport Datasets**
-* Alfheim, Soccer video and player position dataset. [ [publication](https://dl.acm.org/doi/10.1145/2557642.2563677) ]
-* ARX, A Text-Classification Dataset Consisting of Norwegian Soccer Articles from VG and TV2. [ [publication](https://ieeexplore.ieee.org/abstract/document/8877417/) ]
-* ExposureEngine, Oriented Logo Detection & Sponsor Visibility Analytics (Dataset).
-* Heimdallr, A Dataset For Sport Analysis.
-* HockeyAI, A Multi-Class Ice Hockey Dataset for Object Detection. [ [publication](https://dl.acm.org/doi/10.1145/3712676.3718335) ]
-* HockeyRink: A Dataset for Precise Ice Hockey Rink Keypoint Mapping and Analytics. [ [publication](https://dl.acm.org/doi/10.1145/3712676.3718338) ]
-* HockeyOrient, A Dataset for Ice Hockey Player Orientation Classification. [ [publication](https://dl.acm.org/doi/10.1145/3712676.3718342) ]
-* ScopeSense, A 8.5-month sport, nutrition, and lifestyle lifelogging dataset.
-* Soccer Summarization, Soccer game captions and summary in English for game summarization. [ [publication](https://dl.acm.org/doi/10.1145/3552463.3557019) ]
-* SoccerMon, Subjective and objective data collected over two years from two different elite women´s soccer teams.
-* SoccerSum, The SoccerSum Dataset for Automated Detection, Segmentation, and Tracking of Objects on the Soccer Pitch [ [publication](http://localhost:3000/---) ]
-* SoccerNet-Echoes, SoccerNet-Echoes: A Soccer Game Audio Commentary Dataset [ [publication](https://arxiv.org/abs/2405.07354) ]
-* PMData , A lifelogging dataset of 16 persons during 5 months using Fitbit, Google Forms and PMSys.
-* TACDEC, TACDEC: Dataset of Tackle Events in Soccer Game Videos [ [publication](https://dl.acm.org/doi/10.1145/3625468.3652166) ]
+**Sport and Activity Datasets**
+* Alfheim, Soccer video and player position dataset. [[publication](https://dl.acm.org/doi/10.1145/2557642.2563677) | [project](https://datasets.simula.no/alfheim/)]
+* Arx, A Text-Classification Dataset Consisting of Norwegian Soccer Articles from VG and TV2. [[publication](https://ieeexplore.ieee.org/abstract/document/8877417/) | [project](https://datasets.simula.no/arx/)]
+* ExposureEngine, Oriented Logo Detection and Sponsor Visibility Analytics in Sports Broadcasts. [[project](https://huggingface.co/datasets/SimulaMet-HOST/ExposureEngine)]
+* Heimdallr, A Dataset For Sport Analysis. [[project](https://datasets.simula.no/heimdallr/)]
+* HockeyAI, A Multi-Class Ice Hockey Dataset for Object Detection. [[publication](https://dl.acm.org/doi/10.1145/3712676.3718335) | [project](https://github.com/acmmmsys/2025-HockeyAI)]
+* HockeyOrient, A Dataset for Ice Hockey Player Orientation Classification. [[publication](https://dl.acm.org/doi/10.1145/3712676.3718342) | [project](https://github.com/acmmmsys/2025-HockeyOrient)]
+* HockeyRink, A Dataset for Precise Ice Hockey Rink Keypoint Mapping and Analytics. [[publication](https://dl.acm.org/doi/10.1145/3712676.3718338) | [project](https://github.com/acmmmsys/2025-HockeyRink)]
+* PMData, A lifelogging dataset of 16 persons during 5 months using Fitbit, Google Forms and PMSys. [[publication](https://dl.acm.org/doi/10.1145/3339825.3394926) | [project](https://osf.io/vx4bk/)]
+* ScopeSense, A 8.5-month sport, nutrition, and lifestyle lifelogging dataset. [[project](https://osf.io/v5acr/)]
+* Soccer Summarization, Soccer game captions and summary in English for game summarization. [[publication](https://dl.acm.org/doi/10.1145/3552463.3557019) | [project](https://github.com/simula/soccer-summarization)]
+* SoccerChat, A Multimodal Video-Text Dataset for Natural Language Soccer Game Understanding. [[publication](https://arxiv.org/abs/2505.16630) | [project](https://github.com/simula/SoccerChat)]
+* SoccerMon, Subjective and objective data collected over two years from two different elite women´s soccer teams. [[project](https://osf.io/uryz9/)]
+* SoccerNet-Echoes, A Soccer Game Audio Commentary Dataset. [[publication](https://arxiv.org/abs/2405.07354) | [project](https://github.com/SoccerNet/sn-echoes)]
+* SoccerSum, The SoccerSum Dataset for Automated Detection, Segmentation, and Tracking of Objects on the Soccer Pitch. [[publication](https://doi.org/10.1145/3625468.3652180) | [project](https://github.com/simula/SoccerSum)]
+* TACDEC, TACDEC: Dataset of Tackle Events in Soccer Game Videos. [[publication](https://doi.org/10.1145/3625468.3652166) | [project](https://github.com/simula/tacdec)]
 
 **Other Datasets**
-* Anarchy Online, Server-side Network Traffic from Anarchy Online: Analysis, Statistics and Applications. [ [publication](https://datasets.simula.no/ao/mmsys2012-dataset.pdf) ]
-* European Cloud Cover, A dataset containing reanalysis data from ERA5 and satellite retrievals from METeosat Second Generation. [ [publication](https://www.mdpi.com/2504-2289/5/4/62/pdf) ]
-* Eye Tracker, A Serious Game Based Dataset. [ [publication](http://ceur-ws.org/Vol-1345/gamifir15_5.pdf) ]
-* HSDPA, HSDPA-bandwidth logs for mobile HTTP streaming scenarios.
-* HTAD, A Home-Tasks Activities Dataset with Wrist-accelerometer and Audio Features. [ [publication](https://link.springer.com/chapter/10.1007/978-3-030-67835-7_17) ]
-* Image Sentiment, A dataset for image sentiment analysis. [ [publication](https://arxiv.org/pdf/2009.03051.pdf) ]
-* Njord, A fishing boat dataset.
-* Right Inflight, A Dataset for Exploring the Automatic Prediction of Movies Suitable for a Watching Situation.
-* THREAT, A Large Annotated Corpus for Detection of Violent Threats.
-* Toadstool, A Dataset for Training Emotional and Intelligent Machines Playing Super Mario Bros. [ [publication](https://dl.acm.org/doi/10.1145/3339825.3394939) ]
-* WICO Graph Dataset, A Labeled Dataset of Twitter Subgraphs based on Conspiracy Theory and 5G-Corona Misinformation Tweets. [ [publication](https://dl.acm.org/doi/10.1145/3472720.3483617) ]
-* WICO Text, A labeled dataset of conspiracy theory and 5G-corona misinformation tweets. [ [publication](https://dl.acm.org/doi/abs/10.1145/3472720.3483617) ]
+* Anarchy Online, Server-side Network Traffic from Anarchy Online: Analysis, Statistics and Applications. [[publication](https://datasets.simula.no/ao/mmsys2012-dataset.pdf) | [project](https://datasets.simula.no/ao/)]
+* European Cloud Cover, A dataset containing reanalysis data from ERA5 and satellite retrievals from METeosat Second Generation. [[publication](https://www.mdpi.com/2504-2289/5/4/62/pdf) | [project](https://osf.io/kqdgx/)]
+* Eye Tracker, A Serious Game Based Dataset. [[publication](http://ceur-ws.org/Vol-1345/gamifir15_5.pdf) | [project](https://datasets.simula.no/eye-tracker/)]
+* HSDPA, HSDPA-bandwidth logs for mobile HTTP streaming scenarios. [[publication](http://home.ifi.uio.no/paalh/publications/files/mmsys2013-dataset.pdf) | [project](https://datasets.simula.no/hsdpa/)]
+* Image Sentiment, A dataset for image sentiment analysis. [[publication](https://arxiv.org/pdf/2009.03051.pdf) | [project](https://osf.io/xakp2/)]
+* Njord, A fishing boat dataset. [[project](https://github.com/simula/njord)]
+* Right Inflight, A Dataset for Exploring the Automatic Prediction of Movies Suitable for a Watching Situation. [[project](https://zenodo.org/record/1118338)]
+* THREAT, A Large Annotated Corpus for Detection of Violent Threats. [[project](https://datasets.simula.no/threat/)]
+* Toadstool, A Dataset for Training Emotional and Intelligent Machines Playing Super Mario Bros. [[publication](https://dl.acm.org/doi/10.1145/3339825.3394939) | [project](https://github.com/simula/toadstool)]
+* WICO Graph Dataset, A Labeled Dataset of Twitter Subgraphs based on Conspiracy Theory and 5G-Corona Misinformation Tweets. [[publication](https://dl.acm.org/doi/10.1145/3472720.3483617) | [project](https://osf.io/5m3by/)]
+* WICO Text, A labeled dataset of conspiracy theory and 5G-corona misinformation tweets. [[publication](https://doi.org/10.1145/3472720.3483617) | [project](https://datasets.simula.no/wico-text/)]
+
 
 ## How to contribute
 To add a new **dataset**, follow these steps:
