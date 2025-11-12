@@ -2,10 +2,11 @@
 title: 'Kvasir Instrument'
 desc: 'A gastrointestinal instrument Dataset.'
 thumbnail: /thumbnails/kvasir-instrument.jpg
-publication: https://link.springer.com/chapter/10.1007/978-3-030-67835-7_19
+publication: https://doi.org/10.1007/978-3-030-67835-7_19
+github: https://osf.io/kp6my/
 tags:
   - gastrointestinal
-  - sgementation
+  - segmentation
 ---
 
 Gastrointestinal (GI) tract pathologies are screened, biopsied, and resected (if needed) periodically using surgical tools. However, these biopsied and/or resected areas are not tracked due to which the video analysis for assessing disease burden or the amount of pathology resection remains unknown. To tackle such issues, we have released the novel “Kvasir-Instrument: Diagnostic and therapeutic tool segmentation dataset in gastrointestinal endoscopy” dataset, which consists of 590 annotated frames comprising of GI procedure tools such as snares, balloons, biopsy forceps, etc. By adding segmentation masks and bounding boxes information to this dataset, we enable computer vision and GI endoscopy researchers to contribute to the field of automated tool segmentation.

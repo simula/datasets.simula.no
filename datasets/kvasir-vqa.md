@@ -2,7 +2,8 @@
 title: 'Kvasir-VQA'
 desc: 'A Text-Image Pair GI Tract Dataset'
 thumbnail: /thumbnails/kvasir.jpg # change
-publication: 
+publication: https://doi.org/10.1145/3689096.3689458
+github: https://huggingface.co/datasets/SimulaMet-HOST/Kvasir-VQA
 tags:
   - gastrointestinal
   - images

@@ -2,7 +2,7 @@
 title: 'KvasirCapsule SEG'
 desc: 'A Capsule Endoscopy Segmentation Dataset.'
 thumbnail: /thumbnails/kvasir-capsule-seg.jpg
-publication: https://arxiv.org/abs/2104.11138#:~:text=NanoNet%3A%20Real%2DTime%20Polyp%20Segmentation%20in%20Video%20Capsule%20Endoscopy%20and%20Colonoscopy,-Debesh%20Jha%2C%20Nikhil&text=Deep%20learning%20in%20gastrointestinal%20endoscopy,to%20assess%20lesions%20more%20accurately.
+publication: https://arxiv.org/abs/2104.11138
 github: https://github.com/DebeshJha/NanoNet
 tags:
   - gastrointestinal

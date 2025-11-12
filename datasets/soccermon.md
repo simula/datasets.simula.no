@@ -2,6 +2,8 @@
 title: 'SoccerMon'
 desc: 'Subjective and objective data collected over two years from two different elite women´s soccer teams.'
 thumbnail: /thumbnails/soccermon.png
+publication: ''
+github: https://osf.io/uryz9/
 hidden: false
 tags:
   - soccer

@@ -2,7 +2,8 @@
 title: 'Nerthus'
 desc: 'A Bowel Preparation Quality Video Dataset.'
 thumbnail: /thumbnails/nerthus.jpg
-publication: https://dl.acm.org/do/10.1145/3193165/abs/
+publication: https://doi.org/10.1145/3083187.3083216
+github: ''
 tags:
   - gastrointestinal
   - images
