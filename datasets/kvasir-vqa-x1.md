@@ -1,8 +1,9 @@
 ---
 title: 'Kvasir-VQA-x1'
 desc: 'A Large-Scale Multi-Task Benchmark for GI Tract Visual Question Answering'
-thumbnail: /thumbnails/kvasir.jpg
-publication:
+thumbnail: /thumbnails/kvasir-vqa-v1.png
+publication: https://doi.org/10.1007/978-3-032-08009-7_6
+github: https://github.com/simula/Kvasir-VQA-x1
 tags:
   - gastrointestinal
   - endoscopy
