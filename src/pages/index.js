@@ -177,15 +177,14 @@ export default function Home({ datasets, allTags }) {
                             key={props.slug}
                             className="flex flex-col overflow-hidden rounded-md border border-gray-300 shadow-md transition duration-200 ease-in-out hover:shadow-2xl focus-within:ring-2 focus-within:ring-primary"
                         >
-                            <Link href={`/${props.slug}`} passHref>
-                                <a className="flex cursor-pointer flex-col overflow-hidden focus:outline-none">
+                            <Link href={`/${props.slug}`} className="flex cursor-pointer flex-col overflow-hidden focus:outline-none">
                                     <div className="relative h-36 w-full overflow-hidden">
                                         <Image
                                             src={`${props.frontmatter.thumbnail}`}
                                             alt={props.frontmatter.title}
                                             height={144}
                                             width={308}
-                                            objectFit="cover"
+                                            style={{ objectFit: 'cover' }}
                                         />
                                     </div>
                                     <div className="h-8">
@@ -196,7 +195,6 @@ export default function Home({ datasets, allTags }) {
                                     <div className="h-16 px-4 pt-2 text-sm text-slate-600 line-clamp-3">
                                         {props.frontmatter.desc}
                                     </div>
-                                </a>
                             </Link>
                             <div className="flex w-full flex-row justify-between px-4 pb-2 pt-4">
                                 <div className="flex flex-row">

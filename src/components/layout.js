@@ -13,7 +13,7 @@ export default function Layout({ children }) {
             </a>
             <header className="bg-primary">
                 <nav className="container mx-auto flex max-w-7xl items-center justify-between px-4">
-                    <Link href="/" passHref>
+                    <Link href="/">
                         <Image
                             alt="logo"
                             src="/logo.svg"

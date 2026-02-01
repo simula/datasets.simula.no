@@ -41,8 +41,7 @@ export default function DatasetPage({ frontmatter, content }) {
 
             {/* Navigation */}
             <nav className="mb-6" aria-label="Breadcrumb">
-                <Link href="/" passHref>
-                    <a className="inline-flex items-center text-sm text-gray-600 transition-colors hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+                <Link href="/" className="inline-flex items-center text-sm text-gray-600 transition-colors hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="mr-1 h-4 w-4"
@@ -59,13 +58,10 @@ export default function DatasetPage({ frontmatter, content }) {
                             />
                         </svg>
                         Back to all datasets
-                    </a>
                 </Link>
                 <div className="mt-1 text-sm text-gray-400">
-                    <Link href="/" passHref>
-                        <a className="hover:text-primary hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+                    <Link href="/" className="hover:text-primary hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
                             Datasets
-                        </a>
                     </Link>
                     <span className="mx-2">/</span>
                     <span className="text-gray-600">{frontmatter.title}</span>
