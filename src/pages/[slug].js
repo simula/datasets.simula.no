@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import fs from 'fs'
 import matter from 'gray-matter'
 import markdownIt from 'markdown-it'
@@ -33,22 +34,62 @@ export async function getStaticProps({ params: { slug } }) {
 export default function DatasetPage({ frontmatter, content }) {
     const md = markdownIt({ html: true })
     return (
-        <div className="mx-auto max-w-7xl px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-8">
             <Head>
                 <title>Simula Datasets - {frontmatter.title}</title>
             </Head>
+
+            {/* Navigation */}
+            <nav className="mb-6" aria-label="Breadcrumb">
+                <Link href="/" passHref>
+                    <a className="inline-flex items-center text-sm text-gray-600 transition-colors hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="mr-1 h-4 w-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            aria-hidden="true"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M15 19l-7-7 7-7"
+                            />
+                        </svg>
+                        Back to all datasets
+                    </a>
+                </Link>
+                <div className="mt-1 text-sm text-gray-400">
+                    <Link href="/" passHref>
+                        <a className="hover:text-primary hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+                            Datasets
+                        </a>
+                    </Link>
+                    <span className="mx-2">/</span>
+                    <span className="text-gray-600">{frontmatter.title}</span>
+                </div>
+            </nav>
+
             <div className="mb-8 text-center">
                 <h1 className="mb-2 text-4xl">{frontmatter.title}</h1>
-                <h2 className="text-xl">{frontmatter.desc}</h2>
+                <p className="text-xl text-gray-600">{frontmatter.desc}</p>
                 <div className="mx-auto mt-3 flex w-24 justify-around">
                     {frontmatter.publication && (
-                        <a href={frontmatter.publication}>
+                        <a
+                            href={frontmatter.publication}
+                            aria-label="View publication"
+                            title="View publication"
+                            className="rounded p-1 transition-colors hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                        >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-6 w-6"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
+                                aria-hidden="true"
                             >
                                 <path
                                     strokeLinecap="round"
@@ -60,13 +101,19 @@ export default function DatasetPage({ frontmatter, content }) {
                         </a>
                     )}
                     {frontmatter.github && (
-                        <a href={frontmatter.github}>
+                        <a
+                            href={frontmatter.github}
+                            aria-label="View GitHub repository"
+                            title="View GitHub repository"
+                            className="rounded p-1 transition-colors hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                        >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-6 w-6"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
+                                aria-hidden="true"
                             >
                                 <path
                                     strokeLinecap="round"
@@ -79,9 +126,9 @@ export default function DatasetPage({ frontmatter, content }) {
                     )}
                 </div>
             </div>
-            <div className="prose mx-auto max-w-none prose-h2:mb-2 prose-h2:mt-5 prose-p:my-3">
+            <article className="prose mx-auto max-w-none prose-h2:mb-2 prose-h2:mt-5 prose-p:my-3 prose-a:text-primary hover:prose-a:text-primary/80">
                 <div className="break-words" dangerouslySetInnerHTML={{ __html: md.render(content) }} />
-            </div>
+            </article>
         </div>
     )
 }
