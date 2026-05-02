@@ -30,3 +30,19 @@ html,
 body {
     background-color: #f15d22;
 }
+
+.prose img {
+    max-width: 100%;
+    height: auto;
+}
+
+.prose table {
+    display: block;
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+.prose pre {
+    overflow-x: auto;
+    max-width: 100%;
+}

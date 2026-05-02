@@ -35,7 +35,7 @@ function DatasetCard({ dataset, onTagClick, priority = false }) {
                 href={`/${slug}`}
                 className="flex flex-1 flex-col focus:outline-hidden"
             >
-                <div className="relative h-40 w-full overflow-hidden bg-gradient-to-br from-orange-50 to-orange-100">
+                <div className="relative aspect-2/1 w-full overflow-hidden bg-gradient-to-br from-orange-50 to-orange-100">
                     {frontmatter.thumbnail ? (
                         <picture>
                             {webpSrcSet && (

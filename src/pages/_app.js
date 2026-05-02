@@ -15,6 +15,10 @@ function MyApp({ Component, pageProps }) {
             <Layout>
                 <Head>
                     <title>Simula Datasets</title>
+                    <meta
+                        name="viewport"
+                        content="width=device-width, initial-scale=1"
+                    />
                 </Head>
                 <Component {...pageProps} />
             </Layout>

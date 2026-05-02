@@ -27,6 +27,12 @@ export default function Layout({ children }) {
                             Simula.no
                         </a>
                         <a
+                            href="https://www.simula.no"
+                            className="hidden hover:underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary sm:inline"
+                        >
+                            SimulaMet.no
+                        </a>
+                        <a
                             href="https://github.com/simula/datasets.simula.no"
                             className="inline-flex items-center gap-1.5 hover:underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
                         >

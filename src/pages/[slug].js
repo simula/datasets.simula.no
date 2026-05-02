@@ -60,7 +60,7 @@ export default function DatasetPage({ slug, frontmatter, html, related }) {
     }
 
     return (
-        <div className="mx-auto max-w-7xl px-4 sm:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <Head>
                 <title>Simula Datasets - {frontmatter.title}</title>
                 <meta name="description" content={description} />
@@ -140,13 +140,13 @@ export default function DatasetPage({ slug, frontmatter, html, related }) {
                             GitHub repo
                         </a>
                     )}
-                    <span className="ml-auto text-xs text-gray-500">
+                    <span className="text-xs text-gray-500 sm:ml-auto">
                         Last updated {formatMonthYear(frontmatter.mtime)}
                     </span>
                 </div>
             </header>
 
-            <article className="prose prose-lg mx-auto max-w-3xl prose-h2:mb-2 prose-h2:mt-8 prose-h2:text-2xl prose-h2:font-semibold prose-h2:tracking-tight prose-h3:font-semibold prose-p:my-3 prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+            <article className="prose prose-base mx-auto max-w-3xl sm:prose-lg prose-h2:mb-2 prose-h2:mt-8 prose-h2:text-2xl prose-h2:font-semibold prose-h2:tracking-tight prose-h3:font-semibold prose-p:my-3 prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
                 <div
                     className="wrap-break-word"
                     dangerouslySetInnerHTML={{ __html: html }}

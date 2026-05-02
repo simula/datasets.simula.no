@@ -13,6 +13,7 @@ import {
 } from '../utils/filter'
 
 const TAG_COLLAPSE_THRESHOLD = 12
+const TAG_COLLAPSE_THRESHOLD_MOBILE = 6
 
 export async function getStaticProps() {
     // Strip `content` — the home page only needs frontmatter, and shipping
@@ -210,14 +211,20 @@ export default function Home({ datasets, allTags, tagCounts }) {
 
                 {/* Tag filters */}
                 <div className="mt-4 flex flex-wrap justify-center gap-2">
-                    {tagsToRender.map(tag => {
+                    {tagsToRender.map((tag, i) => {
                         const isActive = selectedTags.includes(tag)
+                        const hideOnMobile =
+                            !showAllTags && i >= TAG_COLLAPSE_THRESHOLD_MOBILE
                         return (
                             <button
                                 key={tag}
                                 onClick={() => handleTagClick(tag)}
                                 aria-pressed={isActive}
-                                className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-sm transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
+                                className={`items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
+                                    hideOnMobile
+                                        ? 'hidden sm:inline-flex'
+                                        : 'inline-flex'
+                                } ${
                                     isActive
                                         ? 'border-primary bg-primary text-white'
                                         : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:bg-gray-50'
@@ -234,10 +241,14 @@ export default function Home({ datasets, allTags, tagCounts }) {
                             </button>
                         )
                     })}
-                    {allTags.length > TAG_COLLAPSE_THRESHOLD && (
+                    {allTags.length > TAG_COLLAPSE_THRESHOLD_MOBILE && (
                         <button
                             onClick={() => setShowAllTags(s => !s)}
-                            className="inline-flex items-center rounded-full border border-dashed border-gray-300 px-3 py-1 text-sm text-gray-600 hover:border-primary hover:text-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                            className={`inline-flex items-center rounded-full border border-dashed border-gray-300 px-3 py-1.5 text-sm text-gray-600 hover:border-primary hover:text-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2${
+                                allTags.length <= TAG_COLLAPSE_THRESHOLD
+                                    ? ' sm:hidden'
+                                    : ''
+                            }`}
                         >
                             {showAllTags
                                 ? 'Show less'
@@ -247,7 +258,7 @@ export default function Home({ datasets, allTags, tagCounts }) {
                 </div>
 
                 {/* Results count + sort + clear */}
-                <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+                <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <p
                         className="text-sm text-gray-500"
                         role="status"
@@ -284,7 +295,7 @@ export default function Home({ datasets, allTags, tagCounts }) {
                             <select
                                 value={sort}
                                 onChange={e => setSort(e.target.value)}
-                                className="rounded-md border border-gray-300 bg-white px-2 py-1 text-sm focus:border-primary focus:outline-hidden focus:ring-2 focus:ring-primary/20"
+                                className="rounded-md border border-gray-300 bg-white px-2 py-1.5 text-sm focus:border-primary focus:outline-hidden focus:ring-2 focus:ring-primary/20"
                             >
                                 <option value="recent">Recently updated</option>
                                 <option value="az">Title A–Z</option>
