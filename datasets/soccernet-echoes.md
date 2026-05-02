@@ -7,8 +7,7 @@ publication: https://arxiv.org/abs/2405.07354
 hidden: false
 tags:
   - text
-  - soccer
-  - football
+  - sports
 ---
 
 ## Accessing the Dataset

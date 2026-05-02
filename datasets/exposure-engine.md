@@ -6,9 +6,7 @@ publication: ''
 github: https://huggingface.co/datasets/SimulaMet-HOST/ExposureEngine
 hidden: false
 tags:
-  - Logo Detection
-  - Oriented Object Detection
-  - Analytics
+  - detection
 ---
 
 # ExposureEngine: Oriented Logo Detection & Sponsor Visibility Analytics (Dataset)

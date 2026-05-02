@@ -5,7 +5,6 @@ thumbnail: /thumbnails/pmdata.jpg
 publication: https://dl.acm.org/doi/10.1145/3339825.3394926
 github: https://osf.io/vx4bk/
 tags:
-  - sports
   - sensor
 ---
 

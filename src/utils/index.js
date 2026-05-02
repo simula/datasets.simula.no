@@ -60,3 +60,31 @@ export function timeAgo(time) {
     }
     return time
 }
+
+export function countTags(datasets) {
+    const counts = {}
+    for (const d of datasets) {
+        for (const tag of d.frontmatter.tags || []) {
+            counts[tag] = (counts[tag] || 0) + 1
+        }
+    }
+    return counts
+}
+
+export function findRelatedDatasets(target, allDatasets, limit = 3) {
+    const targetTags = new Set(target.frontmatter.tags || [])
+    if (targetTags.size === 0) return []
+
+    return allDatasets
+        .filter(d => d.slug !== target.slug && !d.frontmatter.hidden)
+        .map(d => {
+            const overlap = (d.frontmatter.tags || []).filter(t =>
+                targetTags.has(t)
+            ).length
+            return { dataset: d, overlap }
+        })
+        .filter(x => x.overlap > 0)
+        .sort((a, b) => b.overlap - a.overlap)
+        .slice(0, limit)
+        .map(x => x.dataset)
+}

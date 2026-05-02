@@ -6,7 +6,6 @@ publication: ''
 github: https://github.com/simula/njord
 hidden: false
 tags:
-  - fishing
   - segmentation
 ---
 

@@ -5,7 +5,6 @@ thumbnail: /thumbnails/right-inflight.png
 publication: ''
 github: https://zenodo.org/record/1118338
 tags:
-  - climate change
   - sensor
 ---
 

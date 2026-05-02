@@ -7,8 +7,7 @@ github: https://github.com/simula/SoccerSum
 hidden: false
 tags:
   - text
-  - soccer
-  - football
+  - sports
 ---
 
 # SoccerSum Dataset

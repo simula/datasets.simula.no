@@ -5,8 +5,8 @@ thumbnail: /thumbnails/alfheim.png
 publication: https://dl.acm.org/doi/10.1145/2557642.2563677
 github: ''
 tags:
-  - soccer
-  - video analysis
+  - sports
+  - video
 ---
 
 In this dataset paper, we present and make available a dataset of elite soccer player movements and corresponding videos. The dataset is captured at Alfheim Stadium -- the home arena for Tromsø IL (Norway). The player postions are measured at 20~Hz using the ZXY Sport Tracking system, and the video is captured from the middle of the field using two camera arrays. The player tracking system provides the player coordinates on the field, their speed, acceleration and force together with an ID and timestamp. The camera array covers the entire field, and each camera can be used individually or as a stitched panorama video. In addition to the obvious sport analytics scenario, the dataset can be used several ways. In the multimedia scenario, the combination of sensor data and video gives a researcher a video dataset with a ground truth object position from the sensor data, i.e., it can be used to test algorithms used for feature extraction, object tracking, background substraction, etc. The sensor data itself can also be used alone in simulations or experiments where for example the users with devices move on a limited area (the field) with a varying speed and direction.

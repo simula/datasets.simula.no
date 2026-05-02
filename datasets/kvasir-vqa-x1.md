@@ -5,12 +5,10 @@ thumbnail: /thumbnails/kvasir-vqa-v1.png
 publication: https://doi.org/10.1007/978-3-032-08009-7_6
 github: https://github.com/simula/Kvasir-VQA-x1
 tags:
-  - gastrointestinal
-  - endoscopy
+  - health
   - images
-  - VQA
+  - vqa
   - multimodal
-  - GI
 ---
 
 The **Kvasir-VQA-x1** dataset is a large-scale extension of the original Kvasir-VQA benchmark. 

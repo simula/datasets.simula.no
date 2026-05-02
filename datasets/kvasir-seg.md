@@ -5,7 +5,7 @@ thumbnail: /thumbnails/kvasir-seg.png
 publication: https://dl.acm.org/doi/10.1007/978-3-030-37734-2_37
 github: ''
 tags:
-  - gastrointestinal
+  - health
   - segmentation
 ---
 Pixel-wise image segmentation is a highly demanding task in medical image analysis. It is difficult to find annotated medical images with corresponding segmentation mask. Here, we present Kvasir-SEG. It is an open-access dataset of gastrointestinal polyp images and corresponding segmentation masks, manually annotated and verified by an experienced gastroenterologist. This work will be valuable for researchers to reproduce results and compare their methods in the future. By adding segmentation masks to the Kvasir dataset, which until today only consisted of framewise annotations, we enable multimedia and computer vision researchers to contribute in the field of polyp segmentation and automatic analysis of colonoscopy videos.

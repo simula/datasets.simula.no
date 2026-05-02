@@ -5,7 +5,7 @@ thumbnail: /thumbnails/kvasir-capsule.png
 publication: https://www.nature.com/articles/s41597-021-00920-z
 github: https://github.com/simula/kvasir-capsule
 tags:
-  - gastrointestinal
+  - health
   - images
 ---
 

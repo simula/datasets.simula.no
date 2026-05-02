@@ -5,7 +5,6 @@ thumbnail: /thumbnails/threat.png
 publication: ''
 github: ''
 tags:
-  - violent threats
   - text
 ---
 

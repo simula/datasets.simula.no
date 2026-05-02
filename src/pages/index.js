@@ -1,9 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { useRouter } from 'next/router'
+import Head from 'next/head'
 import fs from 'fs'
 import matter from 'gray-matter'
-import Image from 'next/image'
-import Link from 'next/link'
-import { timeAgo } from '../utils'
+import DatasetCard from '../components/dataset-card'
+import { countTags } from '../utils'
+
+const TAG_COLLAPSE_THRESHOLD = 12
 
 export async function getStaticProps() {
     const files = fs.readdirSync('datasets')
@@ -14,74 +17,178 @@ export async function getStaticProps() {
         const readFile = fs.readFileSync(filepath, 'utf-8')
         const stats = fs.statSync(filepath)
         const { data: frontmatter } = matter(readFile)
-        frontmatter.mtime = stats.mtime.toLocaleDateString()
+        frontmatter.mtime = stats.mtime.toISOString()
         return {
             slug,
             frontmatter
         }
     })
 
-    // Extract unique tags from all datasets
-    const allTags = [
-        ...new Set(
-            datasets.flatMap(d => d.frontmatter.tags || [])
-        )
-    ].sort()
+    const visibleDatasets = datasets.filter(d => !d.frontmatter.hidden)
+    const tagCounts = countTags(visibleDatasets)
+    const allTags = Object.keys(tagCounts).sort()
 
     return {
         props: {
             datasets,
-            allTags
+            allTags,
+            tagCounts
         }
     }
 }
 
-export default function Home({ datasets, allTags }) {
-    const [searchValue, setSearchValue] = useState('')
-    const [selectedTag, setSelectedTag] = useState(null)
+export default function Home({ datasets, allTags, tagCounts }) {
+    const router = useRouter()
+    const searchInputRef = useRef(null)
 
-    // Filter datasets
-    const visibleDatasets = datasets.filter(d => !d.frontmatter.hidden)
-    const filteredDatasets = visibleDatasets
-        .filter(d => !selectedTag || d.frontmatter.tags?.includes(selectedTag))
-        .filter(d => {
-            if (!searchValue) return true
-            const search = searchValue.toLowerCase()
-            return (
-                d.frontmatter.title.toLowerCase().includes(search) ||
-                d.frontmatter.desc?.toLowerCase().includes(search) ||
-                d.frontmatter.tags?.some(tag => tag.toLowerCase().includes(search))
-            )
+    const [showAllTags, setShowAllTags] = useState(false)
+
+    // Derive filter state from URL query params (single source of truth).
+    // During SSG and the first client render router.query is empty, so values
+    // fall back to defaults — matches server output, then re-derives once
+    // router.isReady fires.
+    const searchValue =
+        typeof router.query.q === 'string' ? router.query.q : ''
+    const selectedTags = (() => {
+        const tag = router.query.tag
+        if (!tag) return []
+        return Array.isArray(tag) ? tag : [tag]
+    })()
+    const sort =
+        typeof router.query.sort === 'string' &&
+        ['recent', 'az', 'za'].includes(router.query.sort)
+            ? router.query.sort
+            : 'recent'
+
+    const updateQuery = next => {
+        const query = {}
+        if (next.q) query.q = next.q
+        if (next.tags && next.tags.length > 0) query.tag = next.tags
+        if (next.sort && next.sort !== 'recent') query.sort = next.sort
+        router.replace({ pathname: '/', query }, undefined, {
+            shallow: true,
+            scroll: false
         })
-
-    const handleClearSearch = () => {
-        setSearchValue('')
     }
+
+    const setSearchValue = q =>
+        updateQuery({ q, tags: selectedTags, sort })
+    const setSort = s =>
+        updateQuery({ q: searchValue, tags: selectedTags, sort: s })
+    const setSelectedTags = tags =>
+        updateQuery({ q: searchValue, tags, sort })
+
+    // '/' keyboard shortcut to focus search
+    useEffect(() => {
+        const onKeyDown = e => {
+            if (e.key !== '/') return
+            const active = document.activeElement
+            const tagName = active?.tagName
+            if (
+                tagName === 'INPUT' ||
+                tagName === 'TEXTAREA' ||
+                active?.isContentEditable
+            )
+                return
+            e.preventDefault()
+            searchInputRef.current?.focus()
+        }
+        window.addEventListener('keydown', onKeyDown)
+        return () => window.removeEventListener('keydown', onKeyDown)
+    }, [])
+
+    const visibleDatasets = useMemo(
+        () => datasets.filter(d => !d.frontmatter.hidden),
+        [datasets]
+    )
+
+    const filteredDatasets = useMemo(() => {
+        const search = searchValue.toLowerCase().trim()
+        const tagSet = new Set(selectedTags)
+
+        const matched = visibleDatasets
+            .filter(d => {
+                if (tagSet.size === 0) return true
+                const dTags = new Set(d.frontmatter.tags || [])
+                for (const t of tagSet) if (!dTags.has(t)) return false
+                return true
+            })
+            .filter(d => {
+                if (!search) return true
+                return (
+                    d.frontmatter.title.toLowerCase().includes(search) ||
+                    d.frontmatter.desc?.toLowerCase().includes(search) ||
+                    d.frontmatter.tags?.some(t => t.toLowerCase().includes(search))
+                )
+            })
+
+        if (sort === 'az') {
+            matched.sort((a, b) =>
+                a.frontmatter.title.localeCompare(b.frontmatter.title)
+            )
+        } else if (sort === 'za') {
+            matched.sort((a, b) =>
+                b.frontmatter.title.localeCompare(a.frontmatter.title)
+            )
+        } else {
+            matched.sort(
+                (a, b) =>
+                    new Date(b.frontmatter.mtime).getTime() -
+                    new Date(a.frontmatter.mtime).getTime()
+            )
+        }
+
+        return matched
+    }, [visibleDatasets, searchValue, selectedTags, sort])
+
+    const handleClearSearch = () => setSearchValue('')
 
     const handleTagClick = tag => {
-        setSelectedTag(selectedTag === tag ? null : tag)
+        const next = selectedTags.includes(tag)
+            ? selectedTags.filter(t => t !== tag)
+            : [...selectedTags, tag]
+        setSelectedTags(next)
     }
 
-    const handleClearFilters = () => {
-        setSearchValue('')
-        setSelectedTag(null)
+    const handleClearAll = () => {
+        updateQuery({ q: '', tags: [], sort })
     }
+
+    const tagsToRender = showAllTags
+        ? allTags
+        : allTags.slice(0, TAG_COLLAPSE_THRESHOLD)
+    const hasFilters = searchValue || selectedTags.length > 0
 
     return (
-        <div className="mx-auto max-w-7xl px-4">
-            <div className="mb-8 text-center">
-                <h1 className="mb-2 text-3xl">Simula Datasets</h1>
-                <h2 className="text-lg">
-                    A collection of datasets gathered and published by <br />
-                    Simula Research Laboratory and SimulaMet.
-                </h2>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <Head>
+                <title>Simula Datasets</title>
+                <meta
+                    name="description"
+                    content={`Browse ${visibleDatasets.length} research datasets gathered and published by Simula Research Laboratory and SimulaMet.`}
+                />
+            </Head>
 
+            {/* Hero */}
+            <div className="mb-8 text-center">
+                <h1 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+                    Simula Datasets
+                </h1>
+                <div className="mx-auto mt-3 h-1 w-12 bg-primary" aria-hidden="true" />
+                <p className="mx-auto mt-5 max-w-2xl text-lg text-gray-600">
+                    Browse {visibleDatasets.length} research datasets gathered and
+                    published by Simula Research Laboratory and SimulaMet.
+                </p>
+            </div>
+
+            {/* Sticky filter bar */}
+            <div className="sticky top-0 z-10 -mx-4 mb-6 bg-white/95 px-4 py-4 backdrop-blur sm:-mx-6 sm:px-6">
                 {/* Search input */}
-                <div className="mt-4">
+                <div>
                     <label htmlFor="search-input" className="sr-only">
                         Search datasets
                     </label>
-                    <div className="relative mx-auto flex h-10 w-full max-w-md items-center rounded-md border border-gray-300 bg-slate-100 px-3 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary focus-within:ring-opacity-20">
+                    <div className="relative mx-auto flex h-11 w-full max-w-2xl items-center rounded-lg border border-gray-300 bg-white px-3 transition focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-5 w-5 text-gray-400"
@@ -99,16 +206,23 @@ export default function Home({ datasets, allTags }) {
                         </svg>
                         <input
                             id="search-input"
+                            ref={searchInputRef}
                             onChange={e => setSearchValue(e.target.value)}
                             value={searchValue}
                             type="text"
                             placeholder="Search by name, description, or tag..."
-                            className="h-full flex-1 border-none bg-transparent px-2 focus:outline-hidden"
+                            className="h-full flex-1 border-none bg-transparent px-3 text-base focus:outline-hidden"
                         />
+                        <kbd
+                            className="mr-1 hidden rounded border border-gray-300 bg-gray-50 px-1.5 py-0.5 text-xs text-gray-500 sm:inline-block"
+                            aria-hidden="true"
+                        >
+                            /
+                        </kbd>
                         {searchValue && (
                             <button
                                 onClick={handleClearSearch}
-                                className="rounded-sm p-1 text-gray-400 hover:bg-gray-200 hover:text-gray-600 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+                                className="rounded-sm p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
                                 aria-label="Clear search"
                             >
                                 <svg
@@ -133,127 +247,104 @@ export default function Home({ datasets, allTags }) {
 
                 {/* Tag filters */}
                 <div className="mt-4 flex flex-wrap justify-center gap-2">
-                    <button
-                        onClick={() => setSelectedTag(null)}
-                        className={`rounded-full px-3 py-1 text-sm transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
-                            selectedTag === null
-                                ? 'bg-primary text-white'
-                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                        }`}
-                    >
-                        All
-                    </button>
-                    {allTags.map(tag => (
+                    {tagsToRender.map(tag => {
+                        const isActive = selectedTags.includes(tag)
+                        return (
+                            <button
+                                key={tag}
+                                onClick={() => handleTagClick(tag)}
+                                aria-pressed={isActive}
+                                className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-sm transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
+                                    isActive
+                                        ? 'border-primary bg-primary text-white'
+                                        : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:bg-gray-50'
+                                }`}
+                            >
+                                <span>{tag}</span>
+                                <span
+                                    className={`text-xs ${
+                                        isActive ? 'text-white/80' : 'text-gray-400'
+                                    }`}
+                                >
+                                    {tagCounts[tag]}
+                                </span>
+                            </button>
+                        )
+                    })}
+                    {allTags.length > TAG_COLLAPSE_THRESHOLD && (
                         <button
-                            key={tag}
-                            onClick={() => handleTagClick(tag)}
-                            className={`rounded-full px-3 py-1 text-sm transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
-                                selectedTag === tag
-                                    ? 'bg-primary text-white'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                            }`}
+                            onClick={() => setShowAllTags(s => !s)}
+                            className="inline-flex items-center rounded-full border border-dashed border-gray-300 px-3 py-1 text-sm text-gray-600 hover:border-primary hover:text-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                         >
-                            {tag}
+                            {showAllTags
+                                ? 'Show less'
+                                : `Show all (${allTags.length})`}
                         </button>
-                    ))}
+                    )}
                 </div>
 
-                {/* Results count */}
-                <p
-                    className="mt-4 text-sm text-gray-500"
-                    role="status"
-                    aria-live="polite"
-                >
-                    Showing {filteredDatasets.length} of {visibleDatasets.length} datasets
-                    {selectedTag && ` in "${selectedTag}"`}
-                </p>
+                {/* Results count + sort + clear */}
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+                    <p
+                        className="text-sm text-gray-500"
+                        role="status"
+                        aria-live="polite"
+                    >
+                        Showing <span className="font-medium text-gray-900">{filteredDatasets.length}</span> of{' '}
+                        {visibleDatasets.length} datasets
+                        {selectedTags.length > 0 && (
+                            <>
+                                {' '}
+                                tagged{' '}
+                                {selectedTags.map((t, i) => (
+                                    <span key={t}>
+                                        {i > 0 && ' + '}
+                                        <span className="font-medium text-gray-900">
+                                            {t}
+                                        </span>
+                                    </span>
+                                ))}
+                            </>
+                        )}
+                    </p>
+                    <div className="flex items-center gap-3">
+                        {hasFilters && (
+                            <button
+                                onClick={handleClearAll}
+                                className="text-sm text-gray-500 underline-offset-2 hover:text-primary hover:underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                            >
+                                Clear all
+                            </button>
+                        )}
+                        <label className="flex items-center gap-2 text-sm text-gray-600">
+                            <span>Sort</span>
+                            <select
+                                value={sort}
+                                onChange={e => setSort(e.target.value)}
+                                className="rounded-md border border-gray-300 bg-white px-2 py-1 text-sm focus:border-primary focus:outline-hidden focus:ring-2 focus:ring-primary/20"
+                            >
+                                <option value="recent">Recently updated</option>
+                                <option value="az">Title A–Z</option>
+                                <option value="za">Title Z–A</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
             </div>
 
-            {/* Dataset grid or no results message */}
+            {/* Dataset grid or empty state */}
             {filteredDatasets.length > 0 ? (
-                <div className="mx-auto grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {filteredDatasets.map(props => (
-                        <div
-                            key={props.slug}
-                            className="flex flex-col overflow-hidden rounded-md border border-gray-300 shadow-md transition duration-200 ease-in-out hover:shadow-2xl focus-within:ring-2 focus-within:ring-primary"
-                        >
-                            <Link href={`/${props.slug}`} className="flex cursor-pointer flex-col overflow-hidden focus:outline-hidden">
-                                    <div className="relative h-36 w-full overflow-hidden">
-                                        <Image
-                                            src={`${props.frontmatter.thumbnail}`}
-                                            alt={props.frontmatter.title}
-                                            height={144}
-                                            width={308}
-                                            style={{ objectFit: 'cover' }}
-                                        />
-                                    </div>
-                                    <div className="h-8">
-                                        <h3 className="mt-1 px-4 pt-2 text-lg font-medium leading-tight">
-                                            {props.frontmatter.title}
-                                        </h3>
-                                    </div>
-                                    <div className="h-16 px-4 pt-2 text-sm text-slate-600 line-clamp-3">
-                                        {props.frontmatter.desc}
-                                    </div>
-                            </Link>
-                            <div className="flex w-full flex-row justify-between px-4 pb-2 pt-4">
-                                <div className="flex flex-row">
-                                    {props.frontmatter.publication && (
-                                        <a
-                                            href={props.frontmatter.publication}
-                                            aria-label={`View publication for ${props.frontmatter.title}`}
-                                            className="mr-4 rounded-sm p-1 hover:bg-gray-100 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
-                                        >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                className="h-5 w-5"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                                aria-hidden="true"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth="1.5"
-                                                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                                                />
-                                            </svg>
-                                        </a>
-                                    )}
-                                    {props.frontmatter.github && (
-                                        <a
-                                            href={props.frontmatter.github}
-                                            aria-label={`View GitHub repository for ${props.frontmatter.title}`}
-                                            className="rounded-sm p-1 hover:bg-gray-100 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
-                                        >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                className="h-5 w-5"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                                aria-hidden="true"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth="1.5"
-                                                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                                                />
-                                            </svg>
-                                        </a>
-                                    )}
-                                </div>
-                                <div className="flex items-end align-bottom text-xs text-gray-500">
-                                    {timeAgo(props.frontmatter.mtime)}
-                                </div>
-                            </div>
-                        </div>
+                <div className="mx-auto grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    {filteredDatasets.map(dataset => (
+                        <DatasetCard
+                            key={dataset.slug}
+                            dataset={dataset}
+                            onTagClick={handleTagClick}
+                        />
                     ))}
                 </div>
             ) : (
-                <div className="py-12 text-center">
+                <div className="py-16 text-center">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="mx-auto h-12 w-12 text-gray-400"
@@ -269,13 +360,16 @@ export default function Home({ datasets, allTags }) {
                             d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                         />
                     </svg>
-                    <h3 className="mt-4 text-lg font-medium text-gray-900">No datasets found</h3>
+                    <h3 className="mt-4 text-lg font-semibold text-gray-900">
+                        No datasets found
+                    </h3>
                     <p className="mt-2 text-gray-500">
-                        Try adjusting your search or filter to find what you&apos;re looking for.
+                        Try adjusting your search or filters to find what
+                        you&apos;re looking for.
                     </p>
                     <button
-                        onClick={handleClearFilters}
-                        className="mt-4 rounded-md bg-primary px-4 py-2 text-white transition-colors hover:bg-opacity-90 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                        onClick={handleClearAll}
+                        className="mt-5 rounded-md bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary/90 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                     >
                         Clear all filters
                     </button>

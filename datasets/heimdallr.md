@@ -5,8 +5,8 @@ thumbnail: /thumbnails/heimdallr.png
 publication: ''
 github: ''
 tags:
-  - soccer
-  - video analysis
+  - sports
+  - video
 ---
 
 ## Download

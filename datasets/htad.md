@@ -5,7 +5,6 @@ thumbnail: /thumbnails/htad.png
 publication: https://link.springer.com/chapter/10.1007/978-3-030-67835-7_17
 github: https://osf.io/4dnh8/
 tags:
-  - activity
   - sensor
 ---
 

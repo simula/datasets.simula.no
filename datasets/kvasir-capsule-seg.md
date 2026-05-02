@@ -5,7 +5,7 @@ thumbnail: /thumbnails/kvasir-capsule-seg.jpg
 publication: https://arxiv.org/abs/2104.11138
 github: https://github.com/DebeshJha/NanoNet
 tags:
-  - gastrointestinal
+  - health
   - segmentation
 ---
 

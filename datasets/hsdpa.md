@@ -6,7 +6,6 @@ publication: http://home.ifi.uio.no/paalh/publications/files/mmsys2013-dataset.p
 github: ''
 tags:
   - networks
-  - streaming 
 ---
 
 This archive contains logs from TCP streaming sessions in Telenor's 3G/HSDPA mobile wireless network in Norway. In each test, adaptive video streams were downloaded at maximum speed (no throttling, no buffer limit). The video segment duration was fixed to 2 seconds. The tests were performed in the period 2010-09-13 to 2011-04-21.

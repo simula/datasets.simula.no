@@ -5,7 +5,7 @@ thumbnail: /thumbnails/arx.jpg
 publication: https://ieeexplore.ieee.org/abstract/document/8877417/
 github: ''
 tags:
-  - soccer
+  - sports
   - text
 ---
 

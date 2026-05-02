@@ -5,7 +5,7 @@ thumbnail: /thumbnails/hyperaktiv.png
 github: https://github.com/simula/hyperaktiv
 publication: https://dl.acm.org/doi/10.1145/3458305.3478454
 tags:
-  - mental health
+  - health
   - images
 ---
 HYPERAKTIV is a public dataset containing health, activity, andheart rate data from adult patients diagnosed with attention deficit hyperactivity disorder, better known as ADHD. The dataset consists of data collected from 51 patients with ADHD and 52 clinicalcontrols. In addition to the activity and heart rate data, we also include a series of patient attributes such as their age, sex, and information about their mental state, as well as output data from a computerized neuropsychological test.

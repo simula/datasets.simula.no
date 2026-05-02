@@ -6,8 +6,8 @@ publication: https://doi.org/10.1145/3304109.3325814
 github: https://multimediaeval.github.io/editions/2022/
 hidden: true
 tags:
-  - sperm
-  - videos
+  - health
+  - video
 ---
 
 <p align="center">

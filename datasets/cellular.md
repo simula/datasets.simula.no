@@ -6,7 +6,6 @@ publication: ''
 github: https://github.com/simula/cellular
 hidden: false
 tags:
-  - cells
   - segmentation
 ---
 

@@ -6,7 +6,7 @@ publication: ''
 github: https://osf.io/uryz9/
 hidden: false
 tags:
-  - soccer
+  - sports
 ---
 
 A key development in sports over the last three decades has been the increased use of scientific methods to improve the preparation and participation performance in elite competitions. In this context, international sport is undergoing a revolution fueled by the rapidly increasing availability of athlete quantification data, sensor technology, and advanced analytic software. These recent innovations have enabled close monitoring of athlete performance across all training sessions and matches, facilitating a better understanding of training methods that benefit athletes and coaches alike, i.e., facilitating a much deeper understanding of training methods and empowering both players and involved personnel to quantify individual and team strengths and weaknesses, give physical performance feedback, psychological status and wellness fluctuations, educate, plan training content in micro- and macrocycles, and avoid overuse injuries.   

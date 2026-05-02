@@ -6,8 +6,7 @@ publication: https://doi.org/10.1145/3625468.3652166
 github: https://github.com/simula/tacdec
 hidden: false
 tags:
-  - football
-  - soccer
+  - sports
   - video
 ---
 

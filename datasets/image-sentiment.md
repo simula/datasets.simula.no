@@ -5,7 +5,6 @@ thumbnail: /thumbnails/sentiment.jpg
 publication: https://arxiv.org/pdf/2009.03051.pdf
 github: https://osf.io/xakp2/
 tags:
-  - sentiment analysis
   - images
 ---
 

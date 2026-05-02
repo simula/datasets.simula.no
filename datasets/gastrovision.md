@@ -6,7 +6,7 @@ publication: https://arxiv.org/abs/2307.08140
 github: https://github.com/DebeshJha/GastroVision
 hidden: false
 tags:
-  - gastrointestinal
+  - health
   - images
 ---
 

@@ -5,13 +5,9 @@ thumbnail: /thumbnails/MedMultiPoints.png
 publication: https://arxiv.org/abs/2505.16647
 github: https://github.com/Simula/PointDetectCount
 tags:
-  - medical
   - multimodal
   - detection
-  - localization
-  - counting
-  - microscopy
-  - endoscopy
+  - health
 ---
 
 The **MedMultiPoints** dataset is a curated **multimodal medical imaging benchmark** designed for **multi-task learning**—spanning **object detection**, **localization**, and **counting** tasks.  

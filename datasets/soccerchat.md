@@ -5,13 +5,12 @@ thumbnail: /thumbnails/SoccerChat.png
 publication: https://arxiv.org/abs/2505.16630
 github: https://github.com/simula/SoccerChat
 tags:
-  - soccer
+  - sports
   - video
   - multimodal
   - text
-  - event-detection
-  - reasoning
-  - synthetic
+  - detection
+  - vqa
 ---
 
 **SoccerChat** is a multimodal dataset for **video–language understanding** in the context of **soccer match analysis**.  

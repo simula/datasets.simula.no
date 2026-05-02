@@ -6,9 +6,8 @@ publication: https://dl.acm.org/doi/10.1145/3712676.3718342
 github: https://github.com/acmmmsys/2025-HockeyOrient
 hidden: false
 tags:
-  - icehockey
-  - pose estimation
-  - head orientation
+  - sports
+  - pose-estimation
 ---
 
 # HockeyOrient: A Dataset for Ice Hockey Player Orientation Classification

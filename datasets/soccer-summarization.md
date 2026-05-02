@@ -7,7 +7,7 @@ publication: https://dl.acm.org/doi/10.1145/3552463.3557019
 hidden: false
 tags:
   - text
-  - soccer
+  - sports
 ---
 
 This page contains information for the datasets mentioned in the paper **[Soccer Game Summarization using Audio Commentary, Metadata, and Captions](https://dl.acm.org/doi/10.1145/3552463.3557019)

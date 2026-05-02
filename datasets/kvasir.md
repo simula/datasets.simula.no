@@ -5,7 +5,7 @@ thumbnail: /thumbnails/kvasir.jpg
 publication: https://doi.org/10.1145/3083187.3083212
 github: ''
 tags:
-  - gastrointestinal
+  - health
   - images
 ---
 

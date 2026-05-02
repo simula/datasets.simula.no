@@ -6,9 +6,8 @@ publication: https://dl.acm.org/doi/10.1145/3712676.3718335
 github: https://github.com/acmmmsys/2025-HockeyAI
 hidden: false
 tags:
-  - icehockey
-  - object detection
-  - computer vision
+  - sports
+  - detection
 ---
 
 # HockeyAI: A Multi-Class Ice Hockey Dataset for Object Detection

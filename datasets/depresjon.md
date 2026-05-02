@@ -5,7 +5,7 @@ thumbnail: /thumbnails/depresjon.png
 publication: https://dl.acm.org/doi/10.1145/3204949.3208125
 github: ''
 tags:
-  - mental health
+  - health
   - sensor
 ---
 

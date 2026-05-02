@@ -5,7 +5,7 @@ thumbnail: /thumbnails/nerthus.jpg
 publication: https://doi.org/10.1145/3083187.3083216
 github: ''
 tags:
-  - gastrointestinal
+  - health
   - images
 ---
 

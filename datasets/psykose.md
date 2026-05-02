@@ -5,7 +5,7 @@ thumbnail: /thumbnails/psykose.png
 publication: https://ieeexplore.ieee.org/document/9182896
 github: https://osf.io/dgjzu/
 tags:
-  - mental health
+  - health
   - sensor
 ---
 

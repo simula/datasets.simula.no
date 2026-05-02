@@ -5,7 +5,7 @@ thumbnail: /thumbnails/kvasir-instrument.jpg
 publication: https://doi.org/10.1007/978-3-030-67835-7_19
 github: https://osf.io/kp6my/
 tags:
-  - gastrointestinal
+  - health
   - segmentation
 ---
 
