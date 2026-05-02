@@ -41,7 +41,7 @@ export default function DatasetPage({ frontmatter, content }) {
 
             {/* Navigation */}
             <nav className="mb-6" aria-label="Breadcrumb">
-                <Link href="/" className="inline-flex items-center text-sm text-gray-600 transition-colors hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+                <Link href="/" className="inline-flex items-center text-sm text-gray-600 transition-colors hover:text-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="mr-1 h-4 w-4"
@@ -60,7 +60,7 @@ export default function DatasetPage({ frontmatter, content }) {
                         Back to all datasets
                 </Link>
                 <div className="mt-1 text-sm text-gray-400">
-                    <Link href="/" className="hover:text-primary hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+                    <Link href="/" className="hover:text-primary hover:underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary">
                             Datasets
                     </Link>
                     <span className="mx-2">/</span>
@@ -77,7 +77,7 @@ export default function DatasetPage({ frontmatter, content }) {
                             href={frontmatter.publication}
                             aria-label="View publication"
                             title="View publication"
-                            className="rounded p-1 transition-colors hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                            className="rounded-sm p-1 transition-colors hover:bg-gray-100 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +101,7 @@ export default function DatasetPage({ frontmatter, content }) {
                             href={frontmatter.github}
                             aria-label="View GitHub repository"
                             title="View GitHub repository"
-                            className="rounded p-1 transition-colors hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                            className="rounded-sm p-1 transition-colors hover:bg-gray-100 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -122,8 +122,8 @@ export default function DatasetPage({ frontmatter, content }) {
                     )}
                 </div>
             </div>
-            <article className="prose mx-auto max-w-none prose-h2:mb-2 prose-h2:mt-5 prose-p:my-3 prose-a:text-primary hover:prose-a:text-primary/80">
-                <div className="break-words" dangerouslySetInnerHTML={{ __html: md.render(content) }} />
+            <article className="prose mx-auto max-w-none prose-h2:mb-2 prose-h2:mt-5 prose-p:my-3 prose-a:text-primary prose-a:hover:text-primary/80">
+                <div className="wrap-break-word" dangerouslySetInnerHTML={{ __html: md.render(content) }} />
             </article>
         </div>
     )

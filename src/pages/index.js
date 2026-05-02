@@ -103,12 +103,12 @@ export default function Home({ datasets, allTags }) {
                             value={searchValue}
                             type="text"
                             placeholder="Search by name, description, or tag..."
-                            className="h-full flex-1 border-none bg-transparent px-2 focus:outline-none"
+                            className="h-full flex-1 border-none bg-transparent px-2 focus:outline-hidden"
                         />
                         {searchValue && (
                             <button
                                 onClick={handleClearSearch}
-                                className="rounded p-1 text-gray-400 hover:bg-gray-200 hover:text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                                className="rounded-sm p-1 text-gray-400 hover:bg-gray-200 hover:text-gray-600 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
                                 aria-label="Clear search"
                             >
                                 <svg
@@ -135,7 +135,7 @@ export default function Home({ datasets, allTags }) {
                 <div className="mt-4 flex flex-wrap justify-center gap-2">
                     <button
                         onClick={() => setSelectedTag(null)}
-                        className={`rounded-full px-3 py-1 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
+                        className={`rounded-full px-3 py-1 text-sm transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                             selectedTag === null
                                 ? 'bg-primary text-white'
                                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -147,7 +147,7 @@ export default function Home({ datasets, allTags }) {
                         <button
                             key={tag}
                             onClick={() => handleTagClick(tag)}
-                            className={`rounded-full px-3 py-1 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
+                            className={`rounded-full px-3 py-1 text-sm transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                                 selectedTag === tag
                                     ? 'bg-primary text-white'
                                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -177,7 +177,7 @@ export default function Home({ datasets, allTags }) {
                             key={props.slug}
                             className="flex flex-col overflow-hidden rounded-md border border-gray-300 shadow-md transition duration-200 ease-in-out hover:shadow-2xl focus-within:ring-2 focus-within:ring-primary"
                         >
-                            <Link href={`/${props.slug}`} className="flex cursor-pointer flex-col overflow-hidden focus:outline-none">
+                            <Link href={`/${props.slug}`} className="flex cursor-pointer flex-col overflow-hidden focus:outline-hidden">
                                     <div className="relative h-36 w-full overflow-hidden">
                                         <Image
                                             src={`${props.frontmatter.thumbnail}`}
@@ -202,7 +202,7 @@ export default function Home({ datasets, allTags }) {
                                         <a
                                             href={props.frontmatter.publication}
                                             aria-label={`View publication for ${props.frontmatter.title}`}
-                                            className="mr-4 rounded p-1 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                                            className="mr-4 rounded-sm p-1 hover:bg-gray-100 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
                                         >
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -225,7 +225,7 @@ export default function Home({ datasets, allTags }) {
                                         <a
                                             href={props.frontmatter.github}
                                             aria-label={`View GitHub repository for ${props.frontmatter.title}`}
-                                            className="rounded p-1 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                                            className="rounded-sm p-1 hover:bg-gray-100 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
                                         >
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -275,7 +275,7 @@ export default function Home({ datasets, allTags }) {
                     </p>
                     <button
                         onClick={handleClearFilters}
-                        className="mt-4 rounded-md bg-primary px-4 py-2 text-white transition-colors hover:bg-opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                        className="mt-4 rounded-md bg-primary px-4 py-2 text-white transition-colors hover:bg-opacity-90 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                     >
                         Clear all filters
                     </button>
