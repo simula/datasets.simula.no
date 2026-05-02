@@ -5,7 +5,6 @@ thumbnail: /thumbnails/european-cloud-cover.jpg
 publication: https://www.mdpi.com/2504-2289/5/4/62/pdf
 github: https://osf.io/kqdgx/
 tags:
-  - climate-change
   - sensor
 ---
 

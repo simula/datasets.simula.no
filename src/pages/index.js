@@ -1,28 +1,26 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-import fs from 'fs'
-import matter from 'gray-matter'
+import { FiSearch, FiX, FiFrown } from 'react-icons/fi'
 import DatasetCard from '../components/dataset-card'
 import { countTags } from '../utils'
+import { loadAllDatasets } from '../utils/datasets'
+import {
+    VALID_SORTS,
+    readFilterState,
+    filterDatasets,
+    sortDatasets
+} from '../utils/filter'
 
 const TAG_COLLAPSE_THRESHOLD = 12
 
 export async function getStaticProps() {
-    const files = fs.readdirSync('datasets')
-
-    const datasets = files.map(fileName => {
-        const slug = fileName.replace('.md', '')
-        const filepath = `datasets/${fileName}`
-        const readFile = fs.readFileSync(filepath, 'utf-8')
-        const stats = fs.statSync(filepath)
-        const { data: frontmatter } = matter(readFile)
-        frontmatter.mtime = stats.mtime.toISOString()
-        return {
-            slug,
-            frontmatter
-        }
-    })
+    // Strip `content` — the home page only needs frontmatter, and shipping
+    // the full markdown body of every dataset would bloat the static props.
+    const datasets = loadAllDatasets().map(({ slug, frontmatter }) => ({
+        slug,
+        frontmatter
+    }))
 
     const visibleDatasets = datasets.filter(d => !d.frontmatter.hidden)
     const tagCounts = countTags(visibleDatasets)
@@ -43,40 +41,50 @@ export default function Home({ datasets, allTags, tagCounts }) {
 
     const [showAllTags, setShowAllTags] = useState(false)
 
-    // Derive filter state from URL query params (single source of truth).
-    // During SSG and the first client render router.query is empty, so values
-    // fall back to defaults — matches server output, then re-derives once
-    // router.isReady fires.
-    const searchValue =
-        typeof router.query.q === 'string' ? router.query.q : ''
-    const selectedTags = (() => {
-        const tag = router.query.tag
-        if (!tag) return []
-        return Array.isArray(tag) ? tag : [tag]
-    })()
-    const sort =
-        typeof router.query.sort === 'string' &&
-        ['recent', 'az', 'za'].includes(router.query.sort)
-            ? router.query.sort
-            : 'recent'
+    // Read URL filters synchronously on the first client render so a
+    // direct hit on /?tag=soccer paints the filtered grid in one pass
+    // instead of flashing the unfiltered list. Server (SSG) has no
+    // `window` and falls back to defaults — that's the SSG output.
+    const [initialFilters] = useState(() =>
+        typeof window === 'undefined'
+            ? { q: '', tags: [], sort: 'recent' }
+            : readFilterState(window.location.search)
+    )
 
-    const updateQuery = next => {
-        const query = {}
-        if (next.q) query.q = next.q
-        if (next.tags && next.tags.length > 0) query.tag = next.tags
-        if (next.sort && next.sort !== 'recent') query.sort = next.sort
-        router.replace({ pathname: '/', query }, undefined, {
-            shallow: true,
-            scroll: false
-        })
-    }
+    // Once router.isReady fires, router.query becomes authoritative.
+    // Until then, fall back to the URL we read at mount.
+    const filters = useMemo(() => {
+        if (!router.isReady) return initialFilters
+        const { q, tag, sort: s } = router.query
+        return {
+            q: typeof q === 'string' ? q : '',
+            tags: Array.isArray(tag) ? tag : tag ? [tag] : [],
+            sort: typeof s === 'string' && VALID_SORTS.includes(s) ? s : 'recent'
+        }
+    }, [router.isReady, router.query, initialFilters])
+    const { q: searchValue, tags: selectedTags, sort } = filters
 
+    const updateQuery = useCallback(
+        (next, mode = 'push') => {
+            const query = {}
+            if (next.q) query.q = next.q
+            if (next.tags && next.tags.length > 0) query.tag = next.tags
+            if (next.sort && next.sort !== 'recent') query.sort = next.sort
+            const nav = mode === 'replace' ? router.replace : router.push
+            nav({ pathname: '/', query }, undefined, {
+                shallow: true,
+                scroll: false
+            })
+        },
+        [router]
+    )
+
+    // Search input updates every keystroke — replace to avoid history spam.
+    // Tag/sort changes are discrete actions — push so back-button walks them.
     const setSearchValue = q =>
-        updateQuery({ q, tags: selectedTags, sort })
+        updateQuery({ q, tags: selectedTags, sort }, 'replace')
     const setSort = s =>
         updateQuery({ q: searchValue, tags: selectedTags, sort: s })
-    const setSelectedTags = tags =>
-        updateQuery({ q: searchValue, tags, sort })
 
     // '/' keyboard shortcut to focus search
     useEffect(() => {
@@ -102,53 +110,33 @@ export default function Home({ datasets, allTags, tagCounts }) {
         [datasets]
     )
 
-    const filteredDatasets = useMemo(() => {
-        const search = searchValue.toLowerCase().trim()
-        const tagSet = new Set(selectedTags)
-
-        const matched = visibleDatasets
-            .filter(d => {
-                if (tagSet.size === 0) return true
-                const dTags = new Set(d.frontmatter.tags || [])
-                for (const t of tagSet) if (!dTags.has(t)) return false
-                return true
-            })
-            .filter(d => {
-                if (!search) return true
-                return (
-                    d.frontmatter.title.toLowerCase().includes(search) ||
-                    d.frontmatter.desc?.toLowerCase().includes(search) ||
-                    d.frontmatter.tags?.some(t => t.toLowerCase().includes(search))
-                )
-            })
-
-        if (sort === 'az') {
-            matched.sort((a, b) =>
-                a.frontmatter.title.localeCompare(b.frontmatter.title)
-            )
-        } else if (sort === 'za') {
-            matched.sort((a, b) =>
-                b.frontmatter.title.localeCompare(a.frontmatter.title)
-            )
-        } else {
-            matched.sort(
-                (a, b) =>
-                    new Date(b.frontmatter.mtime).getTime() -
-                    new Date(a.frontmatter.mtime).getTime()
-            )
-        }
-
-        return matched
-    }, [visibleDatasets, searchValue, selectedTags, sort])
+    const filteredDatasets = useMemo(
+        () =>
+            sortDatasets(
+                filterDatasets({
+                    datasets: visibleDatasets,
+                    search: searchValue,
+                    tags: selectedTags
+                }),
+                sort
+            ),
+        [visibleDatasets, searchValue, selectedTags, sort]
+    )
 
     const handleClearSearch = () => setSearchValue('')
 
-    const handleTagClick = tag => {
-        const next = selectedTags.includes(tag)
-            ? selectedTags.filter(t => t !== tag)
-            : [...selectedTags, tag]
-        setSelectedTags(next)
-    }
+    // Stable identity so DatasetCard's React.memo holds across renders.
+    // selectedTags moves through filters via the router, not closure, so
+    // we read it fresh from a ref-style ladder via filters above.
+    const handleTagClick = useCallback(
+        tag => {
+            const next = selectedTags.includes(tag)
+                ? selectedTags.filter(t => t !== tag)
+                : [...selectedTags, tag]
+            updateQuery({ q: searchValue, tags: next, sort })
+        },
+        [selectedTags, searchValue, sort, updateQuery]
+    )
 
     const handleClearAll = () => {
         updateQuery({ q: '', tags: [], sort })
@@ -189,21 +177,10 @@ export default function Home({ datasets, allTags, tagCounts }) {
                         Search datasets
                     </label>
                     <div className="relative mx-auto flex h-11 w-full max-w-2xl items-center rounded-lg border border-gray-300 bg-white px-3 transition focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
+                        <FiSearch
                             className="h-5 w-5 text-gray-400"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
                             aria-hidden="true"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                            />
-                        </svg>
+                        />
                         <input
                             id="search-input"
                             ref={searchInputRef}
@@ -225,21 +202,7 @@ export default function Home({ datasets, allTags, tagCounts }) {
                                 className="rounded-sm p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
                                 aria-label="Clear search"
                             >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-4 w-4"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    aria-hidden="true"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
+                                <FiX className="h-4 w-4" aria-hidden="true" />
                             </button>
                         )}
                     </div>
@@ -335,31 +298,21 @@ export default function Home({ datasets, allTags, tagCounts }) {
             {/* Dataset grid or empty state */}
             {filteredDatasets.length > 0 ? (
                 <div className="mx-auto grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {filteredDatasets.map(dataset => (
+                    {filteredDatasets.map((dataset, i) => (
                         <DatasetCard
                             key={dataset.slug}
                             dataset={dataset}
                             onTagClick={handleTagClick}
+                            priority={i < 8}
                         />
                     ))}
                 </div>
             ) : (
                 <div className="py-16 text-center">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
+                    <FiFrown
                         className="mx-auto h-12 w-12 text-gray-400"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
                         aria-hidden="true"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="1.5"
-                            d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                    </svg>
+                    />
                     <h3 className="mt-4 text-lg font-semibold text-gray-900">
                         No datasets found
                     </h3>

@@ -13,6 +13,9 @@
 /.build/
 /out/
 
+# build-time generated thumbnails (from scripts/optimize-thumbnails.mjs)
+/public/thumbnails/optimized/
+
 # production
 /build
 
@@ -33,3 +36,4 @@ yarn-error.log*
 
 # vercel
 .vercel
+test-results/

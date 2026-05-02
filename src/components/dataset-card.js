@@ -1,14 +1,33 @@
-import Image from 'next/image'
+import { memo } from 'react'
 import Link from 'next/link'
-import { timeAgo } from '../utils'
+import { FiBookOpen, FiFolder, FiGithub } from 'react-icons/fi'
+import { formatMonthYear } from '../utils'
 
 const MAX_TAGS_ON_CARD = 3
 
-export default function DatasetCard({ dataset, onTagClick }) {
+// Build a webp srcset from /thumbnails/<name>.<ext> →
+// /thumbnails/optimized/<name>-{320,640,960}.webp. Files are emitted by
+// scripts/optimize-thumbnails.mjs at build time.
+function buildWebpSources(thumbnail) {
+    const match = thumbnail.match(/^\/thumbnails\/(.+)\.(png|jpe?g)$/i)
+    if (!match) return null
+    const base = match[1]
+    return [320, 640, 960]
+        .map(w => `/thumbnails/optimized/${base}-${w}.webp ${w}w`)
+        .join(', ')
+}
+
+const SIZES =
+    '(min-width: 1280px) 320px, (min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw'
+
+function DatasetCard({ dataset, onTagClick, priority = false }) {
     const { slug, frontmatter } = dataset
     const tags = frontmatter.tags || []
     const visibleTags = tags.slice(0, MAX_TAGS_ON_CARD)
     const overflowCount = tags.length - visibleTags.length
+    const webpSrcSet = frontmatter.thumbnail
+        ? buildWebpSources(frontmatter.thumbnail)
+        : null
 
     return (
         <div className="group flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition motion-safe:duration-200 motion-safe:hover:-translate-y-0.5 hover:border-gray-300 hover:shadow-lg focus-within:ring-2 focus-within:ring-primary">
@@ -18,30 +37,28 @@ export default function DatasetCard({ dataset, onTagClick }) {
             >
                 <div className="relative h-40 w-full overflow-hidden bg-gradient-to-br from-orange-50 to-orange-100">
                     {frontmatter.thumbnail ? (
-                        <Image
-                            src={frontmatter.thumbnail}
-                            alt=""
-                            height={160}
-                            width={320}
-                            className="h-full w-full object-cover transition motion-safe:duration-300 motion-safe:group-hover:scale-105"
-                        />
+                        <picture>
+                            {webpSrcSet && (
+                                <source
+                                    type="image/webp"
+                                    srcSet={webpSrcSet}
+                                    sizes={SIZES}
+                                />
+                            )}
+                            <img
+                                src={frontmatter.thumbnail}
+                                alt=""
+                                width={320}
+                                height={160}
+                                loading={priority ? 'eager' : 'lazy'}
+                                decoding="async"
+                                fetchPriority={priority ? 'high' : 'auto'}
+                                className="h-full w-full object-cover transition motion-safe:duration-300 motion-safe:group-hover:scale-105"
+                            />
+                        </picture>
                     ) : (
                         <div className="flex h-full w-full items-center justify-center text-primary/40">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-12 w-12"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="1.5"
-                                    d="M4 7v10a2 2 0 002 2h12a2 2 0 002-2V9a2 2 0 00-2-2h-5l-2-2H6a2 2 0 00-2 2z"
-                                />
-                            </svg>
+                            <FiFolder className="h-12 w-12" aria-hidden="true" />
                         </div>
                     )}
                 </div>
@@ -88,21 +105,7 @@ export default function DatasetCard({ dataset, onTagClick }) {
                             title="Publication"
                             className="rounded-sm p-1.5 text-gray-500 transition-colors hover:bg-gray-100 hover:text-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
                         >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-4 w-4"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="1.5"
-                                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                                />
-                            </svg>
+                            <FiBookOpen className="h-4 w-4" aria-hidden="true" />
                         </a>
                     )}
                     {frontmatter.github && (
@@ -112,28 +115,16 @@ export default function DatasetCard({ dataset, onTagClick }) {
                             title="GitHub"
                             className="rounded-sm p-1.5 text-gray-500 transition-colors hover:bg-gray-100 hover:text-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
                         >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-4 w-4"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="1.5"
-                                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                                />
-                            </svg>
+                            <FiGithub className="h-4 w-4" aria-hidden="true" />
                         </a>
                     )}
                 </div>
                 <span className="text-xs text-gray-500">
-                    {timeAgo(frontmatter.mtime)}
+                    {formatMonthYear(frontmatter.mtime)}
                 </span>
             </div>
         </div>
     )
 }
+
+export default memo(DatasetCard)

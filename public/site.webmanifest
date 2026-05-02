@@ -1,6 +1,8 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "Simula Datasets",
+    "short_name": "Simula Datasets",
+    "description": "Browse research datasets gathered and published by Simula Research Laboratory and SimulaMet.",
+    "start_url": "/",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -13,7 +15,7 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ffffff",
+    "theme_color": "#f15d22",
     "background_color": "#ffffff",
     "display": "standalone"
 }
