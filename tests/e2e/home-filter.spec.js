@@ -8,7 +8,7 @@ const cards = page => page.getByRole('heading', { level: 3 })
 // first option's tag (the on-click writes ?<facet>=<tag> to the URL).
 async function openFirstFacet(page) {
     const trigger = page
-        .getByRole('button', { expanded: false })
+        .getByRole('button')
         .filter({ hasText: /^(Domain|Modality|Task)/ })
         .first()
     const facetName = (await trigger.textContent())?.trim().toLowerCase()
@@ -71,9 +71,9 @@ test.describe('home — filter & search', () => {
         await expect(page).toHaveURL(new RegExp(`[?&]${facetName}=`))
         await expect(trigger).toContainText('1')
 
-        // Re-open and toggle off.
-        await trigger.click()
-        await page.getByRole('option').first().click()
+        // The panel stays open across selections (multi-select pattern),
+        // so toggling the same option off doesn't need a re-open.
+        await option.click()
         await expect(page).not.toHaveURL(new RegExp(`${facetName}=`))
     })
 
@@ -116,7 +116,7 @@ test.describe('home — filter & search', () => {
         await page.getByRole('option').first().click()
         await expect(page).toHaveURL(new RegExp(`${facetName}=`))
 
-        await page.getByRole('button', { name: 'Clear all' }).click()
+        await page.getByRole('button', { name: 'Clear all', exact: true }).click()
         await expect(page).not.toHaveURL(/q=/)
         await expect(page).not.toHaveURL(new RegExp(`${facetName}=`))
         await expect(page.getByLabel('Search datasets')).toHaveValue('')

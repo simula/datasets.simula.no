@@ -6,7 +6,6 @@ import { FiChevronDown, FiCheck } from 'react-icons/fi'
 // Escape close the panel.
 export default function FacetDropdown({ label, options, selected, onChange }) {
     const [open, setOpen] = useState(false)
-    const [alignRight, setAlignRight] = useState(false)
     const containerRef = useRef(null)
     const buttonRef = useRef(null)
     const panelRef = useRef(null)
@@ -33,17 +32,17 @@ export default function FacetDropdown({ label, options, selected, onChange }) {
 
     // Flip the panel to right-align if a left-aligned panel would clip
     // past the right edge of the viewport (common on mobile when the
-    // trigger sits in the middle/end of its row).
+    // trigger sits in the middle/end of its row). The panel unmounts on
+    // close, so we mutate classList directly rather than holding state.
     useLayoutEffect(() => {
-        if (!open) {
-            setAlignRight(false)
-            return
-        }
+        if (!open) return
         const panel = panelRef.current
         if (!panel) return
         const rect = panel.getBoundingClientRect()
         const margin = 16 // keep at least 1rem from the viewport edge
-        if (rect.right > window.innerWidth - margin) setAlignRight(true)
+        if (rect.right > window.innerWidth - margin) {
+            panel.classList.replace('left-0', 'right-0')
+        }
     }, [open])
 
     const selectedSet = new Set(selected)
@@ -92,9 +91,7 @@ export default function FacetDropdown({ label, options, selected, onChange }) {
                     role="listbox"
                     aria-multiselectable="true"
                     aria-label={label}
-                    className={`absolute z-20 mt-2 w-60 max-w-[calc(100vw-2rem)] rounded-lg border border-gray-200 bg-white py-1 shadow-lg focus:outline-hidden ${
-                        alignRight ? 'right-0' : 'left-0'
-                    }`}
+                    className="absolute left-0 z-20 mt-2 w-60 max-w-[calc(100vw-2rem)] rounded-lg border border-gray-200 bg-white py-1 shadow-lg focus:outline-hidden"
                 >
                     {options.map(opt => {
                         const checked = selectedSet.has(opt.tag)
