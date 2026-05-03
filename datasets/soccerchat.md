@@ -1,17 +1,20 @@
 ---
-title: 'SoccerChat'
-desc: 'A Multimodal Video-Text Dataset for Natural Language Soccer Game Understanding'
+title: SoccerChat
+desc: A Multimodal Video-Text Dataset for Natural Language Soccer Game Understanding
 thumbnail: /thumbnails/SoccerChat.png
-publication: https://arxiv.org/abs/2505.16630
-github: https://github.com/simula/SoccerChat
-tags:
-  - soccer
+publication: 'https://arxiv.org/abs/2505.16630'
+github: 'https://github.com/simula/SoccerChat'
+domain:
+  - sports
+modality:
   - video
   - multimodal
   - text
-  - event-detection
-  - reasoning
-  - synthetic
+tasks:
+  - detection
+  - vqa
+  - captioning
+  - summarization
 ---
 
 **SoccerChat** is a multimodal dataset for **video–language understanding** in the context of **soccer match analysis**.  

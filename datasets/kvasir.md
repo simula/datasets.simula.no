@@ -1,12 +1,17 @@
 ---
-title: 'Kvasir'
-desc: 'A Multi-Class Image-Dataset for Computer Aided Gastrointestinal Disease Detection.'
+title: Kvasir
+desc: >-
+  A Multi-Class Image-Dataset for Computer Aided Gastrointestinal Disease
+  Detection.
 thumbnail: /thumbnails/kvasir.jpg
-publication: https://doi.org/10.1145/3083187.3083212
+publication: 'https://doi.org/10.1145/3083187.3083212'
 github: ''
-tags:
-  - gastrointestinal
+domain:
+  - health
+modality:
   - images
+tasks:
+  - classification
 ---
 
 Automatic detection of diseases by use of computers is an important, but still unexplored field of research. Such innovations may improve medical practice and refine health care systems all over the world. However, datasets containing medical images are hardly available, making reproducibility and comparison of approaches almost impossible. Here, we present Kvasir, a dataset containing images from inside the gastrointestinal (GI) tract. The collection of images are classified into three important anatomical landmarks and three clinically significant findings. In addition, it contains two categories of images related to endoscopic polyp removal. Sorting and annotation of the dataset is performed by medical doctors (ex- perienced endoscopists). In this respect, Kvasir is important for research on both single- and multi-disease computer aided detec- tion. By providing it, we invite and enable multimedia researcher into the medical domain of detection and retrieval.

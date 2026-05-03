@@ -1,14 +1,13 @@
 ---
-title: 'ExposureEngine'
-desc: 'Oriented Logo Detection and Sponsor Visibility Analytics in Sports Broadcasts'
+title: ExposureEngine
+desc: Oriented Logo Detection and Sponsor Visibility Analytics in Sports Broadcasts
 thumbnail: /thumbnails/exposure-engine.jpg
 publication: ''
-github: https://huggingface.co/datasets/SimulaMet-HOST/ExposureEngine
+github: 'https://huggingface.co/datasets/SimulaMet-HOST/ExposureEngine'
 hidden: false
-tags:
-  - Logo Detection
-  - Oriented Object Detection
-  - Analytics
+tasks:
+  - detection
+  - tracking
 ---
 
 # ExposureEngine: Oriented Logo Detection & Sponsor Visibility Analytics (Dataset)

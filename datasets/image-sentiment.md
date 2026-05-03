@@ -1,12 +1,13 @@
 ---
-title: 'Image Sentiment'
-desc: 'A dataset for image sentiment analysis.'
+title: Image Sentiment
+desc: A dataset for image sentiment analysis.
 thumbnail: /thumbnails/sentiment.jpg
-publication: https://arxiv.org/pdf/2009.03051.pdf
-github: https://osf.io/xakp2/
-tags:
-  - sentiment analysis
+publication: 'https://arxiv.org/pdf/2009.03051.pdf'
+github: 'https://osf.io/xakp2/'
+modality:
   - images
+tasks:
+  - classification
 ---
 
 The increasing popularity of the social networks and users' tendency towards sharing their feelings, expressions and opinions in text, visual and audio content have opened new opportunities and challenges in sentiment analysis. While sentiment analysis of text streams has been widely explored in literature, sentiment analysis of images and videos is relatively new. This article focuses on visual sentiment analysis in a societal important domain; namely, disaster analysis in social media.

@@ -1,13 +1,14 @@
 ---
-title: 'Njord'
-desc: 'A fishing boat dataset.'
+title: Njord
+desc: A fishing boat dataset.
 thumbnail: /thumbnails/njord.jpeg
 publication: ''
-github: https://github.com/simula/njord
+github: 'https://github.com/simula/njord'
 hidden: false
-tags:
-  - fishing
+tasks:
   - segmentation
+  - detection
+  - classification
 ---
 
 ![banner](/images/njord/banner.png)

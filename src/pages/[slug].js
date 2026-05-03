@@ -1,15 +1,16 @@
 import Head from 'next/head'
-import fs from 'fs'
-import matter from 'gray-matter'
-import markdownIt from 'markdown-it'
+import Link from 'next/link'
+import { FiArrowLeft, FiBookOpen, FiGithub } from 'react-icons/fi'
+import DatasetCard from '../components/dataset-card'
+import { allTagsFor, findRelatedDatasets, formatMonthYear } from '../utils'
+import { loadAllDatasets, loadDataset } from '../utils/datasets'
+import { renderAndSanitize } from '../utils/markdown'
+import { FACETS, TAG_LABEL } from '../data/tags'
+
+const SITE_URL = 'https://datasets.simula.no'
 
 export async function getStaticPaths() {
-    const files = fs.readdirSync('datasets')
-    const paths = files.map(fileName => ({
-        params: {
-            slug: fileName.replace('.md', '')
-        }
-    }))
+    const paths = loadAllDatasets().map(({ slug }) => ({ params: { slug } }))
     return {
         paths,
         fallback: false
@@ -17,71 +18,179 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { slug } }) {
-    const filepath = `datasets/${slug}.md`
-    const fileName = fs.readFileSync(filepath, 'utf-8')
-    const stats = fs.statSync(filepath)
-    const { data: frontmatter, content } = matter(fileName)
-    frontmatter.mtime = stats.mtime.toString()
+    const { frontmatter, content } = loadDataset(slug)
+
+    const html = renderAndSanitize(content)
+
+    const related = findRelatedDatasets(
+        { slug, frontmatter },
+        loadAllDatasets(),
+        3
+    ).map(({ slug, frontmatter }) => ({ slug, frontmatter }))
+
     return {
         props: {
+            slug,
             frontmatter,
-            content
+            html,
+            related
         }
     }
 }
 
-export default function DatasetPage({ frontmatter, content }) {
-    const md = markdownIt({ html: true })
+export default function DatasetPage({ slug, frontmatter, html, related }) {
+    const tags = allTagsFor(frontmatter)
+    const description = frontmatter.desc || ''
+
+    const sameAs = [frontmatter.publication, frontmatter.github].filter(Boolean)
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'Dataset',
+        name: frontmatter.title,
+        description: description || frontmatter.title,
+        url: `${SITE_URL}/${slug}`,
+        ...(tags.length > 0 && { keywords: tags }),
+        creator: {
+            '@type': 'Organization',
+            name: 'Simula Research Laboratory',
+            url: 'https://www.simula.no'
+        },
+        ...(sameAs.length > 0 && { sameAs }),
+        ...(frontmatter.mtime && { dateModified: frontmatter.mtime }),
+        isAccessibleForFree: true
+    }
+
     return (
-        <div className="mx-auto max-w-7xl px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <Head>
                 <title>Simula Datasets - {frontmatter.title}</title>
+                <meta name="description" content={description} />
+                <meta property="og:title" content={frontmatter.title} />
+                <meta property="og:description" content={description} />
+                {frontmatter.thumbnail && (
+                    <meta property="og:image" content={frontmatter.thumbnail} />
+                )}
+                <meta property="og:type" content="article" />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                />
             </Head>
-            <div className="mb-8 text-center">
-                <h1 className="mb-2 text-4xl">{frontmatter.title}</h1>
-                <h2 className="text-xl">{frontmatter.desc}</h2>
-                <div className="mx-auto mt-3 flex w-24 justify-around">
+
+            {/* Breadcrumb */}
+            <nav className="mb-6" aria-label="Breadcrumb">
+                <Link
+                    href="/"
+                    className="inline-flex items-center text-sm text-gray-600 transition-colors hover:text-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                >
+                    <FiArrowLeft
+                        className="mr-1 h-4 w-4"
+                        aria-hidden="true"
+                    />
+                    Back to all datasets
+                </Link>
+            </nav>
+
+            {/* Hero */}
+            <header className="mx-auto mb-10 max-w-3xl">
+                <h1 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+                    {frontmatter.title}
+                </h1>
+                {description && (
+                    <p className="mt-4 text-lg leading-relaxed text-gray-600">
+                        {description}
+                    </p>
+                )}
+
+                {tags.length > 0 && (
+                    <div className="mt-5 space-y-2">
+                        {FACETS.map(facet => {
+                            const facetTags = frontmatter[facet.field] || []
+                            if (facetTags.length === 0) return null
+                            return (
+                                <div
+                                    key={facet.key}
+                                    className="flex flex-wrap items-center gap-2"
+                                >
+                                    <span className="text-xs font-medium uppercase tracking-wide text-gray-500">
+                                        {facet.label}
+                                    </span>
+                                    <div className="flex flex-wrap gap-1.5">
+                                        {facetTags.map(tag => (
+                                            <Link
+                                                key={tag}
+                                                href={{
+                                                    pathname: '/',
+                                                    query: { [facet.key]: tag }
+                                                }}
+                                                className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700 transition-colors hover:bg-primary hover:text-white focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+                                            >
+                                                {TAG_LABEL[tag] || tag}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                )}
+
+                <div className="mt-6 flex flex-wrap items-center gap-3">
                     {frontmatter.publication && (
-                        <a href={frontmatter.publication}>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-6 w-6"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="1.5"
-                                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                                />
-                            </svg>
+                        <a
+                            href={frontmatter.publication}
+                            className="inline-flex items-center gap-2 rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:border-primary hover:text-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                        >
+                            <FiBookOpen
+                                className="h-4 w-4"
+                                aria-hidden="true"
+                            />
+                            Publication
                         </a>
                     )}
                     {frontmatter.github && (
-                        <a href={frontmatter.github}>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-6 w-6"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="1.5"
-                                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                                />
-                            </svg>
+                        <a
+                            href={frontmatter.github}
+                            className="inline-flex items-center gap-2 rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:border-primary hover:text-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                        >
+                            <FiGithub
+                                className="h-4 w-4"
+                                aria-hidden="true"
+                            />
+                            GitHub repo
                         </a>
                     )}
+                    <span className="text-xs text-gray-500 sm:ml-auto">
+                        Last updated {formatMonthYear(frontmatter.mtime)}
+                    </span>
                 </div>
-            </div>
-            <div className="prose mx-auto max-w-none prose-h2:mb-2 prose-h2:mt-5 prose-p:my-3">
-                <div className="break-words" dangerouslySetInnerHTML={{ __html: md.render(content) }} />
-            </div>
+            </header>
+
+            <article className="prose prose-base mx-auto max-w-3xl sm:prose-lg prose-h2:mb-2 prose-h2:mt-8 prose-h2:text-2xl prose-h2:font-semibold prose-h2:tracking-tight prose-h3:font-semibold prose-p:my-3 prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+                <div
+                    className="wrap-break-word"
+                    dangerouslySetInnerHTML={{ __html: html }}
+                />
+            </article>
+
+            {related.length > 0 && (
+                <aside
+                    aria-labelledby="related-heading"
+                    className="mt-16 border-t border-gray-200 pt-10"
+                >
+                    <h2
+                        id="related-heading"
+                        className="mb-6 text-2xl font-semibold tracking-tight text-gray-900"
+                    >
+                        Related datasets
+                    </h2>
+                    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                        {related.map(d => (
+                            <DatasetCard key={d.slug} dataset={d} />
+                        ))}
+                    </div>
+                </aside>
+            )}
         </div>
     )
 }

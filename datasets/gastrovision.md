@@ -1,13 +1,16 @@
 ---
-title: 'GastroVision'
-desc: 'A multicenter dataset.'
+title: GastroVision
+desc: A multicenter dataset.
 thumbnail: /thumbnails/gastrovision.jpg
-publication: https://arxiv.org/abs/2307.08140
-github: https://github.com/DebeshJha/GastroVision
+publication: 'https://arxiv.org/abs/2307.08140'
+github: 'https://github.com/DebeshJha/GastroVision'
 hidden: false
-tags:
-  - gastrointestinal
+domain:
+  - health
+modality:
   - images
+tasks:
+  - classification
 ---
 
 This repository provides related links and codes for the GastroVision dataset, a multi-class endoscopy image dataset comprising the largest number of anatomical landmarks, pathological abnormalities, and normal findings in the gastrointestinal (GI) tract. A total of 36 such classes, with 6,169 images, are acquired from the upper and lower GI tracts.

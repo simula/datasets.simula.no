@@ -1,15 +1,15 @@
 ---
-title: 'WICO Text'
-desc: 'A labeled dataset of conspiracy theory and 5G-corona misinformation tweets.'
+title: WICO Text
+desc: A labeled dataset of conspiracy theory and 5G-corona misinformation tweets.
 thumbnail: /thumbnails/wico.png
-publication: https://doi.org/10.1145/3472720.3483617
+publication: 'https://doi.org/10.1145/3472720.3483617'
 github: ''
-tags:
-  - 5G
-  - COVID
-  - Twitter
-  - Conspiracy
-  - Misinformation
+domain:
+  - misinformation
+modality:
+  - text
+tasks:
+  - classification
 ---
 
 The COVID-19 pandemic has been accompanied by a flood of misinformation on social media, which has been labeled an "infodemic".

@@ -1,12 +1,14 @@
 ---
-title: 'KvasirCapsule SEG'
-desc: 'A Capsule Endoscopy Segmentation Dataset.'
+title: KvasirCapsule SEG
+desc: A Capsule Endoscopy Segmentation Dataset.
 thumbnail: /thumbnails/kvasir-capsule-seg.jpg
-publication: https://arxiv.org/abs/2104.11138
-github: https://github.com/DebeshJha/NanoNet
-tags:
-  - gastrointestinal
+publication: 'https://arxiv.org/abs/2104.11138'
+github: 'https://github.com/DebeshJha/NanoNet'
+domain:
+  - health
+tasks:
   - segmentation
+  - detection
 ---
 
 Video capsule endoscopy (VCE) or capsule endoscopy is a non-invasive technology designed to provide diagnostic imaging of the small intestine. The patient swallows a capsule that moves through the digestive tract and captures thousands of images that physicians can further examine. Machine learning and deep learning-based algorithms are gaining popularity in improving the anomaly detection rate and decreasing manual labor for this specific application. To be able to create an efficient model, data is important. In this respect, we release KvasirCapsule-SEG, a publicly available dataset that can help design better segmentation algorithms in the field of VCE technology.

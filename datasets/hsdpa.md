@@ -1,12 +1,13 @@
 ---
-title: 'HSDPA'
-desc: 'HSDPA-bandwidth logs for mobile HTTP streaming scenarios.'
+title: HSDPA
+desc: HSDPA-bandwidth logs for mobile HTTP streaming scenarios.
 thumbnail: /thumbnails/hsdpa-bandwidth-traces.jpg
-publication: http://home.ifi.uio.no/paalh/publications/files/mmsys2013-dataset.pdf
+publication: 'http://home.ifi.uio.no/paalh/publications/files/mmsys2013-dataset.pdf'
 github: ''
-tags:
+domain:
   - networks
-  - streaming 
+tasks:
+  - forecasting
 ---
 
 This archive contains logs from TCP streaming sessions in Telenor's 3G/HSDPA mobile wireless network in Norway. In each test, adaptive video streams were downloaded at maximum speed (no throttling, no buffer limit). The video segment duration was fixed to 2 seconds. The tests were performed in the period 2010-09-13 to 2011-04-21.

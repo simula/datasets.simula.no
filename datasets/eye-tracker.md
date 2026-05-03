@@ -1,11 +1,10 @@
 ---
-title: 'Eye Tracker'
-desc: 'A Serious Game Based Dataset.'
+title: Eye Tracker
+desc: A Serious Game Based Dataset.
 thumbnail: /thumbnails/eye-tracker.png
-publication: http://ceur-ws.org/Vol-1345/gamifir15_5.pdf
+publication: 'http://ceur-ws.org/Vol-1345/gamifir15_5.pdf'
 github: ''
-tags:
-  - climate change
+modality:
   - sensor
 ---
 

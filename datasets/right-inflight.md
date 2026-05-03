@@ -1,11 +1,12 @@
 ---
-title: 'Right Inflight'
-desc: 'A Dataset for Exploring the Automatic Prediction of Movies Suitable for a Watching Situation.'
+title: Right Inflight
+desc: >-
+  A Dataset for Exploring the Automatic Prediction of Movies Suitable for a
+  Watching Situation.
 thumbnail: /thumbnails/right-inflight.png
 publication: ''
-github: https://zenodo.org/record/1118338
-tags:
-  - climate change
+github: 'https://zenodo.org/record/1118338'
+modality:
   - sensor
 ---
 
