@@ -35,15 +35,17 @@ test.describe('dataset detail page', () => {
         page
     }) => {
         // Find a card on home, navigate to its detail, click first tag.
+        // Tag links now route via per-facet query params (?domain=...,
+        // ?modality=..., ?task=...) instead of a single ?tag= param.
         await page.goto('/')
         await page.getByRole('heading', { level: 3 }).first().click()
         const tagLink = page
-            .locator('header a[href*="/?tag="]')
+            .locator('header a[href^="/?"]')
             .first()
         const href = await tagLink.getAttribute('href')
-        expect(href).toMatch(/\/\?tag=/)
+        expect(href).toMatch(/^\/\?(domain|modality|task)=/)
         await tagLink.click()
-        await expect(page).toHaveURL(/\/\?tag=/)
+        await expect(page).toHaveURL(/\/\?(domain|modality|task)=/)
     })
 
     test('detail page emits a JSON-LD Dataset schema script', async ({

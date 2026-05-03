@@ -1,12 +1,13 @@
 ---
-title: 'HockeyRink'
-desc: 'A Dataset for Precise Ice Hockey Rink Keypoint Mapping and Analytics'
+title: HockeyRink
+desc: A Dataset for Precise Ice Hockey Rink Keypoint Mapping and Analytics
 thumbnail: /thumbnails/hockeyrink.png
-publication: https://dl.acm.org/doi/10.1145/3712676.3718338
-github: https://github.com/acmmmsys/2025-HockeyRink
+publication: 'https://dl.acm.org/doi/10.1145/3712676.3718338'
+github: 'https://github.com/acmmmsys/2025-HockeyRink'
 hidden: false
-tags:
+domain:
   - sports
+tasks:
   - detection
   - pose-estimation
 ---

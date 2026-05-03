@@ -1,12 +1,15 @@
 ---
-title: 'Nerthus'
-desc: 'A Bowel Preparation Quality Video Dataset.'
+title: Nerthus
+desc: A Bowel Preparation Quality Video Dataset.
 thumbnail: /thumbnails/nerthus.jpg
-publication: https://doi.org/10.1145/3083187.3083216
+publication: 'https://doi.org/10.1145/3083187.3083216'
 github: ''
-tags:
+domain:
   - health
+modality:
   - images
+tasks:
+  - classification
 ---
 
 Bowel preparation (cleansing) is considered to be a key precondition for successful colonoscopy (endoscopic examination of the bowel). The degree of bowel cleansing directly affects the possibility to detect diseases and may influence decisions on screening and follow-up examination intervals. An accurate assessment of bowel preparation quality is therefore important. Despite the use of reliable and validated bowel preparation scales, the grading may vary from one doctor to another. An objective and automated assessment of bowel cleansing would contribute to reduce such inequalities and optimize use of medical resources. This would also be a valuable feature for automatic endoscopy reporting in the future. Here, we present Nerthus, a dataset containing videos from inside the gastrointestinal (GI) tract, showing different degrees of bowel cleansing. By providing this dataset, we invite multimedia researchers to contribute in the medical field by making systems automatically evaluate the quality of bowel cleansing for colonoscopy. Such innovations would probably contribute to improve the medical field of GI endoscopy.

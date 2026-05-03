@@ -1,12 +1,16 @@
 ---
-title: 'Depresjon'
-desc: 'The Depresjon Dataset.'
+title: Depresjon
+desc: The Depresjon Dataset.
 thumbnail: /thumbnails/depresjon.png
-publication: https://dl.acm.org/doi/10.1145/3204949.3208125
+publication: 'https://dl.acm.org/doi/10.1145/3204949.3208125'
 github: ''
-tags:
+domain:
   - health
+modality:
   - sensor
+tasks:
+  - classification
+  - forecasting
 ---
 
 Wearable sensors measuring different parts of people's activity are a common technology nowadays. Data created using these devices holds a lot of potential besides measuring the quantity of daily steps or calories burned, since continuous recordings of heart rate and activity levels usually are collected. Furthermore, there is an increasing awareness in the field of psychiatry on how these activity data relates to various mental health issues such as changes in mood, personality, inability to cope with daily problems or stress and withdrawal from friends and activities. In this paper we present the analysis of a unique dataset containing sensor data collected from patients suffering from depression. The dataset contains motor activity recordings of 23 unipolar and bipolar depressed patients and 32 healthy controls. We apply machine learning to classify patients into depressed and nondepressed. For evaluation of the algorithms, leave one patient out validation is performed. The best results achieved are an F1 score of 0.73 and a MCC of 0.44. The overall findings show that sensor data contains information that can be used to determine the depression status of a person.

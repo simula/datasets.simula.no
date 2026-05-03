@@ -1,3 +1,5 @@
+import { FACETS } from '../data/tags.js'
+
 const MONTH_YEAR = new Intl.DateTimeFormat('en-US', {
     month: 'short',
     year: 'numeric'
@@ -13,24 +15,38 @@ export function formatMonthYear(time) {
     return MONTH_YEAR.format(d)
 }
 
-export function countTags(datasets) {
+export function allTagsFor(frontmatter) {
+    return [
+        ...(frontmatter.domain || []),
+        ...(frontmatter.modality || []),
+        ...(frontmatter.tasks || []),
+    ]
+}
+
+// Per-facet tag counts: { domain: { health: 18, ... }, modality: {...}, task: {...} }.
+// Powers the option counts in each FacetDropdown.
+export function countFacets(datasets) {
     const counts = {}
-    for (const d of datasets) {
-        for (const tag of d.frontmatter.tags || []) {
-            counts[tag] = (counts[tag] || 0) + 1
+    for (const { key, field } of FACETS) {
+        const bucket = {}
+        for (const d of datasets) {
+            for (const tag of d.frontmatter[field] || []) {
+                bucket[tag] = (bucket[tag] || 0) + 1
+            }
         }
+        counts[key] = bucket
     }
     return counts
 }
 
 export function findRelatedDatasets(target, allDatasets, limit = 3) {
-    const targetTags = new Set(target.frontmatter.tags || [])
+    const targetTags = new Set(allTagsFor(target.frontmatter))
     if (targetTags.size === 0) return []
 
     return allDatasets
         .filter(d => d.slug !== target.slug && !d.frontmatter.hidden)
         .map(d => {
-            const overlap = (d.frontmatter.tags || []).filter(t =>
+            const overlap = allTagsFor(d.frontmatter).filter(t =>
                 targetTags.has(t)
             ).length
             return { dataset: d, overlap }

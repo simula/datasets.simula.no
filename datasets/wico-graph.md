@@ -1,12 +1,17 @@
 ---
-title: 'WICO Graph Dataset'
-desc: 'A Labeled Dataset of Twitter Subgraphs based on Conspiracy Theory and 5G-Corona Misinformation Tweets.'
+title: WICO Graph Dataset
+desc: >-
+  A Labeled Dataset of Twitter Subgraphs based on Conspiracy Theory and
+  5G-Corona Misinformation Tweets.
 thumbnail: /thumbnails/wico.png
-publication: https://dl.acm.org/doi/10.1145/3472720.3483617
-github: https://osf.io/5m3by/
-tags:
+publication: 'https://dl.acm.org/doi/10.1145/3472720.3483617'
+github: 'https://osf.io/5m3by/'
+domain:
   - misinformation
+modality:
   - text
+tasks:
+  - classification
 ---
 
 In the wake of the COVID-19 pandemic, a surge of misinformation has flooded social media and other internet channels, and some of it has the potential to cause real-world harm. To counteract this misinformation, reliably identifying it is a principal problem to be solved. However, the identification of misinformation poses a formidable challenge for language processing systems since the texts containing misinformation are short, work with insinuation rather than explicitly stating a false claim, or resemble other postings that deal with the same topic ironically. Accordingly, for the development of better detection systems, it is not only essential to use hand-labeled ground truth data and extend the analysis with methods beyond Natural Language Processing to consider the characteristics of the participant's relationships and the diffusion of misinformation. This paper presents a novel dataset that deals with a specific piece of misinformation: the idea that the 5G wireless network is causally connected to the COVID-19 pandemic. We have extracted the subgraphs of 3,000 manually classified Tweets from Twitter's follower network and distinguished them into three categories. First, subgraphs of Tweets that propagate the specific 5G misinformation, those that spread other conspiracy theories, and Tweets that do neither. We created the WICO (Wireless Networks and Coronavirus Conspiracy) dataset to support experts in machine learning experts, graph processing, and related fields in studying the spread of misinformation. Furthermore, we provide a series of baseline experiments using both Graph Neural Networks and other established classifiers that use simple graph metrics as features.

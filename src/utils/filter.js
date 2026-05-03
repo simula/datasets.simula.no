@@ -1,34 +1,51 @@
+import { FACETS } from '../data/tags.js'
+
 export const VALID_SORTS = ['recent', 'az', 'za']
 
+const FACET_KEYS = FACETS.map(f => f.key)
+
+// Read URL query params into a normalized filter state. Each facet has
+// its own repeatable param (?domain=health&modality=video) so the three
+// dimensions are independently shareable in the URL.
 export function readFilterState(searchString) {
     const sp = new URLSearchParams(searchString || '')
     const sort = sp.get('sort')
+    const facets = {}
+    for (const key of FACET_KEYS) facets[key] = sp.getAll(key)
     return {
         q: sp.get('q') || '',
-        tags: sp.getAll('tag'),
-        sort: VALID_SORTS.includes(sort) ? sort : 'recent'
+        facets,
+        sort: VALID_SORTS.includes(sort) ? sort : 'recent',
     }
 }
 
-export function filterDatasets({ datasets, search, tags }) {
+// AND across facets, OR within each facet — the standard faceted-search
+// semantic. Selecting `domain=health domain=sports` finds health-OR-sports
+// datasets; adding `modality=video` narrows that to ones that ALSO have video.
+export function filterDatasets({ datasets, search, facets }) {
     const needle = (search || '').toLowerCase().trim()
-    const tagSet = new Set(tags || [])
+    const safeFacets = facets || {}
 
-    return datasets
-        .filter(d => {
-            if (tagSet.size === 0) return true
-            const dTags = new Set(d.frontmatter.tags || [])
-            for (const t of tagSet) if (!dTags.has(t)) return false
-            return true
-        })
-        .filter(d => {
-            if (!needle) return true
-            return (
-                d.frontmatter.title.toLowerCase().includes(needle) ||
-                d.frontmatter.desc?.toLowerCase().includes(needle) ||
-                d.frontmatter.tags?.some(t => t.toLowerCase().includes(needle))
-            )
-        })
+    return datasets.filter(d => {
+        for (const { key, field } of FACETS) {
+            const selected = safeFacets[key] || []
+            if (selected.length === 0) continue
+            const dValues = d.frontmatter[field] || []
+            if (!selected.some(t => dValues.includes(t))) return false
+        }
+        if (!needle) return true
+        const fm = d.frontmatter
+        const allTags = [
+            ...(fm.domain || []),
+            ...(fm.modality || []),
+            ...(fm.tasks || []),
+        ]
+        return (
+            fm.title.toLowerCase().includes(needle) ||
+            fm.desc?.toLowerCase().includes(needle) ||
+            allTags.some(t => t.toLowerCase().includes(needle))
+        )
+    })
 }
 
 export function sortDatasets(datasets, sort) {

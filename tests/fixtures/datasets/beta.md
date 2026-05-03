@@ -1,8 +1,8 @@
 ---
-title: 'Beta Dataset'
-desc: 'A hidden medical dataset.'
+title: Beta Dataset
+desc: A hidden medical dataset.
 hidden: true
-tags:
+domain:
   - health
 ---
 

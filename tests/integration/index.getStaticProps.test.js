@@ -21,14 +21,13 @@ afterEach(() => {
 })
 
 describe('home page getStaticProps', () => {
-    it('returns datasets, allTags, and tagCounts as props', async () => {
+    it('returns datasets and facetCounts as props', async () => {
         const { getStaticProps } = await import('../../src/pages/index')
         const result = await getStaticProps()
 
         expect(result).toHaveProperty('props')
         expect(result.props).toHaveProperty('datasets')
-        expect(result.props).toHaveProperty('allTags')
-        expect(result.props).toHaveProperty('tagCounts')
+        expect(result.props).toHaveProperty('facetCounts')
     })
 
     it('includes hidden datasets in props.datasets (so the client can re-derive)', async () => {
@@ -47,23 +46,17 @@ describe('home page getStaticProps', () => {
         }
     })
 
-    it('counts tags only across visible datasets (excludes hidden)', async () => {
+    it('counts tags per facet across visible datasets only (excludes hidden)', async () => {
         const { getStaticProps } = await import('../../src/pages/index')
         const { props } = await getStaticProps()
-        // Fixtures: alpha=[health,video], beta=[health] hidden,
-        // gamma=[sports,video], delta=[sports]. Hidden beta's "health"
+        // Fixtures: alpha=[health, video], beta=[health] hidden,
+        // gamma=[sports, video], delta=[sports]. Hidden beta's "health"
         // does NOT count.
-        expect(props.tagCounts).toEqual({
-            health: 1,
-            video: 2,
-            sports: 2
+        expect(props.facetCounts).toEqual({
+            domain: { health: 1, sports: 2 },
+            modality: { video: 2 },
+            task: {}
         })
-    })
-
-    it('returns allTags sorted alphabetically and excluding hidden-only tags', async () => {
-        const { getStaticProps } = await import('../../src/pages/index')
-        const { props } = await getStaticProps()
-        expect(props.allTags).toEqual(['health', 'sports', 'video'])
     })
 
     it('attaches an ISO-string mtime to each dataset frontmatter', async () => {

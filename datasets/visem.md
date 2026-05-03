@@ -1,12 +1,16 @@
 ---
-title: 'VISEM'
-desc: 'A Multimodal Video Dataset of Human Spermatozoa.'
+title: VISEM
+desc: A Multimodal Video Dataset of Human Spermatozoa.
 thumbnail: /thumbnails/visem.png
-publication: https://dl.acm.org/doi/10.1145/3304109.3325814
+publication: 'https://dl.acm.org/doi/10.1145/3304109.3325814'
 github: ''
-tags:
+domain:
   - health
+modality:
   - video
+tasks:
+  - classification
+  - tracking
 ---
 
 Real multimedia datasets that contain more than just images or text are rare. Even more rare are open multimedia datasets in medicine. Often, clinically related datasets only consist of image or videos. Here, we present a dataset that is novel in two ways. Firstly, it is a multi-modal dataset containing different data sources such as videos, biological analysis data, and participant data. Secondly, it is the first dataset of that kind in the field of human reproduction. It consists of anonymized data from 85 different participants. We hope this dataset will inspire people to apply their knowledge in this important field, generate shareable results in the domain, and ultimately improve human infertility investigation and treatment.

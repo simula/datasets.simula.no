@@ -1,7 +1,7 @@
 ---
-title: 'Delta Dataset'
-desc: 'Soccer dataset that ships raw HTML and a script payload.'
-tags:
+title: Delta Dataset
+desc: Soccer dataset that ships raw HTML and a script payload.
+domain:
   - sports
 ---
 

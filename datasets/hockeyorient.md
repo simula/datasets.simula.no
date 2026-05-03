@@ -1,13 +1,15 @@
 ---
-title: 'HockeyOrient'
-desc: 'A Dataset for Ice Hockey Player Orientation Classification'
+title: HockeyOrient
+desc: A Dataset for Ice Hockey Player Orientation Classification
 thumbnail: /thumbnails/hockeyOrient.png
-publication: https://dl.acm.org/doi/10.1145/3712676.3718342
-github: https://github.com/acmmmsys/2025-HockeyOrient
+publication: 'https://dl.acm.org/doi/10.1145/3712676.3718342'
+github: 'https://github.com/acmmmsys/2025-HockeyOrient'
 hidden: false
-tags:
+domain:
   - sports
+tasks:
   - pose-estimation
+  - classification
 ---
 
 # HockeyOrient: A Dataset for Ice Hockey Player Orientation Classification

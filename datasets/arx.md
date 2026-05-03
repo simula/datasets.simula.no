@@ -1,12 +1,17 @@
 ---
-title: 'Arx'
-desc: 'A Text-Classification Dataset Consisting of Norwegian Soccer Articles from VG and TV2.'
+title: Arx
+desc: >-
+  A Text-Classification Dataset Consisting of Norwegian Soccer Articles from VG
+  and TV2.
 thumbnail: /thumbnails/arx.jpg
-publication: https://ieeexplore.ieee.org/abstract/document/8877417/
+publication: 'https://ieeexplore.ieee.org/abstract/document/8877417/'
 github: ''
-tags:
+domain:
   - sports
+modality:
   - text
+tasks:
+  - classification
 ---
 
 We are today overwhelmed with information, of which an important part is news. Sports news, in particular, has become very popular, where soccer makes up a big part of this coverage. For sports fans, it can be a time consuming and tedious to keep up with the news that they really

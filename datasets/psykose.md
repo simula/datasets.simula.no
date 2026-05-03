@@ -1,12 +1,16 @@
 ---
-title: 'Psykose'
-desc: 'A Motor Activity Database of Patients with Schizophrenia.'
+title: Psykose
+desc: A Motor Activity Database of Patients with Schizophrenia.
 thumbnail: /thumbnails/psykose.png
-publication: https://ieeexplore.ieee.org/document/9182896
-github: https://osf.io/dgjzu/
-tags:
+publication: 'https://ieeexplore.ieee.org/document/9182896'
+github: 'https://osf.io/dgjzu/'
+domain:
   - health
+modality:
   - sensor
+tasks:
+  - classification
+  - forecasting
 ---
 
 Using sensor data from monitoring devices such as smart-watches or movements collected via mobile phones to predict certain health states or for performance outcomes is a very popular topic in both computer science and medical research. To be able to perform reliable and reproducible research, it is important to share data and results openly. In medicine, this is often difficult due to legal restrictions or due to the fact that data collected from clinical trials is seen as very valuable and something that should be kept "in-house". Therefore we present PSYKOSE, a publicly shared dataset consisting of motor activity. The dataset contains sensor data collected from patients with schizophrenia. In total, we have data from schizophrenia patients with schizophrenia and control persons. For each person in the dataset, we provide sensor data collected over several days in a row. In addition to the sensor data, we also provide some demographic data and medical assessments during the observation period. The schizophrenic state was assessed by medical experts from Haukeland University hospital. In addition to the data, we also provide a baseline analysis and possible use-cases of the dataset.

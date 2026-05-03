@@ -1,8 +1,9 @@
 ---
-title: 'Gamma Dataset'
-desc: 'A soccer video collection.'
-tags:
+title: Gamma Dataset
+desc: A soccer video collection.
+domain:
   - sports
+modality:
   - video
 ---
 

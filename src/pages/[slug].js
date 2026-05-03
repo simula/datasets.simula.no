@@ -2,9 +2,10 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { FiArrowLeft, FiBookOpen, FiGithub } from 'react-icons/fi'
 import DatasetCard from '../components/dataset-card'
-import { findRelatedDatasets, formatMonthYear } from '../utils'
+import { allTagsFor, findRelatedDatasets, formatMonthYear } from '../utils'
 import { loadAllDatasets, loadDataset } from '../utils/datasets'
 import { renderAndSanitize } from '../utils/markdown'
+import { FACETS, TAG_LABEL } from '../data/tags'
 
 const SITE_URL = 'https://datasets.simula.no'
 
@@ -38,7 +39,7 @@ export async function getStaticProps({ params: { slug } }) {
 }
 
 export default function DatasetPage({ slug, frontmatter, html, related }) {
-    const tags = frontmatter.tags || []
+    const tags = allTagsFor(frontmatter)
     const description = frontmatter.desc || ''
 
     const sameAs = [frontmatter.publication, frontmatter.github].filter(Boolean)
@@ -102,16 +103,35 @@ export default function DatasetPage({ slug, frontmatter, html, related }) {
                 )}
 
                 {tags.length > 0 && (
-                    <div className="mt-5 flex flex-wrap gap-1.5">
-                        {tags.map(tag => (
-                            <Link
-                                key={tag}
-                                href={{ pathname: '/', query: { tag } }}
-                                className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700 transition-colors hover:bg-primary hover:text-white focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
-                            >
-                                {tag}
-                            </Link>
-                        ))}
+                    <div className="mt-5 space-y-2">
+                        {FACETS.map(facet => {
+                            const facetTags = frontmatter[facet.field] || []
+                            if (facetTags.length === 0) return null
+                            return (
+                                <div
+                                    key={facet.key}
+                                    className="flex flex-wrap items-center gap-2"
+                                >
+                                    <span className="text-xs font-medium uppercase tracking-wide text-gray-500">
+                                        {facet.label}
+                                    </span>
+                                    <div className="flex flex-wrap gap-1.5">
+                                        {facetTags.map(tag => (
+                                            <Link
+                                                key={tag}
+                                                href={{
+                                                    pathname: '/',
+                                                    query: { [facet.key]: tag }
+                                                }}
+                                                className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700 transition-colors hover:bg-primary hover:text-white focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+                                            >
+                                                {TAG_LABEL[tag] || tag}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </div>
+                            )
+                        })}
                     </div>
                 )}
 

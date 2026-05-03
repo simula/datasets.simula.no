@@ -1,11 +1,12 @@
 ---
-title: 'Alfheim'
-desc: 'Soccer video and player position dataset.'
+title: Alfheim
+desc: Soccer video and player position dataset.
 thumbnail: /thumbnails/alfheim.png
-publication: https://dl.acm.org/doi/10.1145/2557642.2563677
+publication: 'https://dl.acm.org/doi/10.1145/2557642.2563677'
 github: ''
-tags:
+domain:
   - sports
+modality:
   - video
 ---
 

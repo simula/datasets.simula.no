@@ -1,13 +1,19 @@
 ---
-title: 'MedMultiPoints'
-desc: 'A Multimodal Dataset for Object Detection, Localization, and Counting in Medical Imaging'
+title: MedMultiPoints
+desc: >-
+  A Multimodal Dataset for Object Detection, Localization, and Counting in
+  Medical Imaging
 thumbnail: /thumbnails/MedMultiPoints.png
-publication: https://arxiv.org/abs/2505.16647
-github: https://github.com/Simula/PointDetectCount
-tags:
-  - multimodal
-  - detection
+publication: 'https://arxiv.org/abs/2505.16647'
+github: 'https://github.com/Simula/PointDetectCount'
+domain:
   - health
+modality:
+  - multimodal
+tasks:
+  - detection
+  - segmentation
+  - classification
 ---
 
 The **MedMultiPoints** dataset is a curated **multimodal medical imaging benchmark** designed for **multi-task learning**—spanning **object detection**, **localization**, and **counting** tasks.  

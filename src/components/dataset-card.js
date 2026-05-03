@@ -2,8 +2,10 @@ import { memo } from 'react'
 import Link from 'next/link'
 import { FiBookOpen, FiFolder, FiGithub } from 'react-icons/fi'
 import { formatMonthYear } from '../utils'
+import { TAG_CATEGORY, TAG_LABEL } from '../data/tags'
 
 const MAX_TAGS_ON_CARD = 3
+const CATEGORY_TO_FACET = { domain: 'domain', modality: 'modality', task: 'task' }
 
 // Build a webp srcset from /thumbnails/<name>.<ext> →
 // /thumbnails/optimized/<name>-{320,640,960}.webp. Files are emitted by
@@ -22,7 +24,12 @@ const SIZES =
 
 function DatasetCard({ dataset, onTagClick, priority = false }) {
     const { slug, frontmatter } = dataset
-    const tags = frontmatter.tags || []
+    // Domain first, then modality, then tasks — most descriptive first.
+    const tags = [
+        ...(frontmatter.domain || []),
+        ...(frontmatter.modality || []),
+        ...(frontmatter.tasks || []),
+    ]
     const visibleTags = tags.slice(0, MAX_TAGS_ON_CARD)
     const overflowCount = tags.length - visibleTags.length
     const webpSrcSet = frontmatter.thumbnail
@@ -74,20 +81,23 @@ function DatasetCard({ dataset, onTagClick, priority = false }) {
 
             {visibleTags.length > 0 && (
                 <div className="flex flex-wrap gap-1.5 px-4 pt-3">
-                    {visibleTags.map(tag => (
-                        <button
-                            key={tag}
-                            type="button"
-                            onClick={e => {
-                                e.preventDefault()
-                                e.stopPropagation()
-                                onTagClick?.(tag)
-                            }}
-                            className="rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-700 transition-colors hover:bg-primary hover:text-white focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
-                        >
-                            {tag}
-                        </button>
-                    ))}
+                    {visibleTags.map(tag => {
+                        const facet = CATEGORY_TO_FACET[TAG_CATEGORY[tag]]
+                        return (
+                            <button
+                                key={tag}
+                                type="button"
+                                onClick={e => {
+                                    e.preventDefault()
+                                    e.stopPropagation()
+                                    onTagClick?.({ tag, facet })
+                                }}
+                                className="rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-700 transition-colors hover:bg-primary hover:text-white focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+                            >
+                                {TAG_LABEL[tag] || tag}
+                            </button>
+                        )
+                    })}
                     {overflowCount > 0 && (
                         <span className="rounded-full bg-gray-50 px-2 py-0.5 text-xs font-medium text-gray-500">
                             +{overflowCount}

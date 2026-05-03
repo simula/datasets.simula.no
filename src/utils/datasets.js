@@ -18,8 +18,8 @@ export function loadAllDatasets() {
         const filepath = `${dir}/${fileName}`
         const raw = fs.readFileSync(filepath, 'utf-8')
         const stats = fs.statSync(filepath)
-        const { data: frontmatter, content } = matter(raw)
-        validateFrontmatter(slug, frontmatter)
+        const { data: rawFrontmatter, content } = matter(raw)
+        const frontmatter = validateFrontmatter(slug, rawFrontmatter)
         frontmatter.mtime = stats.mtime.toISOString()
         return { slug, frontmatter, content }
     })

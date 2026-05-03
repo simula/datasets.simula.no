@@ -1,12 +1,17 @@
 ---
-title: 'HyperKvasir'
-desc: 'The Largest Gastrointestinal Dataset.'
+title: HyperKvasir
+desc: The Largest Gastrointestinal Dataset.
 thumbnail: /thumbnails/hyperkvasir.jpg
-github: https://github.com/simula/hyper-kvasir
-publication: https://www.nature.com/articles/s41597-020-00622-y
-tags:
+github: 'https://github.com/simula/hyper-kvasir'
+publication: 'https://www.nature.com/articles/s41597-020-00622-y'
+domain:
   - health
+modality:
   - images
+tasks:
+  - classification
+  - segmentation
+  - detection
 ---
 
 ## Dataset Details

@@ -1,11 +1,13 @@
 ---
-title: 'THREAT'
-desc: 'A Large Annotated Corpus for Detection of Violent Threats.'
+title: THREAT
+desc: A Large Annotated Corpus for Detection of Violent Threats.
 thumbnail: /thumbnails/threat.png
 publication: ''
 github: ''
-tags:
+modality:
   - text
+tasks:
+  - classification
 ---
 
 ## Download

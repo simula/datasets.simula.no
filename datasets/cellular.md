@@ -1,12 +1,13 @@
 ---
-title: 'Cellular'
-desc: 'A cell autophagy dataset.'
+title: Cellular
+desc: A cell autophagy dataset.
 thumbnail: /thumbnails/cellular.png
 publication: ''
-github: https://github.com/simula/cellular
+github: 'https://github.com/simula/cellular'
 hidden: false
-tags:
+tasks:
   - segmentation
+  - classification
 ---
 
 ## Dataset Details

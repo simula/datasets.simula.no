@@ -1,13 +1,17 @@
 ---
-title: 'Soccer Summarization'
-desc: 'Soccer game captions and summary in English for game summarization.'
+title: Soccer Summarization
+desc: Soccer game captions and summary in English for game summarization.
 thumbnail: /thumbnails/arx.jpg
-github: https://github.com/simula/soccer-summarization
-publication: https://dl.acm.org/doi/10.1145/3552463.3557019
+github: 'https://github.com/simula/soccer-summarization'
+publication: 'https://dl.acm.org/doi/10.1145/3552463.3557019'
 hidden: false
-tags:
-  - text
+domain:
   - sports
+modality:
+  - text
+tasks:
+  - summarization
+  - captioning
 ---
 
 This page contains information for the datasets mentioned in the paper **[Soccer Game Summarization using Audio Commentary, Metadata, and Captions](https://dl.acm.org/doi/10.1145/3552463.3557019)

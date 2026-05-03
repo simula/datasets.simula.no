@@ -4,6 +4,18 @@ import { test, expect } from '@playwright/test'
 // elements is a stable, semantic way to measure the visible result set.
 const cards = page => page.getByRole('heading', { level: 3 })
 
+// Open the first facet dropdown that has at least one option, return the
+// first option's tag (the on-click writes ?<facet>=<tag> to the URL).
+async function openFirstFacet(page) {
+    const trigger = page
+        .getByRole('button', { expanded: false })
+        .filter({ hasText: /^(Domain|Modality|Task)/ })
+        .first()
+    const facetName = (await trigger.textContent())?.trim().toLowerCase()
+    await trigger.click()
+    return { trigger, facetName }
+}
+
 test.describe('home — filter & search', () => {
     test('renders the full dataset list on first paint', async ({ page }) => {
         await page.goto('/')
@@ -35,7 +47,6 @@ test.describe('home — filter & search', () => {
         await page.goto('/')
         const search = page.getByLabel('Search datasets')
         await search.fill('soccer')
-        // wait for URL to settle
         await expect(page).toHaveURL(/[?&]q=soccer/)
         const filteredCount = await cards(page).count()
         await page.reload()
@@ -43,58 +54,45 @@ test.describe('home — filter & search', () => {
         await expect(cards(page)).toHaveCount(filteredCount)
     })
 
-    test('clicking a tag filters and toggles via URL', async ({ page }) => {
-        await page.goto('/')
-        // Pick the first available filter tag in the bar (aria-pressed
-        // indicates it's a tag toggle button, not a card-internal tag).
-        // The button renders <span>{tag}</span><span>{count}</span>, so
-        // read the tag name from the first child span only.
-        const tagButton = page.locator('button[aria-pressed]').first()
-        const tagName = (
-            await tagButton.locator('span').first().textContent()
-        )?.trim()
-        expect(tagName).toBeTruthy()
-        await tagButton.click()
-        await expect(page).toHaveURL(
-            new RegExp(`[?&]tag=${encodeURIComponent(tagName)}(?:&|$)`)
-        )
-        await expect(tagButton).toHaveAttribute('aria-pressed', 'true')
-
-        // Toggle off — URL drops the tag.
-        await tagButton.click()
-        await expect(page).not.toHaveURL(
-            new RegExp(`tag=${encodeURIComponent(tagName)}`)
-        )
-        await expect(tagButton).toHaveAttribute('aria-pressed', 'false')
-    })
-
-    test('direct URL hit on /?tag=... applies the filter on load', async ({
+    test('selecting a facet option filters and toggles via URL', async ({
         page
     }) => {
-        // First visit / to discover an actual tag in the dataset corpus,
-        // so the test is robust against tag-list changes.
         await page.goto('/')
-        const tagButton = page.locator('button[aria-pressed]').first()
-        const tagName = (
-            await tagButton.locator('span').first().textContent()
-        )?.trim()
-        await tagButton.click()
-        await expect(page).toHaveURL(
-            new RegExp(`tag=${encodeURIComponent(tagName)}`)
-        )
-        const filteredCount = await cards(page).count()
+        const { trigger, facetName } = await openFirstFacet(page)
 
-        // Now hit the URL directly in a fresh navigation. The grid must
-        // converge on the same filtered count once hydration completes.
-        await page.goto(`/?tag=${encodeURIComponent(tagName)}`)
+        // Pick the first available option in the open panel.
+        const option = page.getByRole('option').first()
+        const optionLabel = (await option.textContent())?.trim()
+        expect(optionLabel).toBeTruthy()
+        await option.click()
+
+        // URL gains ?<facet>=<tag>; trigger now shows an active state
+        // (count badge appears alongside the label).
+        await expect(page).toHaveURL(new RegExp(`[?&]${facetName}=`))
+        await expect(trigger).toContainText('1')
+
+        // Re-open and toggle off.
+        await trigger.click()
+        await page.getByRole('option').first().click()
+        await expect(page).not.toHaveURL(new RegExp(`${facetName}=`))
+    })
+
+    test('direct URL hit on /?domain=... applies the filter on load', async ({
+        page
+    }) => {
+        // Discover an actual selected state by clicking through the UI,
+        // then revisit the URL fresh and verify hydration converges.
+        await page.goto('/')
+        const { facetName } = await openFirstFacet(page)
+        const option = page.getByRole('option').first()
+        await option.click()
+
+        await expect(page).toHaveURL(new RegExp(`${facetName}=`))
+        const filteredCount = await cards(page).count()
+        const url = page.url()
+
+        await page.goto(url)
         await expect(cards(page)).toHaveCount(filteredCount)
-        // The matching tag-bar button should reflect the filter as
-        // active, confirming that the URL was actually consumed.
-        await expect(
-            page
-                .locator('button[aria-pressed="true"]')
-                .filter({ hasText: tagName })
-        ).toBeVisible()
     })
 
     test('sort dropdown reorders and updates URL only when non-default', async ({
@@ -102,34 +100,30 @@ test.describe('home — filter & search', () => {
     }) => {
         await page.goto('/')
         const sort = page.getByRole('combobox')
-        // Switching to az puts ?sort=az in URL.
         await sort.selectOption('az')
         await expect(page).toHaveURL(/[?&]sort=az/)
 
-        // Back to the default 'recent' clears the sort param.
         await sort.selectOption('recent')
         await expect(page).not.toHaveURL(/sort=/)
     })
 
-    test('"Clear all" resets search and tags', async ({ page }) => {
+    test('"Clear all" resets search and facet filters', async ({ page }) => {
         await page.goto('/')
-        // Each filter mutation is async (router.replace/push), so wait
-        // for the URL to settle between actions to avoid one update
-        // clobbering the other.
         await page.getByLabel('Search datasets').fill('soccer')
         await expect(page).toHaveURL(/q=soccer/)
-        await page.locator('button[aria-pressed]').first().click()
-        await expect(page).toHaveURL(/q=soccer.*tag=|tag=.*q=soccer/)
+
+        const { facetName } = await openFirstFacet(page)
+        await page.getByRole('option').first().click()
+        await expect(page).toHaveURL(new RegExp(`${facetName}=`))
 
         await page.getByRole('button', { name: 'Clear all' }).click()
         await expect(page).not.toHaveURL(/q=/)
-        await expect(page).not.toHaveURL(/tag=/)
+        await expect(page).not.toHaveURL(new RegExp(`${facetName}=`))
         await expect(page.getByLabel('Search datasets')).toHaveValue('')
     })
 
     test('"/" keyboard shortcut focuses the search input', async ({ page }) => {
         await page.goto('/')
-        // Make sure focus is somewhere outside the input.
         await page.locator('body').click()
         await page.keyboard.press('/')
         await expect(page.getByLabel('Search datasets')).toBeFocused()
@@ -140,10 +134,6 @@ test.describe('home — filter & search', () => {
     }) => {
         await page.goto('/')
         const search = page.getByLabel('Search datasets')
-        // Focus the input directly. The "/" handler in src/pages/index.js
-        // checks `document.activeElement.tagName === 'INPUT'` and returns
-        // early without preventing the default, so the slash should land
-        // in the input as a normal character.
         await search.focus()
         await expect(search).toBeFocused()
         await page.keyboard.press('/')

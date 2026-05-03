@@ -3,8 +3,10 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import { FiSearch, FiX, FiFrown } from 'react-icons/fi'
 import DatasetCard from '../components/dataset-card'
-import { countTags } from '../utils'
+import FacetDropdown from '../components/facet-dropdown'
+import { countFacets } from '../utils'
 import { loadAllDatasets } from '../utils/datasets'
+import { FACETS, TAG_LABEL } from '../data/tags'
 import {
     VALID_SORTS,
     readFilterState,
@@ -12,8 +14,8 @@ import {
     sortDatasets
 } from '../utils/filter'
 
-const TAG_COLLAPSE_THRESHOLD = 12
-const TAG_COLLAPSE_THRESHOLD_MOBILE = 6
+const FACET_KEYS = FACETS.map(f => f.key)
+const EMPTY_FACETS = Object.fromEntries(FACET_KEYS.map(k => [k, []]))
 
 export async function getStaticProps() {
     // Strip `content` — the home page only needs frontmatter, and shipping
@@ -24,31 +26,36 @@ export async function getStaticProps() {
     }))
 
     const visibleDatasets = datasets.filter(d => !d.frontmatter.hidden)
-    const tagCounts = countTags(visibleDatasets)
-    const allTags = Object.keys(tagCounts).sort()
+    const facetCounts = countFacets(visibleDatasets)
 
     return {
         props: {
             datasets,
-            allTags,
-            tagCounts
+            facetCounts
         }
     }
 }
 
-export default function Home({ datasets, allTags, tagCounts }) {
+function readFacetsFromQuery(query) {
+    const out = {}
+    for (const key of FACET_KEYS) {
+        const v = query[key]
+        out[key] = Array.isArray(v) ? v : v ? [v] : []
+    }
+    return out
+}
+
+export default function Home({ datasets, facetCounts }) {
     const router = useRouter()
     const searchInputRef = useRef(null)
 
-    const [showAllTags, setShowAllTags] = useState(false)
-
     // Read URL filters synchronously on the first client render so a
-    // direct hit on /?tag=soccer paints the filtered grid in one pass
+    // direct hit on /?domain=health paints the filtered grid in one pass
     // instead of flashing the unfiltered list. Server (SSG) has no
     // `window` and falls back to defaults — that's the SSG output.
     const [initialFilters] = useState(() =>
         typeof window === 'undefined'
-            ? { q: '', tags: [], sort: 'recent' }
+            ? { q: '', facets: EMPTY_FACETS, sort: 'recent' }
             : readFilterState(window.location.search)
     )
 
@@ -56,20 +63,23 @@ export default function Home({ datasets, allTags, tagCounts }) {
     // Until then, fall back to the URL we read at mount.
     const filters = useMemo(() => {
         if (!router.isReady) return initialFilters
-        const { q, tag, sort: s } = router.query
+        const { q, sort: s } = router.query
         return {
             q: typeof q === 'string' ? q : '',
-            tags: Array.isArray(tag) ? tag : tag ? [tag] : [],
+            facets: readFacetsFromQuery(router.query),
             sort: typeof s === 'string' && VALID_SORTS.includes(s) ? s : 'recent'
         }
     }, [router.isReady, router.query, initialFilters])
-    const { q: searchValue, tags: selectedTags, sort } = filters
+    const { q: searchValue, facets: selectedFacets, sort } = filters
 
     const updateQuery = useCallback(
         (next, mode = 'push') => {
             const query = {}
             if (next.q) query.q = next.q
-            if (next.tags && next.tags.length > 0) query.tag = next.tags
+            for (const key of FACET_KEYS) {
+                const vals = next.facets?.[key]
+                if (vals && vals.length > 0) query[key] = vals
+            }
             if (next.sort && next.sort !== 'recent') query.sort = next.sort
             const nav = mode === 'replace' ? router.replace : router.push
             nav({ pathname: '/', query }, undefined, {
@@ -81,11 +91,11 @@ export default function Home({ datasets, allTags, tagCounts }) {
     )
 
     // Search input updates every keystroke — replace to avoid history spam.
-    // Tag/sort changes are discrete actions — push so back-button walks them.
+    // Facet/sort changes are discrete actions — push so back-button walks them.
     const setSearchValue = q =>
-        updateQuery({ q, tags: selectedTags, sort }, 'replace')
+        updateQuery({ q, facets: selectedFacets, sort }, 'replace')
     const setSort = s =>
-        updateQuery({ q: searchValue, tags: selectedTags, sort: s })
+        updateQuery({ q: searchValue, facets: selectedFacets, sort: s })
 
     // '/' keyboard shortcut to focus search
     useEffect(() => {
@@ -117,36 +127,47 @@ export default function Home({ datasets, allTags, tagCounts }) {
                 filterDatasets({
                     datasets: visibleDatasets,
                     search: searchValue,
-                    tags: selectedTags
+                    facets: selectedFacets
                 }),
                 sort
             ),
-        [visibleDatasets, searchValue, selectedTags, sort]
+        [visibleDatasets, searchValue, selectedFacets, sort]
     )
 
     const handleClearSearch = () => setSearchValue('')
 
-    // Stable identity so DatasetCard's React.memo holds across renders.
-    // selectedTags moves through filters via the router, not closure, so
-    // we read it fresh from a ref-style ladder via filters above.
-    const handleTagClick = useCallback(
-        tag => {
-            const next = selectedTags.includes(tag)
-                ? selectedTags.filter(t => t !== tag)
-                : [...selectedTags, tag]
-            updateQuery({ q: searchValue, tags: next, sort })
+    const setFacet = useCallback(
+        (key, vals) => {
+            updateQuery({
+                q: searchValue,
+                facets: { ...selectedFacets, [key]: vals },
+                sort
+            })
         },
-        [selectedTags, searchValue, sort, updateQuery]
+        [searchValue, selectedFacets, sort, updateQuery]
+    )
+
+    // Card pills click: route the click through the right facet param.
+    const handleTagClick = useCallback(
+        ({ tag, facet }) => {
+            const current = selectedFacets[facet] || []
+            const next = current.includes(tag)
+                ? current.filter(t => t !== tag)
+                : [...current, tag]
+            setFacet(facet, next)
+        },
+        [selectedFacets, setFacet]
     )
 
     const handleClearAll = () => {
-        updateQuery({ q: '', tags: [], sort })
+        updateQuery({ q: '', facets: EMPTY_FACETS, sort })
     }
 
-    const tagsToRender = showAllTags
-        ? allTags
-        : allTags.slice(0, TAG_COLLAPSE_THRESHOLD)
-    const hasFilters = searchValue || selectedTags.length > 0
+    const totalSelected = FACET_KEYS.reduce(
+        (n, k) => n + (selectedFacets[k]?.length || 0),
+        0
+    )
+    const hasFilters = searchValue || totalSelected > 0
 
     return (
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -159,19 +180,19 @@ export default function Home({ datasets, allTags, tagCounts }) {
             </Head>
 
             {/* Hero */}
-            <div className="mb-8 text-center">
-                <h1 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+            <div className="mb-6 text-center sm:mb-8">
+                <h1 className="text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
                     Simula Datasets
                 </h1>
                 <div className="mx-auto mt-3 h-1 w-12 bg-primary" aria-hidden="true" />
-                <p className="mx-auto mt-5 max-w-2xl text-lg text-gray-600">
+                <p className="mx-auto mt-4 max-w-2xl text-base text-gray-600 sm:mt-5 sm:text-lg">
                     Browse {visibleDatasets.length} research datasets gathered and
                     published by Simula Research Laboratory and SimulaMet.
                 </p>
             </div>
 
             {/* Sticky filter bar */}
-            <div className="sticky top-0 z-10 -mx-4 mb-6 bg-white/95 px-4 py-4 backdrop-blur sm:-mx-6 sm:px-6">
+            <div className="sticky top-0 z-10 -mx-4 mb-6 bg-white/95 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6 sm:py-4">
                 {/* Search input */}
                 <div>
                     <label htmlFor="search-input" className="sr-only">
@@ -209,100 +230,72 @@ export default function Home({ datasets, allTags, tagCounts }) {
                     </div>
                 </div>
 
-                {/* Tag filters */}
-                <div className="mt-4 flex flex-wrap justify-center gap-2">
-                    {tagsToRender.map((tag, i) => {
-                        const isActive = selectedTags.includes(tag)
-                        const hideOnMobile =
-                            !showAllTags && i >= TAG_COLLAPSE_THRESHOLD_MOBILE
-                        return (
-                            <button
-                                key={tag}
-                                onClick={() => handleTagClick(tag)}
-                                aria-pressed={isActive}
-                                className={`items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
-                                    hideOnMobile
-                                        ? 'hidden sm:inline-flex'
-                                        : 'inline-flex'
-                                } ${
-                                    isActive
-                                        ? 'border-primary bg-primary text-white'
-                                        : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:bg-gray-50'
-                                }`}
-                            >
-                                <span>{tag}</span>
-                                <span
-                                    className={`text-xs ${
-                                        isActive ? 'text-white/80' : 'text-gray-400'
-                                    }`}
-                                >
-                                    {tagCounts[tag]}
-                                </span>
-                            </button>
-                        )
-                    })}
-                    {allTags.length > TAG_COLLAPSE_THRESHOLD_MOBILE && (
-                        <button
-                            onClick={() => setShowAllTags(s => !s)}
-                            className={`inline-flex items-center rounded-full border border-dashed border-gray-300 px-3 py-1.5 text-sm text-gray-600 hover:border-primary hover:text-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2${
-                                allTags.length <= TAG_COLLAPSE_THRESHOLD
-                                    ? ' sm:hidden'
-                                    : ''
-                            }`}
+                {/* Facet dropdowns + sort/clear, all on one controls row */}
+                <div className="mt-3 flex flex-wrap items-center justify-between gap-x-3 gap-y-2 sm:mt-4">
+                    <div className="flex flex-wrap items-center gap-2">
+                        {FACETS.map(facet => {
+                            const counts = facetCounts[facet.key] || {}
+                            const options = facet.tags.map(tag => ({
+                                tag,
+                                label: TAG_LABEL[tag] || tag,
+                                count: counts[tag] || 0
+                            }))
+                            return (
+                                <FacetDropdown
+                                    key={facet.key}
+                                    label={facet.label}
+                                    options={options}
+                                    selected={selectedFacets[facet.key] || []}
+                                    onChange={vals => setFacet(facet.key, vals)}
+                                />
+                            )
+                        })}
+                    </div>
+                    <label className="flex items-center gap-2 text-sm text-gray-600">
+                        <span>Sort</span>
+                        <select
+                            value={sort}
+                            onChange={e => setSort(e.target.value)}
+                            className="min-h-9 rounded-md border border-gray-300 bg-white px-2 py-1.5 text-sm focus:border-primary focus:outline-hidden focus:ring-2 focus:ring-primary/20"
                         >
-                            {showAllTags
-                                ? 'Show less'
-                                : `Show all (${allTags.length})`}
-                        </button>
-                    )}
+                            <option value="recent">Recently updated</option>
+                            <option value="az">Title A–Z</option>
+                            <option value="za">Title Z–A</option>
+                        </select>
+                    </label>
                 </div>
 
-                {/* Results count + sort + clear */}
-                <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                    <p
-                        className="text-sm text-gray-500"
-                        role="status"
-                        aria-live="polite"
-                    >
+                {/* Results status line + clear */}
+                <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-gray-500">
+                    <p role="status" aria-live="polite">
                         Showing <span className="font-medium text-gray-900">{filteredDatasets.length}</span> of{' '}
                         {visibleDatasets.length} datasets
-                        {selectedTags.length > 0 && (
+                        {totalSelected > 0 && (
                             <>
-                                {' '}
-                                tagged{' '}
-                                {selectedTags.map((t, i) => (
-                                    <span key={t}>
-                                        {i > 0 && ' + '}
-                                        <span className="font-medium text-gray-900">
-                                            {t}
+                                {' '}filtered by{' '}
+                                {FACETS.flatMap(f =>
+                                    (selectedFacets[f.key] || []).map(t => (
+                                        <span
+                                            key={`${f.key}:${t}`}
+                                            className="font-medium text-gray-900"
+                                        >
+                                            {TAG_LABEL[t] || t}
                                         </span>
-                                    </span>
-                                ))}
+                                    ))
+                                ).reduce((acc, el, i) =>
+                                    i === 0 ? [el] : [...acc, ', ', el], []
+                                )}
                             </>
                         )}
                     </p>
-                    <div className="flex items-center gap-3">
-                        {hasFilters && (
-                            <button
-                                onClick={handleClearAll}
-                                className="text-sm text-gray-500 underline-offset-2 hover:text-primary hover:underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-                            >
-                                Clear all
-                            </button>
-                        )}
-                        <label className="flex items-center gap-2 text-sm text-gray-600">
-                            <span>Sort</span>
-                            <select
-                                value={sort}
-                                onChange={e => setSort(e.target.value)}
-                                className="rounded-md border border-gray-300 bg-white px-2 py-1.5 text-sm focus:border-primary focus:outline-hidden focus:ring-2 focus:ring-primary/20"
-                            >
-                                <option value="recent">Recently updated</option>
-                                <option value="az">Title A–Z</option>
-                                <option value="za">Title Z–A</option>
-                            </select>
-                        </label>
-                    </div>
+                    {hasFilters && (
+                        <button
+                            onClick={handleClearAll}
+                            className="underline-offset-2 hover:text-primary hover:underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                        >
+                            Clear all
+                        </button>
+                    )}
                 </div>
             </div>
 

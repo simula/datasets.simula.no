@@ -11,7 +11,9 @@ const baseDataset = {
         thumbnail: '/thumbnails/alpha.png',
         publication: 'https://example.com/alpha-paper',
         github: 'https://github.com/example/alpha',
-        tags: ['medical', 'video'],
+        domain: ['health'],
+        modality: ['video'],
+        tasks: [],
         mtime: '2024-06-15T12:00:00Z'
     }
 }
@@ -86,39 +88,56 @@ describe('DatasetCard', () => {
         )
     })
 
-    it('renders up to 3 tag buttons and an overflow chip when there are more', () => {
-        const dataset = make({ tags: ['a', 'b', 'c', 'd', 'e'] })
+    it('renders up to 3 tag buttons across all facets and an overflow chip when there are more', () => {
+        const dataset = make({
+            domain: ['health', 'sports'],
+            modality: ['video', 'images'],
+            tasks: ['segmentation']
+        })
         render(<DatasetCard dataset={dataset} />)
-        expect(screen.getByRole('button', { name: 'a' })).toBeInTheDocument()
-        expect(screen.getByRole('button', { name: 'b' })).toBeInTheDocument()
-        expect(screen.getByRole('button', { name: 'c' })).toBeInTheDocument()
-        expect(screen.queryByRole('button', { name: 'd' })).toBeNull()
+        // Domain first, then modality, then tasks. So first 3 visible
+        // are: health, sports, video. Labels are the friendly form.
+        expect(
+            screen.getByRole('button', { name: 'Health & medical' })
+        ).toBeInTheDocument()
+        expect(screen.getByRole('button', { name: 'Sports' })).toBeInTheDocument()
+        expect(screen.getByRole('button', { name: 'Video' })).toBeInTheDocument()
+        expect(screen.queryByRole('button', { name: 'Images' })).toBeNull()
         expect(screen.getByText('+2')).toBeInTheDocument()
     })
 
-    it('does not show the overflow chip when there are 3 or fewer tags', () => {
-        const dataset = make({ tags: ['a', 'b', 'c'] })
+    it('does not show the overflow chip when there are 3 or fewer tags total', () => {
+        const dataset = make({
+            domain: ['health'],
+            modality: ['video'],
+            tasks: ['segmentation']
+        })
         render(<DatasetCard dataset={dataset} />)
         expect(screen.queryByText(/^\+\d/)).toBeNull()
     })
 
-    it('omits the tag bar entirely when there are no tags', () => {
-        const dataset = make({ tags: [] })
+    it('omits the tag bar entirely when there are no tags in any facet', () => {
+        const dataset = make({ domain: [], modality: [], tasks: [] })
         render(<DatasetCard dataset={dataset} />)
         // No tag buttons render at all.
         const buttons = screen.queryAllByRole('button')
         expect(buttons).toHaveLength(0)
     })
 
-    it('calls onTagClick(tag) when a tag button is clicked', async () => {
+    it('calls onTagClick({ tag, facet }) when a tag button is clicked', async () => {
         const onTagClick = vi.fn()
         const user = userEvent.setup()
         render(
             <DatasetCard dataset={baseDataset} onTagClick={onTagClick} />
         )
 
-        await user.click(screen.getByRole('button', { name: 'medical' }))
-        expect(onTagClick).toHaveBeenCalledWith('medical')
+        await user.click(
+            screen.getByRole('button', { name: 'Health & medical' })
+        )
+        expect(onTagClick).toHaveBeenCalledWith({
+            tag: 'health',
+            facet: 'domain'
+        })
         expect(onTagClick).toHaveBeenCalledTimes(1)
     })
 
@@ -126,7 +145,9 @@ describe('DatasetCard', () => {
         const user = userEvent.setup()
         render(<DatasetCard dataset={baseDataset} />)
         await expect(
-            user.click(screen.getByRole('button', { name: 'medical' }))
+            user.click(
+                screen.getByRole('button', { name: 'Health & medical' })
+            )
         ).resolves.not.toThrow()
     })
 

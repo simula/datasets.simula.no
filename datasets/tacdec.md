@@ -1,13 +1,17 @@
 ---
-title: 'TACDEC'
+title: TACDEC
 desc: 'TACDEC: Dataset of Tackle Events in Soccer Game Videos'
-thumbnail: '/thumbnails/arx.jpg'
-publication: https://doi.org/10.1145/3625468.3652166
-github: https://github.com/simula/tacdec
+thumbnail: /thumbnails/arx.jpg
+publication: 'https://doi.org/10.1145/3625468.3652166'
+github: 'https://github.com/simula/tacdec'
 hidden: false
-tags:
+domain:
   - sports
+modality:
   - video
+tasks:
+  - detection
+  - classification
 ---
 
 # TACDEC Dataset

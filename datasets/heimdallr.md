@@ -1,11 +1,12 @@
 ---
-title: 'Heimdallr'
-desc: 'A Dataset For Sport Analysis.'
+title: Heimdallr
+desc: A Dataset For Sport Analysis.
 thumbnail: /thumbnails/heimdallr.png
 publication: ''
 github: ''
-tags:
+domain:
   - sports
+modality:
   - video
 ---
 

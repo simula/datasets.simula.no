@@ -1,11 +1,16 @@
 ---
 title: 'PMData '
-desc: 'A lifelogging dataset of 16 persons during 5 months using Fitbit, Google Forms and PMSys.'
+desc: >-
+  A lifelogging dataset of 16 persons during 5 months using Fitbit, Google Forms
+  and PMSys.
 thumbnail: /thumbnails/pmdata.jpg
-publication: https://dl.acm.org/doi/10.1145/3339825.3394926
-github: https://osf.io/vx4bk/
-tags:
+publication: 'https://dl.acm.org/doi/10.1145/3339825.3394926'
+github: 'https://osf.io/vx4bk/'
+modality:
   - sensor
+tasks:
+  - forecasting
+  - classification
 ---
 
 The PMData dataset that aims to combine the traditional lifelogging with sports activity logging. Such a dataset enables the development of several interesting analysis applications, e.g., where additional sports data can be used to predict and analyze everyday developments like a person's weight and sleep patterns, and where traditional lifelog data can be used in a sports context to predict an athletes performance. In this respect, we have used the Fitbit Versa 2 smartwatch wristband, the PMSys sports logging app, and Google forms for the data collection. PMData contains logging data of 16 persons from a period of 5 months.

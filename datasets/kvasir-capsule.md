@@ -1,12 +1,16 @@
 ---
-title: 'Kvasir Capsule'
-desc: 'The largest gastrointestinal PillCAM dataset.'
+title: Kvasir Capsule
+desc: The largest gastrointestinal PillCAM dataset.
 thumbnail: /thumbnails/kvasir-capsule.png
-publication: https://www.nature.com/articles/s41597-021-00920-z
-github: https://github.com/simula/kvasir-capsule
-tags:
+publication: 'https://www.nature.com/articles/s41597-021-00920-z'
+github: 'https://github.com/simula/kvasir-capsule'
+domain:
   - health
+modality:
   - images
+tasks:
+  - classification
+  - detection
 ---
 
 This is the official repository for the Kvasir-Capsule dataset, which is the largest publicly released PillCAM dataset. In total, the dataset contains 47,238 labeled images and 117 videos, where it captures anatomical landmarks and pathological and normal findings. The results is more than 4,741,621 images and video frames all together.

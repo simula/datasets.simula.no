@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { ALLOWED_TAGS } from '../data/tags.js'
+import { DOMAIN_TAGS, MODALITY_TAGS, TASK_TAGS } from '../data/tags.js'
 
 // Schema for dataset frontmatter (the YAML block at the top of each
 // datasets/<slug>.md file). Enforced by loadAllDatasets() and by the
@@ -23,17 +23,21 @@ export const datasetFrontmatterSchema = z
         thumbnail: z.string().min(1).optional(),
         publication: optionalUrlOrEmpty,
         github: optionalUrlOrEmpty,
-        tags: z
-            .array(z.enum(ALLOWED_TAGS))
-            .min(1, 'at least one tag is required'),
+        domain: z.array(z.enum(DOMAIN_TAGS)).default([]),
+        modality: z.array(z.enum(MODALITY_TAGS)).default([]),
+        tasks: z.array(z.enum(TASK_TAGS)).default([]),
         hidden: z.boolean().optional(),
     })
     .strict()
+    .refine(d => d.domain.length + d.modality.length + d.tasks.length > 0, {
+        message: 'at least one tag is required (domain, modality, or task)',
+        path: ['domain'],
+    })
 
 export function validateFrontmatter(slug, frontmatter) {
     const { mtime: _mtime, ...rest } = frontmatter
     const result = datasetFrontmatterSchema.safeParse(rest)
-    if (result.success) return
+    if (result.success) return result.data
     const issues = result.error.issues
         .map(i => `  - ${i.path.join('.') || '(root)'}: ${i.message}`)
         .join('\n')

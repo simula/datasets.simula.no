@@ -1,12 +1,13 @@
 ---
-title: 'HockeyAI'
-desc: 'A Multi-Class Ice Hockey Dataset for Object Detection'
+title: HockeyAI
+desc: A Multi-Class Ice Hockey Dataset for Object Detection
 thumbnail: /thumbnails/hockeyai.jpeg
-publication: https://dl.acm.org/doi/10.1145/3712676.3718335
-github: https://github.com/acmmmsys/2025-HockeyAI
+publication: 'https://dl.acm.org/doi/10.1145/3712676.3718335'
+github: 'https://github.com/acmmmsys/2025-HockeyAI'
 hidden: false
-tags:
+domain:
   - sports
+tasks:
   - detection
 ---
 

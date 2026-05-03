@@ -1,11 +1,15 @@
 ---
-title: 'European Cloud Cover'
-desc: 'A dataset containing reanalysis data from ERA5 and satellite retrievals from METeosat Second Generation.'
+title: European Cloud Cover
+desc: >-
+  A dataset containing reanalysis data from ERA5 and satellite retrievals from
+  METeosat Second Generation.
 thumbnail: /thumbnails/european-cloud-cover.jpg
-publication: https://www.mdpi.com/2504-2289/5/4/62/pdf
-github: https://osf.io/kqdgx/
-tags:
+publication: 'https://www.mdpi.com/2504-2289/5/4/62/pdf'
+github: 'https://osf.io/kqdgx/'
+modality:
   - sensor
+tasks:
+  - forecasting
 ---
 
 Climate change is stated as one of the biggest challenges of our time resulting in many unwanted effects. The response of cloud fractional cover (CFC), i.e. the portion of the sky covered by clouds, to future climate is associated with high uncertainties. CFC will affect the rate of global warming and different parts of the society such as agriculture and solar energy production.

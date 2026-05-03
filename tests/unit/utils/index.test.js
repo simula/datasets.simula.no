@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
     formatMonthYear,
-    countTags,
+    countFacets,
     findRelatedDatasets
 } from '../../../src/utils/index'
 
@@ -37,81 +37,101 @@ describe('formatMonthYear', () => {
     })
 })
 
-describe('countTags', () => {
-    it('returns an empty object for an empty array', () => {
-        expect(countTags([])).toEqual({})
+describe('countFacets', () => {
+    const empty = { domain: {}, modality: {}, task: {} }
+
+    it('returns empty per-facet objects for an empty array', () => {
+        expect(countFacets([])).toEqual(empty)
     })
 
-    it('returns an empty object when no datasets carry tags', () => {
+    it('returns empty per-facet objects when no datasets carry tags', () => {
         const datasets = [
             { frontmatter: { title: 'A' } },
-            { frontmatter: { title: 'B', tags: [] } }
+            { frontmatter: { title: 'B', domain: [], modality: [], tasks: [] } }
         ]
-        expect(countTags(datasets)).toEqual({})
+        expect(countFacets(datasets)).toEqual(empty)
     })
 
-    it('counts repeated tags across datasets', () => {
+    it('counts repeated tags within their facet', () => {
         const datasets = [
-            { frontmatter: { tags: ['medical', 'video'] } },
-            { frontmatter: { tags: ['medical'] } },
-            { frontmatter: { tags: ['video', 'soccer'] } }
+            { frontmatter: { domain: ['health'], modality: ['video'] } },
+            { frontmatter: { domain: ['health'], modality: ['images'] } },
+            { frontmatter: { domain: ['sports'], modality: ['video'] } }
         ]
-        expect(countTags(datasets)).toEqual({
-            medical: 2,
-            video: 2,
-            soccer: 1
+        expect(countFacets(datasets)).toEqual({
+            domain: { health: 2, sports: 1 },
+            modality: { video: 2, images: 1 },
+            task: {}
         })
     })
 
-    it('treats missing tags as no contribution', () => {
+    it('treats missing facet arrays as no contribution', () => {
         const datasets = [
-            { frontmatter: { tags: ['a'] } },
-            { frontmatter: {} }, // tags undefined
-            { frontmatter: { tags: ['a', 'b'] } }
+            { frontmatter: { domain: ['health'] } },
+            { frontmatter: {} },
+            { frontmatter: { domain: ['health', 'sports'], tasks: ['vqa'] } }
         ]
-        expect(countTags(datasets)).toEqual({ a: 2, b: 1 })
+        expect(countFacets(datasets)).toEqual({
+            domain: { health: 2, sports: 1 },
+            modality: {},
+            task: { vqa: 1 }
+        })
     })
 })
 
 describe('findRelatedDatasets', () => {
-    const mk = (slug, tags, { hidden = false } = {}) => ({
+    const mk = (slug, { domain = [], modality = [], tasks = [], hidden = false } = {}) => ({
         slug,
-        frontmatter: { title: slug, tags, hidden }
+        frontmatter: { title: slug, domain, modality, tasks, hidden }
     })
 
-    it('returns [] when the target has no tags', () => {
-        const target = mk('target', [])
-        const all = [mk('a', ['x']), mk('b', ['y'])]
+    it('returns [] when the target has no tags across any facet', () => {
+        const target = mk('target')
+        const all = [mk('a', { domain: ['health'] }), mk('b', { modality: ['video'] })]
         expect(findRelatedDatasets(target, all)).toEqual([])
     })
 
-    it('returns [] when the target has undefined tags', () => {
+    it('returns [] when the target has no facet fields at all', () => {
         const target = { slug: 'target', frontmatter: { title: 'target' } }
-        const all = [mk('a', ['x'])]
+        const all = [mk('a', { domain: ['health'] })]
         expect(findRelatedDatasets(target, all)).toEqual([])
     })
 
     it('excludes the target itself by slug', () => {
-        const target = mk('target', ['a'])
-        const all = [mk('target', ['a']), mk('other', ['a'])]
+        const target = mk('target', { domain: ['health'] })
+        const all = [
+            mk('target', { domain: ['health'] }),
+            mk('other', { domain: ['health'] })
+        ]
         const result = findRelatedDatasets(target, all)
         expect(result).toHaveLength(1)
         expect(result[0].slug).toBe('other')
     })
 
     it('excludes hidden datasets', () => {
-        const target = mk('target', ['a'])
-        const all = [mk('vis', ['a']), mk('hid', ['a'], { hidden: true })]
+        const target = mk('target', { domain: ['health'] })
+        const all = [
+            mk('vis', { domain: ['health'] }),
+            mk('hid', { domain: ['health'], hidden: true })
+        ]
         const result = findRelatedDatasets(target, all)
         expect(result.map(d => d.slug)).toEqual(['vis'])
     })
 
-    it('sorts by tag-overlap descending', () => {
-        const target = mk('target', ['a', 'b', 'c'])
+    it('sorts by overlap descending across all facets combined', () => {
+        const target = mk('target', {
+            domain: ['health'],
+            modality: ['video'],
+            tasks: ['segmentation']
+        })
         const all = [
-            mk('one-overlap', ['a', 'z']),
-            mk('three-overlap', ['a', 'b', 'c']),
-            mk('two-overlap', ['a', 'b', 'z'])
+            mk('one-overlap', { domain: ['health'] }),
+            mk('three-overlap', {
+                domain: ['health'],
+                modality: ['video'],
+                tasks: ['segmentation']
+            }),
+            mk('two-overlap', { domain: ['health'], modality: ['video'] })
         ]
         const result = findRelatedDatasets(target, all)
         expect(result.map(d => d.slug)).toEqual([
@@ -122,31 +142,34 @@ describe('findRelatedDatasets', () => {
     })
 
     it('respects the limit argument', () => {
-        const target = mk('target', ['a'])
+        const target = mk('target', { domain: ['health'] })
         const all = [
-            mk('one', ['a']),
-            mk('two', ['a']),
-            mk('three', ['a']),
-            mk('four', ['a'])
+            mk('one', { domain: ['health'] }),
+            mk('two', { domain: ['health'] }),
+            mk('three', { domain: ['health'] }),
+            mk('four', { domain: ['health'] })
         ]
         expect(findRelatedDatasets(target, all, 2)).toHaveLength(2)
         expect(findRelatedDatasets(target, all, 1)).toHaveLength(1)
     })
 
     it('defaults the limit to 3', () => {
-        const target = mk('target', ['a'])
+        const target = mk('target', { domain: ['health'] })
         const all = [
-            mk('one', ['a']),
-            mk('two', ['a']),
-            mk('three', ['a']),
-            mk('four', ['a'])
+            mk('one', { domain: ['health'] }),
+            mk('two', { domain: ['health'] }),
+            mk('three', { domain: ['health'] }),
+            mk('four', { domain: ['health'] })
         ]
         expect(findRelatedDatasets(target, all)).toHaveLength(3)
     })
 
-    it('returns [] when no candidate shares any tag', () => {
-        const target = mk('target', ['a'])
-        const all = [mk('x', ['b']), mk('y', ['c'])]
+    it('returns [] when no candidate shares any tag in any facet', () => {
+        const target = mk('target', { domain: ['health'] })
+        const all = [
+            mk('x', { domain: ['sports'] }),
+            mk('y', { modality: ['text'] })
+        ]
         expect(findRelatedDatasets(target, all)).toEqual([])
     })
 })

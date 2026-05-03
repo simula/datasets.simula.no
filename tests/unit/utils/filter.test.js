@@ -14,10 +14,14 @@ describe('VALID_SORTS', () => {
 
 describe('readFilterState', () => {
     it('returns defaults for empty/undefined input', () => {
-        expect(readFilterState('')).toEqual({ q: '', tags: [], sort: 'recent' })
+        expect(readFilterState('')).toEqual({
+            q: '',
+            facets: { domain: [], modality: [], task: [] },
+            sort: 'recent'
+        })
         expect(readFilterState(undefined)).toEqual({
             q: '',
-            tags: [],
+            facets: { domain: [], modality: [], task: [] },
             sort: 'recent'
         })
     })
@@ -34,12 +38,18 @@ describe('readFilterState', () => {
         expect(readFilterState('?q=hello%20world').q).toBe('hello world')
     })
 
-    it('collects multiple tag params into an array', () => {
-        expect(readFilterState('?tag=a&tag=b').tags).toEqual(['a', 'b'])
+    it('collects multiple values per facet param into an array', () => {
+        const { facets } = readFilterState(
+            '?domain=health&domain=sports&modality=video'
+        )
+        expect(facets.domain).toEqual(['health', 'sports'])
+        expect(facets.modality).toEqual(['video'])
+        expect(facets.task).toEqual([])
     })
 
-    it('returns an empty tags array when no tag params are present', () => {
-        expect(readFilterState('?q=foo').tags).toEqual([])
+    it('returns empty arrays per facet when no facet params are present', () => {
+        const { facets } = readFilterState('?q=foo')
+        expect(facets).toEqual({ domain: [], modality: [], task: [] })
     })
 
     it('accepts each valid sort value', () => {
@@ -52,14 +62,20 @@ describe('readFilterState', () => {
         expect(readFilterState('?sort=garbage').sort).toBe('recent')
     })
 
-    it('parses combined q + multiple tags + sort together', () => {
-        expect(readFilterState('?q=cats&tag=medical&tag=video&sort=az')).toEqual(
-            {
-                q: 'cats',
-                tags: ['medical', 'video'],
-                sort: 'az'
-            }
-        )
+    it('parses combined q + facets + sort together', () => {
+        expect(
+            readFilterState(
+                '?q=cats&domain=health&modality=video&task=segmentation&sort=az'
+            )
+        ).toEqual({
+            q: 'cats',
+            facets: {
+                domain: ['health'],
+                modality: ['video'],
+                task: ['segmentation']
+            },
+            sort: 'az'
+        })
     })
 })
 
@@ -69,30 +85,40 @@ describe('filterDatasets', () => {
         ds('alpha', {
             title: 'Alpha',
             desc: 'medical video benchmark',
-            tags: ['medical', 'video']
+            domain: ['health'],
+            modality: ['video'],
+            tasks: []
         }),
         ds('beta', {
             title: 'Beta',
             desc: 'soccer dataset',
-            tags: ['soccer', 'video']
+            domain: ['sports'],
+            modality: ['video'],
+            tasks: []
         }),
         ds('gamma', {
             title: 'Gamma',
             desc: 'pure text corpus',
-            tags: ['text']
+            domain: [],
+            modality: ['text'],
+            tasks: []
         }),
         ds('delta', {
             title: 'Delta',
             desc: 'kitchen sink',
-            tags: ['medical', 'soccer', 'video']
+            domain: ['health', 'sports'],
+            modality: ['video'],
+            tasks: ['segmentation']
         })
     ]
+
+    const noFacets = { domain: [], modality: [], task: [] }
 
     it('returns all datasets when no filters are active', () => {
         const result = filterDatasets({
             datasets: sample,
             search: '',
-            tags: []
+            facets: noFacets
         })
         expect(result.map(d => d.slug)).toEqual([
             'alpha',
@@ -102,26 +128,46 @@ describe('filterDatasets', () => {
         ])
     })
 
-    it('treats undefined search/tags the same as empty', () => {
+    it('treats undefined search/facets the same as empty', () => {
         const result = filterDatasets({ datasets: sample })
         expect(result).toHaveLength(sample.length)
     })
 
-    it('applies tags as set-intersection (AND, not OR)', () => {
+    it('treats multiple values within a facet as OR', () => {
         const result = filterDatasets({
             datasets: sample,
-            search: '',
-            tags: ['medical', 'video']
+            facets: { ...noFacets, domain: ['health', 'sports'] }
         })
-        // Only alpha and delta have BOTH medical and video.
-        expect(result.map(d => d.slug)).toEqual(['alpha', 'delta'])
+        // All datasets with EITHER domain (alpha=health, beta=sports,
+        // delta=both). Gamma has no domain so it's excluded.
+        expect(result.map(d => d.slug).sort()).toEqual([
+            'alpha',
+            'beta',
+            'delta'
+        ])
     })
 
-    it('returns no results when a tag matches nothing', () => {
+    it('treats selections across facets as AND', () => {
         const result = filterDatasets({
             datasets: sample,
-            search: '',
-            tags: ['medical', 'text']
+            facets: {
+                domain: ['health'],
+                modality: ['video'],
+                task: []
+            }
+        })
+        // Need health in domain AND video in modality. Alpha and delta qualify.
+        expect(result.map(d => d.slug).sort()).toEqual(['alpha', 'delta'])
+    })
+
+    it('returns no results when an across-facet AND matches nothing', () => {
+        const result = filterDatasets({
+            datasets: sample,
+            facets: {
+                domain: ['health'],
+                modality: ['text'],
+                task: []
+            }
         })
         expect(result).toEqual([])
     })
@@ -130,7 +176,7 @@ describe('filterDatasets', () => {
         const result = filterDatasets({
             datasets: sample,
             search: 'ALPHA',
-            tags: []
+            facets: noFacets
         })
         expect(result.map(d => d.slug)).toEqual(['alpha'])
     })
@@ -139,18 +185,19 @@ describe('filterDatasets', () => {
         const result = filterDatasets({
             datasets: sample,
             search: 'soccer',
-            tags: []
+            facets: noFacets
         })
-        // beta.desc and delta.tags both include "soccer".
-        expect(result.map(d => d.slug).sort()).toEqual(['beta', 'delta'])
+        expect(result.map(d => d.slug)).toEqual(['beta'])
     })
 
-    it('matches search against tag names', () => {
+    it('matches search against tag names across all facets', () => {
         const result = filterDatasets({
             datasets: sample,
             search: 'text',
-            tags: []
+            facets: noFacets
         })
+        // Gamma has modality=text. Also any other dataset whose
+        // title/desc/tags contain "text" — none here.
         expect(result.map(d => d.slug)).toEqual(['gamma'])
     })
 
@@ -158,16 +205,16 @@ describe('filterDatasets', () => {
         const result = filterDatasets({
             datasets: sample,
             search: '   alpha   ',
-            tags: []
+            facets: noFacets
         })
         expect(result.map(d => d.slug)).toEqual(['alpha'])
     })
 
-    it('combines search and tags (both must match)', () => {
+    it('combines search and facets (both must match)', () => {
         const result = filterDatasets({
             datasets: sample,
             search: 'kitchen',
-            tags: ['medical', 'soccer']
+            facets: { ...noFacets, task: ['segmentation'] }
         })
         expect(result.map(d => d.slug)).toEqual(['delta'])
     })
@@ -175,11 +222,18 @@ describe('filterDatasets', () => {
     it('handles datasets without a desc field gracefully', () => {
         const noDesc = [{ slug: 'x', frontmatter: { title: 'No Desc Here' } }]
         expect(
-            filterDatasets({ datasets: noDesc, search: 'desc', tags: [] })
-                .map(d => d.slug)
+            filterDatasets({
+                datasets: noDesc,
+                search: 'desc',
+                facets: noFacets
+            }).map(d => d.slug)
         ).toEqual(['x'])
         expect(
-            filterDatasets({ datasets: noDesc, search: 'unrelated', tags: [] })
+            filterDatasets({
+                datasets: noDesc,
+                search: 'unrelated',
+                facets: noFacets
+            })
         ).toEqual([])
     })
 })
