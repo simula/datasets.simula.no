@@ -50,20 +50,20 @@ describe('home page getStaticProps', () => {
     it('counts tags only across visible datasets (excludes hidden)', async () => {
         const { getStaticProps } = await import('../../src/pages/index')
         const { props } = await getStaticProps()
-        // Fixtures: alpha=[medical,video], beta=[medical] hidden,
-        // gamma=[soccer,video], delta=[soccer]. Hidden beta's "medical"
+        // Fixtures: alpha=[health,video], beta=[health] hidden,
+        // gamma=[sports,video], delta=[sports]. Hidden beta's "health"
         // does NOT count.
         expect(props.tagCounts).toEqual({
-            medical: 1,
+            health: 1,
             video: 2,
-            soccer: 2
+            sports: 2
         })
     })
 
     it('returns allTags sorted alphabetically and excluding hidden-only tags', async () => {
         const { getStaticProps } = await import('../../src/pages/index')
         const { props } = await getStaticProps()
-        expect(props.allTags).toEqual(['medical', 'soccer', 'video'])
+        expect(props.allTags).toEqual(['health', 'sports', 'video'])
     })
 
     it('attaches an ISO-string mtime to each dataset frontmatter', async () => {

@@ -2,7 +2,7 @@
 title: 'Gamma Dataset'
 desc: 'A soccer video collection.'
 tags:
-  - soccer
+  - sports
   - video
 ---
 

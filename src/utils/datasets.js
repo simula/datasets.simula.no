@@ -1,5 +1,6 @@
 import fs from 'fs'
 import matter from 'gray-matter'
+import { validateFrontmatter } from './dataset-schema.js'
 
 let cache = null
 
@@ -18,6 +19,7 @@ export function loadAllDatasets() {
         const raw = fs.readFileSync(filepath, 'utf-8')
         const stats = fs.statSync(filepath)
         const { data: frontmatter, content } = matter(raw)
+        validateFrontmatter(slug, frontmatter)
         frontmatter.mtime = stats.mtime.toISOString()
         return { slug, frontmatter, content }
     })

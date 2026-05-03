@@ -2,7 +2,7 @@
 title: 'Delta Dataset'
 desc: 'Soccer dataset that ships raw HTML and a script payload.'
 tags:
-  - soccer
+  - sports
 ---
 
 # Delta

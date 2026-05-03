@@ -5,7 +5,7 @@ thumbnail: /thumbnails/alpha.png
 publication: https://example.com/alpha
 github: https://github.com/example/alpha
 tags:
-  - medical
+  - health
   - video
 ---
 

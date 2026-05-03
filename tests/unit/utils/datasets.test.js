@@ -29,7 +29,7 @@ describe('loadAllDatasets', () => {
 
         const alpha = all.find(d => d.slug === 'alpha')
         expect(alpha.frontmatter.title).toBe('Alpha Dataset')
-        expect(alpha.frontmatter.tags).toEqual(['medical', 'video'])
+        expect(alpha.frontmatter.tags).toEqual(['health', 'video'])
         expect(alpha.content).toContain('alpha')
     })
 

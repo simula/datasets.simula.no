@@ -35,7 +35,7 @@ describe('dataset detail getStaticProps', () => {
             slug: 'alpha',
             frontmatter: expect.objectContaining({
                 title: 'Alpha Dataset',
-                tags: ['medical', 'video']
+                tags: ['health', 'video']
             })
         })
         expect(typeof result.props.html).toBe('string')
@@ -71,7 +71,7 @@ describe('dataset detail getStaticProps', () => {
         const { props } = await mod.getStaticProps({
             params: { slug: 'alpha' }
         })
-        // Alpha is tagged [medical, video]. gamma shares 'video'; delta
+        // Alpha is tagged [health, video]. gamma shares 'video'; delta
         // shares no tag with alpha; beta is hidden so excluded.
         const slugs = props.related.map(d => d.slug)
         expect(slugs).toContain('gamma')
@@ -100,7 +100,7 @@ describe('dataset detail getStaticProps', () => {
 
     it('returns no related datasets for a hidden target with unique tags', async () => {
         // beta is the only fixture with hidden:true; its single tag
-        // (medical) is shared with alpha, but alpha is visible — beta
+        // (health) is shared with alpha, but alpha is visible — beta
         // sees alpha as a related candidate. So beta SHOULD have
         // related=[alpha]. This documents that hidden datasets still
         // get related lookups; only their candidates are filtered.
