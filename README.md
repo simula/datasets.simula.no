@@ -57,7 +57,7 @@ Currently, we have published the following datasets:
 
 ## How to contribute
 
-Datasets are added via pull request. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full walkthrough — in short: fork the repo, add a `datasets/<slug>.md` file with the required frontmatter, drop a 16:9 thumbnail into `public/thumbnails/`, run `npm test`, and open a PR.
+Datasets are added via pull request. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full walkthrough.
 
 ## Contact
 If you have any questions or need assistance, please open an issue in the repository or contact steven@simula.no.
