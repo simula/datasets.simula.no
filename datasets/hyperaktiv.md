@@ -7,7 +7,7 @@ publication: 'https://dl.acm.org/doi/10.1145/3458305.3478454'
 domain:
   - health
 modality:
-  - images
+  - sensor
 tasks:
   - classification
   - forecasting
