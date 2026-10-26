@@ -4,8 +4,8 @@ desc: >-
   Subjective and objective data collected over two years from two different
   elite women´s soccer teams.
 thumbnail: /thumbnails/soccermon.png
-publication: ''
-github: 'https://osf.io/uryz9/'
+publication: 'https://www.nature.com/articles/s41597-024-03386-x'
+github: 'https://github.com/simula/soccermon'
 hidden: false
 domain:
   - sports
@@ -21,7 +21,22 @@ In this context, soccer (also known as association football) is an open-loop spo
 The data we present in our SoccerMon dataset was collected and used by professional teams during the 2020 and 2021 seasons in the Norwegian women´s elite soccer league (“Toppserien”). In particular, the teams used the \pmsys athlete monitoring system to log subjective parameters, including training load, wellness, sickness, and injuries after every session, in addition to wellness once a day and sickness and injuries whenever they occurred. Moreover, during the training sessions, the players used wearable tracking equipment (STATSports APEX) to monitor total distance, high-speed running distance, sprint distance, accelerations and decelerations, and peak speed.
 
 ## Download
-All files can be viewed and downloaded in our OSF repository available here: [https://osf.io/uryz9/](https://osf.io/uryz9/)
+The dataset is available on Zenodo: [https://zenodo.org/records/10033832](https://zenodo.org/records/10033832).
+
+## Citation
+If you use this dataset in your research, please cite:
+
+<pre><code>
+@article{midoglu2024soccermon,
+  author  = {Midoglu, Cise and Kjæreng Winther, Andreas and Boeker, Matthias and Dahl Pettersen, Susann and Pedersen, Sigurd and Ragab, Nourhan and Kupka, Tomas and Hicks, Steven A. and Bredsgaard Randers, Morten and Jain, Ramesh and Dagenborg, Håvard J. and Pettersen, Svein Arne and Johansen, Dag and Riegler, Michael A. and Halvorsen, Pål},
+  title   = {A large-scale multivariate soccer athlete health, performance, and position monitoring dataset},
+  journal = {Scientific Data},
+  volume  = {11},
+  pages   = {553},
+  year    = {2024},
+  doi     = {10.1038/s41597-024-03386-x}
+}
+</code></pre>
 
 ## Terms of Use
 The dataset is licensed under CC-By Attribution 4.0 International.
