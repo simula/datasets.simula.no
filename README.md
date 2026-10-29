@@ -36,7 +36,7 @@ Currently, we have published the following datasets:
 * ScopeSense, A 8.5-month sport, nutrition, and lifestyle lifelogging dataset. [[project](https://osf.io/v5acr/)]
 * Soccer Summarization, Soccer game captions and summary in English for game summarization. [[publication](https://dl.acm.org/doi/10.1145/3552463.3557019) | [project](https://github.com/simula/soccer-summarization)]
 * SoccerChat, A Multimodal Video-Text Dataset for Natural Language Soccer Game Understanding. [[publication](https://arxiv.org/abs/2505.16630) | [project](https://github.com/simula/SoccerChat)]
-* SoccerMon, Subjective and objective data collected over two years from two different elite women´s soccer teams. [[project](https://osf.io/uryz9/)]
+* SoccerMon, Subjective and objective data collected over two years from two different elite women´s soccer teams. [[publication](https://www.nature.com/articles/s41597-024-03386-x) | [project](https://osf.io/uryz9/)]
 * SoccerNet-Echoes, A Soccer Game Audio Commentary Dataset. [[publication](https://arxiv.org/abs/2405.07354) | [project](https://github.com/SoccerNet/sn-echoes)]
 * SoccerSum, The SoccerSum Dataset for Automated Detection, Segmentation, and Tracking of Objects on the Soccer Pitch. [[publication](https://doi.org/10.1145/3625468.3652180) | [project](https://github.com/simula/SoccerSum)]
 * TACDEC, TACDEC: Dataset of Tackle Events in Soccer Game Videos. [[publication](https://doi.org/10.1145/3625468.3652166) | [project](https://github.com/simula/tacdec)]
@@ -57,7 +57,7 @@ Currently, we have published the following datasets:
 
 ## How to contribute
 
-Datasets are added via pull request. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full walkthrough — in short: fork the repo, add a `datasets/<slug>.md` file with the required frontmatter, drop a 16:9 thumbnail into `public/thumbnails/`, run `npm test`, and open a PR.
+Datasets are added via pull request. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full walkthrough.
 
 ## Contact
 If you have any questions or need assistance, please open an issue in the repository or contact steven@simula.no.
